@@ -19,12 +19,12 @@ export class LoginPage {
 
   logIn(username: HTMLInputElement, password: HTMLInputElement) {
     if (username.value.length == 0) {
-      alert("请输入账号");
+      console.log("请输入账号");
     } else if (password.value.length == 0) {
-      alert("请输入密码");
+      console.log("请输入密码");
     } else {
       let userinfo: string = '用户名：' + username.value + '密码：' + password.value;
-      alert(userinfo);
+      console.log(userinfo);
       this.navCtrl.push(TabsPage, {id: 111112222});
     }
   }
