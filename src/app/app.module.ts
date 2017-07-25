@@ -5,7 +5,7 @@ import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
+import { HomeModule } from '../pages/home/home.module';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 
@@ -15,13 +15,13 @@ import { LoginComponent } from '../components/login/login';
 
 //测试module C:\Users\ncbank\Desktop\github-ionic\yohome\src\pages\test\test.module.js
 import { TestModule } from '../pages/test/test.module';
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
     ContactPage,
-    HomePage,
     LoginPage,
     TabsPage,
     LoginComponent
@@ -29,14 +29,15 @@ import { TestModule } from '../pages/test/test.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    TestModule
+    TestModule,
+    HomeModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     AboutPage,
     ContactPage,
-    HomePage,
     LoginPage,
     TabsPage
   ],

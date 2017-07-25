@@ -18,15 +18,16 @@ export class LoginPage {
   }
 
   logIn(username: HTMLInputElement, password: HTMLInputElement) {
-    if (username.value.length == 0) {
-      console.log("请输入账号");
-    } else if (password.value.length == 0) {
-      console.log("请输入密码");
-    } else {
-      let userinfo: string = '用户名：' + username.value + '密码：' + password.value;
-      console.log(userinfo);
-      this.navCtrl.push(TabsPage, {id: 111112222});
-    }
+    this.navCtrl.push(TabsPage, {id: 111112222});
+    // if (username.value.length == 0) {
+    //   console.log("请输入账号");
+    // } else if (password.value.length == 0) {
+    //   console.log("请输入密码");
+    // } else {
+    //   let userinfo: string = '用户名：' + username.value + '密码：' + password.value;
+    //   console.log(userinfo);
+    //   this.navCtrl.push(TabsPage, {id: 111112222});
+    // }
   }
 
 }

@@ -1,0 +1,17 @@
+[
+    {
+        "name": "aaaa",
+        "imgPath": "assets/img/avatar-ts-woody.png",
+        "addr": "小小的安徽"
+    },
+    {
+        "name": "bbbaabbb",
+        "imgPath": "assets/img/avatar-ts-jessie.png",
+        "addr": "不知道是什么地方"
+    },
+    {
+        "name": "cccc",
+        "imgPath": "assets/img/avatar-ts-potatohead.png",
+        "addr": "应该是宁波"
+    }
+]
