@@ -1,17 +1,17 @@
 [
     {
-        "name": "aaaa",
+        "name": "李硕",
         "imgPath": "assets/img/avatar-ts-woody.png",
-        "addr": "小小的安徽"
+        "addr": "安徽省滁州市嘉山县809号"
     },
     {
-        "name": "bbbaabbb",
+        "name": "陈胖胖",
         "imgPath": "assets/img/avatar-ts-jessie.png",
-        "addr": "不知道是什么地方"
+        "addr": "上海市长宁区迎宾北路214号"
     },
     {
-        "name": "cccc",
+        "name": "陈运",
         "imgPath": "assets/img/avatar-ts-potatohead.png",
-        "addr": "应该是宁波"
+        "addr": "上海市长宁区迎宾北路214号"
     }
 ]

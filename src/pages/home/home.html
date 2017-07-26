@@ -9,13 +9,14 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding class="list-avatar-page">
-    <ion-searchbar (ionInput)="getUsers($event)"></ion-searchbar>
-    <ion-list *ngFor="let user of userList">
-        <ion-item (click)="pagination()">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+
+    <ion-list *ngFor="let user of userList|filterUser:search">
+        <ion-item (click)="toOrders(user)">
             <ion-thumbnail item-left>
                 <img src="{{user.imgPath}}">
             </ion-thumbnail>
-            <h2>{{user.name}}</h2>
+            <h1>{{user.name}}</h1>
             <p>{{user.addr}}</p>
             <ion-note item-right>3:43 pm</ion-note>
         </ion-item>

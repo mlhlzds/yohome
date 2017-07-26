@@ -17,6 +17,9 @@ import { LoginComponent } from '../components/login/login';
 import { TestModule } from '../pages/test/test.module';
 import {HttpModule} from "@angular/http";
 
+//自定义搜索管道
+import { FilterUserPipe } from '../pipes/search-info.pipe';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -25,6 +28,7 @@ import {HttpModule} from "@angular/http";
     LoginPage,
     TabsPage,
     LoginComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -32,6 +36,7 @@ import {HttpModule} from "@angular/http";
     TestModule,
     HomeModule,
     HttpModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,6 +50,6 @@ import {HttpModule} from "@angular/http";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+  ],
 })
 export class AppModule {}
