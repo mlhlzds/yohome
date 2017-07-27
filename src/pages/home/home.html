@@ -1,26 +1,20 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>微信</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="presentPopover($event)">
-                <ion-icon name="add"></ion-icon>
-            </button>
-        </ion-buttons>
+        <ion-title>我的客户</ion-title>
+
     </ion-navbar>
 </ion-header>
-<ion-content padding class="list-avatar-page">
+<ion-content padding >
     <ion-searchbar [(ngModel)]="search"></ion-searchbar>
 
     <ion-list *ngFor="let user of userList|filterUser:search">
         <ion-item (click)="toOrders(user)">
             <ion-thumbnail item-left>
                 <img src="{{user.imgPath}}">
-                
             </ion-thumbnail>
-            <ion-badge item-top style="background-color: red;">1</ion-badge>
-            <h1>{{user.name}}</h1>
+            <ion-badge item-top style="background-color: red;">{{homeObj.attrName}}</ion-badge>
+            <p>{{user.name}}</p>
             <p>{{user.addr}}</p>
-            <ion-note item-right>3:43 pm</ion-note>
         </ion-item>
     </ion-list>
 </ion-content>

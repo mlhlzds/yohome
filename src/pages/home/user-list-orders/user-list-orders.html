@@ -7,22 +7,15 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{usre.name}}</ion-title>
+    <ion-title>{{usre.name}}的订单</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content class="card-background-page">
-  <ion-card>
-    <img src="{{usre.imgPath}}" />
-    <ion-card-content>
-      <ion-card-title>
-        Nine Inch Nails Live
-      </ion-card-title>
-      <p>
-        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-      </p>
-    </ion-card-content>
-  </ion-card>
+<ion-content>
+  <button ion-item *ngFor="let userOrder of userOrders|filterUser:search"  (click)="toOrderInfo(userOrder)">
+      <p>{{userOrder.name}}</p>
+      <p>{{userOrder.addr}}</p>
+  </button>
 </ion-content>

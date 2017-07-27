@@ -12,13 +12,6 @@ import { TestPage } from '../test/test';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-
-    i: number = 0;
-    j: number = 0;
-    k: number = 0;
-
-
-
   tabRoots: Object[];
 
   //初始化tabs
@@ -29,28 +22,29 @@ export class TabsPage {
         root: HomePage,
         tabTitle: 'Home',
         tabIcon: 'home',
-        attrName: 'i'
+        attrName: 6
       },
       {
         root: ContactPage,
         tabTitle: 'Contact',
         tabIcon: 'notifications',
-        attrName: 'j'
+        attrName: 2
       },
       {
         root: AboutPage,
         tabTitle: 'About',
         tabIcon: 'document',
-        attrName: 'k'
+        attrName: 3
       },
       {
         root: TestPage,
         tabTitle: 'test',
-        tabIcon: 'app'
+        tabIcon: 'app',
+        attrName: 1
       }
     ];
     setInterval(() => {
-      this.i++;
+      this.tabRoots[1]['attrName']++;
     }, 1000)
 
 

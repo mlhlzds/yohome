@@ -1,0 +1,17 @@
+[
+    {
+        "name": "智能投影仪",
+        "imgPath": "assets/img/avatar-ts-woody.png",
+        "addr": "安徽省滁州市嘉山县809号"
+    },
+    {
+        "name": "全自动马桶",
+        "imgPath": "assets/img/avatar-ts-jessie.png",
+        "addr": "上海市长宁区迎宾北路214号"
+    },
+    {
+        "name": "自动化空调",
+        "imgPath": "assets/img/avatar-ts-potatohead.png",
+        "addr": "上海市长宁区迎宾北路214号"
+    }
+]

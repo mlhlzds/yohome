@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,NavParams } from 'ionic-angular';
 
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -36,13 +36,15 @@ export class HomePage {
 
   //跳转到所有订单
   toOrders(user:User){
-    this.navCtrl.push(UserListOrdersPage,user);
+    this.navCtrl.push(UserListOrdersPage,{user:user,homeObj:this.homeObj});
   }
 
-  constructor(private http: Http, public navCtrl: NavController) {
+  homeObj = {};
+  constructor(private http: Http, public navCtrl: NavController,public navParams: NavParams) {
     this.initUserList();
+    this.homeObj = this.navParams.data;
+    //this.homeObj['attrName']=2;  父窗口的值也会被改变
   }
-
   //post
   // click2() {
 
