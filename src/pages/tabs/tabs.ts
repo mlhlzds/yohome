@@ -12,26 +12,36 @@ import { TestPage } from '../test/test';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+
+    i: number = 0;
+    j: number = 0;
+    k: number = 0;
+
+
+
   tabRoots: Object[];
 
   //初始化tabs
   constructor(public navParams: NavParams) {
     console.log(this.navParams.get('id'));
     this.tabRoots = [
-      {
+      {             
         root: HomePage,
         tabTitle: 'Home',
-        tabIcon: 'home'
+        tabIcon: 'home',
+        attrName: 'i'
       },
       {
         root: ContactPage,
         tabTitle: 'Contact',
-        tabIcon: 'notifications'
+        tabIcon: 'notifications',
+        attrName: 'j'
       },
       {
         root: AboutPage,
         tabTitle: 'About',
-        tabIcon: 'document'
+        tabIcon: 'document',
+        attrName: 'k'
       },
       {
         root: TestPage,
@@ -39,6 +49,11 @@ export class TabsPage {
         tabIcon: 'app'
       }
     ];
+    setInterval(() => {
+      this.i++;
+    }, 1000)
+
+
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { NavParams, App } from 'ionic-angular';
 
 import { Test1Page } from './test1/test1'
@@ -15,7 +15,7 @@ import { Test1Page } from './test1/test1'
   templateUrl: 'test.html',
 })
 export class TestPage {
-
+  @Input() content:string;
   constructor(private app:App, public navParams: NavParams) {
   }
 

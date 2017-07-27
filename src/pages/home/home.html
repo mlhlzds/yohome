@@ -15,7 +15,9 @@
         <ion-item (click)="toOrders(user)">
             <ion-thumbnail item-left>
                 <img src="{{user.imgPath}}">
+                
             </ion-thumbnail>
+            <ion-badge item-top style="background-color: red;">1</ion-badge>
             <h1>{{user.name}}</h1>
             <p>{{user.addr}}</p>
             <ion-note item-right>3:43 pm</ion-note>
