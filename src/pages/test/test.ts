@@ -1,7 +1,14 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavParams, App } from 'ionic-angular';
 
 import { Test1Page } from './test1/test1'
+
+
+import { ViewController } from 'ionic-angular';
+import { NativeService } from "../../providers/NativeService";
+
+import { FileObj } from "../../model/FileObj";
+
 
 /**
  * Generated class for the Test2Page page.
@@ -15,17 +22,40 @@ import { Test1Page } from './test1/test1'
   templateUrl: 'test.html',
 })
 export class TestPage {
-  @Input() content:string;
-  constructor(private app:App, public navParams: NavParams) {
+
+  constructor(private viewCtrl: ViewController,
+    private nativeService: NativeService) {
+
   }
 
-  toPage1(){
-     // this.navCtrl.push(Test1Page);
-     this.app.getRootNav().push(Test1Page);
+  imgSrc: any = null;
+  uploadDown(event: any) {
+    var file = event.target.files[0];
+    this.imgSrc=window.URL.createObjectURL(file);
+
+        var self = this;
+       
+
+    if (!/image\/\w+/.test(file.type)) {
+      alert("非图片");
+      return;
+    }
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    let temp = null;
+    var self = this;
+    reader.onload = function (e) {
+      
+      self.imgSrc = this.result;//base64
+    //  self.imgSrc.detectChanges();
+      // alert(temp);
+    }
+
+   //  alert(JSON.stringify(reader));
+ //   this.imgSrc = temp;
+  //  alert(this.imgSrc);
+
   }
- 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Test2Page');
-  }
+
 
 }

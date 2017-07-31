@@ -20,6 +20,11 @@ import {HttpModule} from "@angular/http";
 //自定义搜索管道
 import { FilterUserPipe } from '../pipes/search-info.pipe';
 
+//图片上传
+import { NativeService } from '../providers/NativeService';
+
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -49,7 +54,8 @@ import { FilterUserPipe } from '../pipes/search-info.pipe';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    NativeService
   ],
 })
 export class AppModule {}
