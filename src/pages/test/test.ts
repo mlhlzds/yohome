@@ -20,42 +20,40 @@ import { FileObj } from "../../model/FileObj";
 @Component({
   selector: 'page-test',
   templateUrl: 'test.html',
+  styleUrls:['/test.scss']
+
 })
 export class TestPage {
+  thumb:Array<string> = new Array<string>(); //用于存放图片的base64 
 
+  img_upload = function (event: any) { //单次提交图片的函数 
+    var reader = new FileReader(); //创建一个FileReader接口 
+    var guid = (new Date()).valueOf(); //通过时间戳创建一个随机数，作为键名使用 
+    var file = event.target.files[0];
+
+    reader.readAsDataURL(file); //FileReader的方法，把图片转成base64 
+    var self = this;
+
+    reader.onload = function (e) {
+      self.thumb.push(this.result);
+      console.log(guid);
+    }
+
+
+    // var data = new FormData(); //以下为像后台提交图片数据 
+    // data.append('image', files[0]);
+    // data.append('guid', this.guid);
+
+  };
   constructor(private viewCtrl: ViewController,
     private nativeService: NativeService) {
 
   }
-
-  imgSrc: any = null;
-  uploadDown(event: any) {
-    var file = event.target.files[0];
-    this.imgSrc=window.URL.createObjectURL(file);
-
-        var self = this;
-       
-
-    if (!/image\/\w+/.test(file.type)) {
-      alert("非图片");
-      return;
-    }
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    let temp = null;
-    var self = this;
-    reader.onload = function (e) {
-      
-      self.imgSrc = this.result;//base64
-    //  self.imgSrc.detectChanges();
-      // alert(temp);
-    }
-
-   //  alert(JSON.stringify(reader));
- //   this.imgSrc = temp;
-  //  alert(this.imgSrc);
-
+  img_del = function (key) {
+    this.thumb.splice(key, 1);
+  };
+  cliTest(){
+    console.log(this.thumb.length);
   }
-
-
+     
 }

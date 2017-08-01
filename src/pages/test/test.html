@@ -12,12 +12,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding text-center>
-
-  <img [src]="imgSrc" style="display: block; width: 200px; height: 150px;">
-  <input type="file" capture="camera" accept="image/*" (change)="uploadDown($event)">
+<ion-content >
 
 
+  <div *ngFor="let item of thumb;let i = index" style="float:left">
+    <!-- 采用angular循环的方式，对存入thumb的图片进行展示 --> 
+    <div data-num='X' id="a1" (click)="img_del(i)" >              
+        <img [src]="item" style="width:60px;height:60px;"/>
+    </div>
+  
+  </div>
 
+              
 
-</ion-content>
+<a href="javascript:;" class="file" >
+    <input type="file" name="" id="" capture="camera" file-model="images" accept="image/*" (change)="img_upload($event)">
+</a>            
+
+<button ion-button (click)="cliTest()">Default</button>
+
+</ion-content>          

@@ -1,10 +1,56 @@
-page-home {
-  .fab-btn {
-    position: absolute;
-    left:50%;
-    margin-left: -80px;
-    bottom: 10px;
-    z-index: 1;
-    text-align: center;
-  }
+.file {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    background-image:url(/assets/img/jiahao.png); 
+    height: 70px;
+    width: 70px;
+    float:left;
+    vertical-align:middle;
+    margin-top: 15px;
 }
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+#a1 {
+    width: 75px;
+    height: 75px;
+    color: #fff;
+    position: relative;
+    margin-top: 15px;
+}
+
+#a1:after {
+    content: attr(data-num);
+    line-height: 20px;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    top: -9px;
+    right: 10px;
+}
+
+.imgDiv .delete {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                width: 50px;
+                height: 50px;
+                display: none;
+            }

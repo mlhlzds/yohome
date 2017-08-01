@@ -15,7 +15,7 @@ import {User} from "../../model/User";
 export class HomePage {
   
   search: string = '';
-  url: string = 'userList.json';
+  url: string = 'assets/data/userList.json';
   userList: User[] = []; //如果这里不定义的话，或导致后面为undefined，因为我
 
   //获得所有客户

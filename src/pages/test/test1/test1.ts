@@ -13,7 +13,7 @@ import { ToastController } from 'ionic-angular';
 @Component({
   selector: 'page-test1',
   templateUrl: 'test1.html',
-  styleUrls: ['/test1.scss'],
+
 })
 export class Test1Page {
 
