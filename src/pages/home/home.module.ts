@@ -9,7 +9,9 @@ import { FilterUserPipe } from '../../pipes/search-info.pipe';
 
 @NgModule({
     imports:[
-        IonicModule.forRoot(MyApp),
+        IonicModule.forRoot(MyApp,{  
+            backButtonText: '',  
+        })
     ],
     declarations:[FilterUserPipe,HomePage,UserListPage,UserListOrdersPage,UserListOrdersInfoPage],
     entryComponents:[HomePage,UserListPage,UserListOrdersPage,UserListOrdersInfoPage],
