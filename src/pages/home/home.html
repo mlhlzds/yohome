@@ -7,12 +7,14 @@
 <ion-content padding>
     <ion-searchbar [(ngModel)]="search"></ion-searchbar>
 
-    <button ion-item (click)="toOrders(user)" *ngFor="let user of userList|filterUser:search">
-            <ion-thumbnail item-left>
-                <img src="{{user.imgPath}}">
-            </ion-thumbnail>
-            <ion-badge item-top style="background-color: red;">{{homeObj.attrName}}</ion-badge>
-            <p>{{user.name}}</p>
+        <button ion-item (click)="toOrders(user)" *ngFor="let user of userList|filterUser:search">
+             <ion-avatar item-start>
+                    <img src="{{user.imgPath}}">
+                </ion-avatar>
+            <p><ion-badge item-top style="background-color: red;">{{homeObj.attrName}}</ion-badge>{{user.name}}</p>
             <p>{{user.addr}}</p>
         </button>
+
+
+ 
 </ion-content>

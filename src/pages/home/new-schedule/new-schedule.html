@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的进度</ion-title>
+        <ion-buttons end>
+      <button ion-button icon-only (click)="newSchedule()">
+               发表
+            </button>
+    </ion-buttons>
+    
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <div style="  margin-top: 10px;
+    margin-left: 10px;">
+    <div>
+      <textarea placeholder="进度描述……" rows="3"></textarea><hr/>
+    </div>
+    <div *ngFor="let item of thumb;let i = index" style="float:left">
+      <div id="a1">
+        <img [src]="item" style="width:60px;height:60px;background-size: cover;" />
+      </div>
+      <div class="divafter" (click)="img_del(i)">X</div>
+    </div>
+
+
+    <div class="file">
+      <input type="file" name="" id="" (change)="img_upload($event)">
+    </div>
+    <hr/>  
+  </div>
+</ion-content>

@@ -8,26 +8,70 @@
 
   <ion-navbar>
     <ion-title>{{userOrder.name}}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="newSchedule()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content page-user-list-orders-info>
+
+
+
+
   <ion-card>
-    <img src="assets/img/led.jpg" />
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/img/marty-avatar.png">
+      </ion-avatar>
+      <h2>员工小李</h2>
+      <p>做yohome最好的员工</p>
+    </ion-item>
     <ion-card-content>
-      <ion-card-title>
-        Nine Inch Nails Live
-      </ion-card-title>
-      <p>
-        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-      </p>
+      <p>我今天给你装修了很多东西，厨房电脑冰箱洗衣机空调我都差不多装好了，给我赞呗.</p>
     </ion-card-content>
+
+    <ion-item>
+
+      <div class="imgDiv"><img src="assets/img/jiahao.png"></div>
+      <div class="imgDiv"><img src="assets/img/avatar-ts-buzz.jpg"></div>
+      <div class="imgDiv"><img src="assets/img/logo.jpg"></div>
+      <div class="imgDiv"><img src="assets/img/avatar-ts-woody.png"></div>
+
+      <div class="imgDiv"><img src="assets/img/avatar-ts-buzz.jpg"></div>
+      <div class="imgDiv"><img src="assets/img/avatar-ts-woody.png"></div>
+      <div class="imgDiv"><img src="assets/img/logo.jpg"></div>
+      <div class="imgDiv"><img src="assets/img/jiahao.png"></div>
+
+
+    </ion-item>
+
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>12 Likes</div>
+      </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+        <ion-icon name="text"></ion-icon>
+        <div>4 Comments</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          11h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
   </ion-card>
-  <ion-item>
-    <ion-icon name="logo-twitter" item-start></ion-icon>
-    Followers
-    <ion-badge item-end>260k</ion-badge>
-  </ion-item>
 </ion-content>

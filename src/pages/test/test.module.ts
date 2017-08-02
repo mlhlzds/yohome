@@ -5,6 +5,8 @@ import { Test1Page } from './test1/test1';
 import { Test2Page } from './test2/test2';
 import { TestPage } from './test';
 
+
+
 @NgModule({
     imports:[
         IonicModule.forRoot(MyApp),

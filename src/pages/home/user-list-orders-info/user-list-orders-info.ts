@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { UserOrder } from "../../../model/UserOrder";
+import { NewSchedulePage } from '../new-schedule/new-schedule';
 /**
  * Generated class for the UserListOrdersInfoPage page.
  *
@@ -12,6 +13,7 @@ import { UserOrder } from "../../../model/UserOrder";
 @Component({
   selector: 'page-user-list-orders-info',
   templateUrl: 'user-list-orders-info.html',
+  styleUrls:['/user-list-orders-info.scss']
 })
 export class UserListOrdersInfoPage {
   userOrder: UserOrder = new UserOrder;
@@ -21,6 +23,11 @@ export class UserListOrdersInfoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserListOrdersInfoPage');
+  }
+
+  //新的进度
+  newSchedule(){
+    this.navCtrl.push(NewSchedulePage,{name:'123'});
   }
 
 }
