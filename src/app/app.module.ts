@@ -23,6 +23,7 @@ import { FilterUserPipe } from '../pipes/search-info.pipe';
 //图片上传
 import { NativeService } from '../providers/NativeService';
 
+//图片放大
 
 
 @NgModule({

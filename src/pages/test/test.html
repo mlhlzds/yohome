@@ -1,34 +1,31 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      设置个人头像
+      发表进度
     </ion-title>
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">
-            <span showWhen="ios">关闭</span>
-            <ion-icon name="md-close" showWhen="android,windows,landscape"></ion-icon>
-          </button>
+
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-
-
-  <div *ngFor="let item of thumb;let i = index" style="float:left">
-    <!-- 采用angular循环的方式，对存入thumb的图片进行展示 --> 
-    <div data-num='X' id="a1" (click)="img_del(i)" >              
-        <img [src]="item" style="width:60px;height:60px;"/>
+<ion-content>
+  <div style="  margin-top: 10px;
+    margin-left: 10px;">
+    <div>
+      <textarea placeholder="进度描述……" rows="3"></textarea><hr/>
     </div>
-  
+    <div *ngFor="let item of thumb;let i = index" style="float:left">
+      <div id="a1">
+        <img [src]="item" style="width:60px;height:60px;background-size: cover;" />
+      </div>
+      <div class="divafter" (click)="img_del(i)">X</div>
+    </div>
+
+
+    <div class="file">
+      <input type="file" name="" id="" (change)="img_upload($event)">
+    </div>
+    <hr/>  
   </div>
-
-              
-
-<a href="javascript:;" class="file" >
-    <input type="file" name="" id="" capture="camera" file-model="images" accept="image/*" (change)="img_upload($event)">
-</a>            
-
-<button ion-button (click)="cliTest()">Default</button>
-
-</ion-content>          
+</ion-content>
