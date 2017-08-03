@@ -1,0 +1,10 @@
+<div class="clear-fix">
+  <div *ngFor="let fileObj of fileObjList, let i = index" class="pictures" (press)="deletePicture(i)">
+    <img src="{{fileObj.thumbPath}}" (click)="viewerPicture(i)">
+  </div>
+  <div *ngIf="fileObjList.length<max&&allowAdd" >
+    <div class="file">
+      <input name="md-images" type="file" name="" id="" (change)="img_upload($event)">
+    </div>
+  </div>
+</div>                 

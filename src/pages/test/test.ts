@@ -4,7 +4,7 @@ import { NavParams, App } from 'ionic-angular';
 import { Test1Page } from './test1/test1'
 
 
-import { ViewController,ModalController } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 import { NativeService } from "../../providers/NativeService";
 
 import { FileObj } from "../../model/FileObj";
@@ -24,6 +24,7 @@ import { FileObj } from "../../model/FileObj";
 
 })
 export class TestPage {
+  fileObjList: FileObj[] = [];
   thumb:Array<string> = new Array<string>(); //用于存放图片的base64 
 
   img_upload(event: any) { //单次提交图片的函数 
@@ -49,7 +50,7 @@ export class TestPage {
 
   };
   constructor(private viewCtrl: ViewController,
-    private nativeService: NativeService,private modalCtrl: ModalController,) {
+    private nativeService: NativeService) {
 
   }
   img_del(key) {
@@ -58,5 +59,7 @@ export class TestPage {
   cliTest(){
     console.log(this.thumb.length);
   }
-     
+  shouBigImage(img){
+   
+  }
 }

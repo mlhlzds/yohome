@@ -6,10 +6,13 @@ import { Test2Page } from './test2/test2';
 import { TestPage } from './test';
 
 
+import { SharedModule } from '../../shared/shared.module';
+
 
 @NgModule({
     imports:[
         IonicModule.forRoot(MyApp),
+        SharedModule
     ],
     declarations:[TestPage,Test1Page,Test2Page],
     entryComponents:[TestPage,Test1Page,Test2Page],
