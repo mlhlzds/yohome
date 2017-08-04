@@ -9,11 +9,13 @@ import { UserListOrdersInfoPage } from './user-list-orders-info/user-list-orders
 import { HomePage } from './home';
 import { FilterUserPipe } from '../../pipes/search-info.pipe';
 
+import { SharedModule } from '../../shared/shared.module';
 @NgModule({
     imports:[
         IonicModule.forRoot(MyApp,{  
             backButtonText: '',  
-        })
+        }),
+        SharedModule
     ],
     declarations:[FilterUserPipe,HomePage,NewSchedulePage,UserListPage,UserListOrdersPage,UserListOrdersInfoPage],
     entryComponents:[HomePage,NewSchedulePage,UserListPage,UserListOrdersPage,UserListOrdersInfoPage],

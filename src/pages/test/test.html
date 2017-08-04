@@ -17,11 +17,13 @@
       <hr/>
     </div>
 
+    <div class="imgBadge" txt="X"><img src="assets/img/avatar-ts-jessie.png" alt=""/></div>
 
-    
     <div padding-vertical>
       <page-select-pic [max]="6" [(fileObjList)]="fileObjList"></page-select-pic>
     </div>
-    <hr/>
-  </div>
+    <hr/>                 
+  </div>                   
+
+  <ion-icon class="icons-star" *ngFor="let star of stars;let n = index" name='star' [isActive]="star" (click)="toChange(n)"></ion-icon>
 </ion-content>

@@ -21,7 +21,7 @@ export class TabsPage {
       {             
         root: HomePage,
         tabTitle: 'Home',
-        tabIcon: 'home',
+        tabIcon: 'order',
         attrName: 6
       },
       {

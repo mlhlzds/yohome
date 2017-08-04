@@ -45,5 +45,7 @@ thumb:Array<string> = new Array<string>(); //用于存放图片的base64
     console.log(this.thumb.length);
   }
      
-
+  newSchedule(){
+    this.navCtrl.pop();
+  }
 }
