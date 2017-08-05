@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { FileObj } from "../../../model/FileObj";
+import { OrderSchedule } from "../../../model/OrderSchedule";
 /**
  * Generated class for the NewSchedulePage page.
  *
@@ -14,8 +15,11 @@ import { NavController, NavParams } from 'ionic-angular';
   styleUrls:['/new-schedule.scss']
 })
 export class NewSchedulePage {
-
+  describe:string = '';
+  fileObjList: FileObj[] = []; //所有图片
+  orderScheduleList:OrderSchedule[] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.orderScheduleList = navParams.data;  //订单对象
   }
 
 thumb:Array<string> = new Array<string>(); //用于存放图片的base64 
@@ -46,6 +50,11 @@ thumb:Array<string> = new Array<string>(); //用于存放图片的base64
   }
      
   newSchedule(){
+    let orderSchedule:OrderSchedule = new OrderSchedule();
+    orderSchedule.imgs = this.fileObjList;
+    orderSchedule.describe = this.describe;
+
+    this.orderScheduleList.unshift(orderSchedule);
     this.navCtrl.pop();
   }
 }

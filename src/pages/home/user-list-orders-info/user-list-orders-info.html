@@ -23,7 +23,7 @@
 
 
 
-
+<div *ngFor="let orderSchedule of orderScheduleList">
   <ion-card>
 
     <ion-item>
@@ -34,16 +34,14 @@
       <p>做yohome最好的员工</p>
     </ion-item>
     <ion-card-content>
-      <p>我今天给你装修了很多东西，厨房电脑冰箱洗衣机空调我都差不多装好了，给我赞呗.</p>
+      <p>{{orderSchedule.describe}}</p>
     </ion-card-content>
 
     <ion-item>
 
-     <div padding-vertical>
-      <page-select-pic [max]="6" [allowDelete]="false" [allowAdd]="false" [(fileObjList)]="fileObjList" ></page-select-pic>
-    </div>
-
-
+      <div padding-vertical>
+        <page-select-pic [max]="6" [allowDelete]="false" [allowAdd]="false" [(fileObjList)]="orderSchedule.imgs"></page-select-pic>
+      </div>
 
 
     </ion-item>
@@ -70,4 +68,5 @@
     </ion-row>
 
   </ion-card>
+  </div>
 </ion-content>

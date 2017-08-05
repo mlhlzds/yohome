@@ -6,6 +6,8 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomeModule } from '../pages/home/home.module';
+import { MineModule } from '../pages/mine/mine.module';
+
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 
@@ -41,6 +43,7 @@ import { NativeService } from '../providers/NativeService';
     IonicModule.forRoot(MyApp),
     TestModule,
     HomeModule,
+    MineModule,
     HttpModule
     
   ],

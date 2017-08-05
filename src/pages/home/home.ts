@@ -15,7 +15,7 @@ import {User} from "../../model/User";
 export class HomePage {
   
   search: string = '';
-  url: string = 'assets/data/userList.json';
+  url: string = 'assets/data/UserList.json';
   userList: User[] = []; //如果这里不定义的话，或导致后面为undefined，因为我
 
   //获得所有客户
@@ -33,6 +33,21 @@ export class HomePage {
       console.log(data)
     })
   }
+  //测试通过
+  // getAllOrder() {
+  //   let headers = new Headers({ 'Content-Type': 'application/json' });
+  //   let options = new RequestOptions({ headers: headers });
+
+  //   let body = JSON.stringify({
+  //     code: "mk200"
+  //   });
+
+  //   this.http.post("testServlet.json", body, options).map(res => {
+  //     console.log('22222222222222222'+res.json());
+  //   }).subscribe(function (data) {
+  //     console.log('1111');
+  //   })
+  // }      
 
   //跳转到所有订单
   toOrders(user:User){
@@ -44,7 +59,9 @@ export class HomePage {
     this.initUserList();
     this.homeObj = this.navParams.data;
     //this.homeObj['attrName']=2;  父窗口的值也会被改变
+    //this.getAllOrder();
   }
+
   //post
   // click2() {
 

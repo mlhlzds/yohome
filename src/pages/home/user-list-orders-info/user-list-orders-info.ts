@@ -5,6 +5,10 @@ import { UserOrder } from "../../../model/UserOrder";
 import { NewSchedulePage } from '../new-schedule/new-schedule';
 
 import { FileObj } from "../../../model/FileObj";
+import { OrderSchedule } from "../../../model/OrderSchedule";
+
+
+import { Http, RequestOptions, Headers } from '@angular/http';
 /**
  * Generated class for the UserListOrdersInfoPage page.
  *
@@ -15,34 +19,55 @@ import { FileObj } from "../../../model/FileObj";
 @Component({
   selector: 'page-user-list-orders-info',
   templateUrl: 'user-list-orders-info.html',
-  styleUrls:['/user-list-orders-info.scss']
+  styleUrls: ['/user-list-orders-info.scss']
 })
 export class UserListOrdersInfoPage {
-  fileObjList: FileObj[] = [];
-  fo:FileObj = new FileObj();
-  userOrder: UserOrder = new UserOrder;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.userOrder = navParams.data;
-      // <div class="imgDiv"><img src="assets/img/jiahao.png"></div>
-      // <div class="imgDiv"><img src="assets/img/avatar-ts-buzz.jpg"></div>
-      // <div class="imgDiv"><img src="assets/img/logo.jpg"></div>
-      // <div class="imgDiv"><img src="assets/img/avatar-ts-woody.png"></div>
+  fileObjList: FileObj[] = []; //所有图片
+  fo: FileObj = new FileObj();
+  userOrder: UserOrder = new UserOrder; //传过来的订单对象
+  orderScheduleList:OrderSchedule[] = [];
 
-    this.fo.base64 = 'assets/img/avatar-ts-buzz.jpg' ;
-    this.fo.thumbPath = 'assets/img/avatar-ts-buzz.jpg';
-    this.fo.origPath = 'assets/img/avatar-ts-buzz.jpg';
+  constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+    this.userOrder = navParams.data;  //订单对象
 
-    this.fileObjList.push(this.fo);
+
+    // this.fo.base64 = 'assets/img/avatar-ts-buzz.jpg';
+    // this.fo.thumbPath = 'assets/img/avatar-ts-buzz.jpg';
+    // this.fo.origPath = 'assets/img/avatar-ts-buzz.jpg';
+
+    // this.fileObjList.push(this.fo);
+    this.getAllOrder();
   }
 
-  
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserListOrdersInfoPage');
+
+
+  //获得所有订单
+  getAllOrder() {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    let body = JSON.stringify({
+      code: "mk200"
+    });
+
+    // this.http.post("assets/data/testServlet.json", body, options).subscribe(function (data) {
+    //   console.log(data)
+    // })
+
+    this.http.get("assets/data/OrderSchedule.json").map(res => {
+      this.orderScheduleList = res.json();
+
+    }).subscribe(function (data) {
+      console.log(data)
+    })
+
   }
 
-  //新的进度
-  newSchedule(){
-    this.navCtrl.push(NewSchedulePage,{name:'123'});
+
+
+  //发表新的进度
+  newSchedule() {
+    this.navCtrl.push(NewSchedulePage, this.orderScheduleList);
   }
 
 }
