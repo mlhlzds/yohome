@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
-import { MinePage } from '../mine/mine';
+
 import { HomePage } from '../home/home';
 import { UserListOrdersInfoPage } from '../home/user-list-orders-info/user-list-orders-info';
 
@@ -23,27 +23,28 @@ export class TabsPage {
       {             
         root: HomePage,
         tabTitle: '我的客户',
-        tabIcon: 'order',
+        tabIcon: 'people',
         attrName: 6
       },
       {
         root: UserListOrdersInfoPage,
         tabTitle: '所有进度',
-        tabIcon: 'notifications',
+        tabIcon: 'walk',
         attrName: 0
       },
       {
-        root: MinePage,
+        root: ContactPage,
         tabTitle: '我',
-        tabIcon: 'document',
-        attrName: 3
-      },
-      {
-        root: TestPage,
-        tabTitle: 'test',
-        tabIcon: 'app',
-        attrName: 1
+        tabIcon: 'person',
+        attrName: 0
       }
+      // ,
+      // {
+      //   root: TestPage,
+      //   tabTitle: 'test',
+      //   tabIcon: 'app',
+      //   attrName: 0
+      // }
     ];
     setInterval(() => {
     //  this.tabRoots[1]['attrName']++;
