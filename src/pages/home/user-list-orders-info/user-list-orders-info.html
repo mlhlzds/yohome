@@ -7,25 +7,27 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{userOrder.name?userOrder.name:'所有进度'}}</ion-title>
+    <ion-title>{{userOrder.name?userOrder.name:'所有进度'}}<button ion-button  (click)="test()">testTo</button><a href="#ion{{cnt}}" (click)="test()">(4)条新消息</a></ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only (click)="newSchedule()">
                 <ion-icon *ngIf="userOrder.name" name="add"></ion-icon>
             </button>
+
+            <button ion-button  (click)="testTo()">testTo</button>
     </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content page-user-list-orders-info>
+<ion-content id="content" overflow-scroll="false" page-user-list-orders-info>
 
 
 
-<div *ngFor="let orderSchedule of orderScheduleList">
-  <ion-card>
-
+<div *ngFor="let orderSchedule of orderScheduleList;let i=index;">
+  <ion-card id="ion{{i}}">
+<a name="ion{{i}}"></a>
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/img/marty-avatar.png">
@@ -69,4 +71,9 @@
 
   </ion-card>
   </div>
+
+
+ <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>

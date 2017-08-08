@@ -38,13 +38,13 @@ export class TabsPage {
         tabIcon: 'person',
         attrName: 0
       }
-      // ,
-      // {
-      //   root: TestPage,
-      //   tabTitle: 'test',
-      //   tabIcon: 'app',
-      //   attrName: 0
-      // }
+      ,
+      {
+        root: TestPage,
+        tabTitle: 'test',
+        tabIcon: 'app',
+        attrName: 0
+      }
     ];
     setInterval(() => {
     //  this.tabRoots[1]['attrName']++;

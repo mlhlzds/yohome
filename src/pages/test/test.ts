@@ -49,9 +49,26 @@ export class TestPage {
     // data.append('guid', this.guid);
 
   };
+  items = [];
   constructor(private viewCtrl: ViewController,
     private nativeService: NativeService) {
+    for (var i = 0; i < 30; i++) {
+      this.items.push( this.items.length );
+    }
+  }
+  doInfinite(): Promise<any> {
+    console.log('Begin async operation');
 
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        for (var i = 0; i < 30; i++) {
+          this.items.push( this.items.length );
+        }
+
+        console.log('Async operation has ended');
+        resolve();
+      }, 500);
+    })
   }
   img_del(key) {
     this.thumb.splice(key, 1);
