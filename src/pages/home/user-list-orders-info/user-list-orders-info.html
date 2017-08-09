@@ -7,14 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{userOrder.name?userOrder.name:'所有进度'}}<button ion-button  (click)="test()">testTo</button><a href="#ion{{cnt}}" (click)="test()">(4)条新消息</a></ion-title>
+    <ion-title>{{userOrder.name?userOrder.name:'所有进度'}}<a href="#ion{{cnt}}" (click)="test()">(4)条新消息</a></ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only (click)="newSchedule()">
                 <ion-icon *ngIf="userOrder.name" name="add"></ion-icon>
             </button>
-
-            <button ion-button  (click)="testTo()">testTo</button>
     </ion-buttons>
   </ion-navbar>
 
@@ -69,6 +67,15 @@
       </ion-col>
     </ion-row>
 
+        <div class="cmt-wrap">
+          <div class="cmt-list" *ngFor="let re of orderSchedule.reply">
+            <p><span class="data-name">{{re.name}}</span> 回复
+              <span>{{re.replyName}}：</span>
+              {{re.content}}
+            </p>
+          </div>
+          <ion-input  [(ngModel)]="teststr" (change)="testChange(i)"  type="text" placeholder="请输入回复内容…" ></ion-input>
+        </div>
   </ion-card>
   </div>
 

@@ -94,12 +94,28 @@ export class UserListOrdersInfoPage {
   newSchedule() {
     this.navCtrl.push(NewSchedulePage, this.orderScheduleList);
   }
-
+  teststr:any;
+testChange(i){
+ // var val = this.el.nativeElement.querySelector('#input'+i).value;
+ if(!this.orderScheduleList[i].reply){
+   this.orderScheduleList[i].reply = [];
+ }
+ this.orderScheduleList[i].reply.push({
+                "id": "123",
+                "name": "chenyun",
+                "content": this.teststr,
+                "replyName": "chengpang",
+                "replyId": "123",
+                "time": "两分钟之前"
+            });
+this.teststr="";
+  //alert(this.teststr);
+}
   testTo(){
-    location.href = "test";
+    this.el.nativeElement.querySelector('input').focus();
    // this.el.nativeElement.querySelector('#content').a;
   }
-  test(){
+  test(){                   
     console.log("1111111111");
     this.http.get("assets/data/OrderSchedule.json").map(res => {
           for (var i = 0; i < res.json().length; i++) {
