@@ -69,12 +69,12 @@
 
         <div class="cmt-wrap">
           <div class="cmt-list" *ngFor="let re of orderSchedule.reply">
-            <p><span class="data-name">{{re.name}}</span> 回复
-              <span>{{re.replyName}}：</span>
-              {{re.content}}
-            </p>
-          </div>
-          <ion-input  [(ngModel)]="teststr" (change)="testChange(i)"  type="text" placeholder="请输入回复内容…" ></ion-input>
+            <p><span >{{re.name}}</span>
+              <span *ngIf="re.replyName" (click)="testChange2(i,re.replyName)">回复{{re.replyName}}</span>
+              <span>: </span>{{re.content}}
+            </p>    
+          </div>                 
+          <ion-input id="input{{i}}" [(ngModel)]="teststr" (change)="testChange(i)"  type="text" [placeholder]="myplaceholder" ></ion-input>
         </div>
   </ion-card>
   </div>

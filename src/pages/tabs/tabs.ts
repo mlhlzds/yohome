@@ -18,8 +18,10 @@ export class TabsPage {
 
   //初始化tabs
   constructor(public navParams: NavParams) {
-    console.log(this.navParams.get('id'));
-    this.tabRoots = [
+    var logType = this.navParams.get('type');
+    console.log(this.navParams.get('type'));
+    if(logType==1){
+      this.tabRoots = [
       {             
         root: HomePage,
         tabTitle: '我的客户',
@@ -27,10 +29,32 @@ export class TabsPage {
         attrName: 6
       },
       {
+        root: ContactPage,
+        tabTitle: '我',
+        tabIcon: 'person',
+        attrName: 0
+      },
+      {
         root: UserListOrdersInfoPage,
         tabTitle: '所有进度',
         tabIcon: 'walk',
         attrName: 0
+      }
+      ,
+      {
+        root: TestPage,
+        tabTitle: 'test',
+        tabIcon: 'app',
+        attrName: 0
+      }
+    ];
+    }else{
+      this.tabRoots = [
+      {             
+        root: AboutPage,
+        tabTitle: '我的订单',
+        tabIcon: 'people',
+        attrName: 6
       },
       {
         root: ContactPage,
@@ -46,6 +70,8 @@ export class TabsPage {
         attrName: 0
       }
     ];
+    }
+    
     setInterval(() => {
     //  this.tabRoots[1]['attrName']++;
     }, 1000)

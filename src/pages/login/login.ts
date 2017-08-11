@@ -18,7 +18,12 @@ export class LoginPage {
   }
 
   logIn(username: HTMLInputElement, password: HTMLInputElement) {
-    this.navCtrl.push(TabsPage, {id: 111112222});
+    if (username.value=="yh001"){
+      this.navCtrl.push(TabsPage, {type: 1}); //操作员
+    }else{
+      this.navCtrl.push(TabsPage, {type: 2}); //客户
+    }
+    
     // if (username.value.length == 0) {
     //   console.log("请输入账号");
     // } else if (password.value.length == 0) {

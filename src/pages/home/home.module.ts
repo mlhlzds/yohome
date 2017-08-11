@@ -13,7 +13,7 @@ import { SharedModule } from '../../shared/shared.module';
 @NgModule({
     imports:[
         IonicModule.forRoot(MyApp,{  
-            backButtonText: '',  
+            backButtonText: '返回',  
         }),
         SharedModule
     ],

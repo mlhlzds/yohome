@@ -17,7 +17,7 @@ import { LoginComponent } from '../components/login/login';
 
 //测试module C:\Users\ncbank\Desktop\github-ionic\yohome\src\pages\test\test.module.js
 import { TestModule } from '../pages/test/test.module';
-import {HttpModule} from "@angular/http";
+import { HttpModule } from "@angular/http";
 
 //自定义搜索管道
 import { FilterUserPipe } from '../pipes/search-info.pipe';
@@ -36,15 +36,17 @@ import { NativeService } from '../providers/NativeService';
     LoginPage,
     TabsPage,
     LoginComponent
-    
+
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      backButtonText: '返回',
+    }),
     TestModule,
     HomeModule,
     HttpModule
-    
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,8 +59,8 @@ import { NativeService } from '../providers/NativeService';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     NativeService
   ],
 })
-export class AppModule {}
+export class AppModule { }

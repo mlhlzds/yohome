@@ -1,11 +1,42 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      我的订单
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+<div padding>
+  <ion-segment [(ngModel)]="pet">
+    <ion-segment-button value="kittens">
+      全部订单
+    </ion-segment-button>
+    <ion-segment-button value="puppies">
+      进行中
+    </ion-segment-button>
+     <ion-segment-button value="aaaa">
+      已完成
+    </ion-segment-button>
+    <ion-segment-button value="4444">
+      待评价
+    </ion-segment-button>
+  </ion-segment>
+</div>
 
+<div [ngSwitch]="pet">
+  <ion-list *ngSwitchCase="'kittens'">
+  <button ion-item *ngFor="let userOrder of userOrders"  (click)="toOrderInfo(userOrder)">
+      <p>{{userOrder.name}}</p>
+      <p>{{userOrder.addr}}</p>
+  </button>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'puppies'">
+    <button ion-item *ngFor="let userOrder of userOrders"  (click)="toOrderInfo(userOrder)">
+        <p>{{userOrder.name}}</p>
+        <p>{{userOrder.addr}}</p>
+    </button>
+  </ion-list>
+</div>
 </ion-content>

@@ -8,6 +8,7 @@ import { ViewController } from 'ionic-angular';
 import { NativeService } from "../../providers/NativeService";
 
 import { FileObj } from "../../model/FileObj";
+import {Storage} from '@ionic/storage';
 
 
 /**
@@ -50,7 +51,8 @@ export class TestPage {
 
   };
   items = [];
-  constructor(private viewCtrl: ViewController,
+  constructor( private storage: Storage,private viewCtrl: ViewController,
+   
     private nativeService: NativeService) {
     for (var i = 0; i < 30; i++) {
       this.items.push( this.items.length );
@@ -79,7 +81,7 @@ export class TestPage {
   shouBigImage(img) {
 
   }
-
+  pet:string = 'puppies';
   score: number = 0;
   stars: any[] = [false, false, false, false, false];
   toChange(n) {

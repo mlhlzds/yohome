@@ -1,4 +1,4 @@
-import { Component,ElementRef,ContentChildren  } from '@angular/core';
+import { Component, ElementRef, ContentChildren, OnChanges, SimpleChanges } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { UserOrder } from "../../../model/UserOrder";
@@ -26,15 +26,15 @@ export class UserListOrdersInfoPage {
   fileObjList: FileObj[] = []; //所有图片
   fo: FileObj = new FileObj();
   userOrder: UserOrder = new UserOrder; //传过来的订单对象
-  @ContentChildren(OrderSchedule)orderScheduleList:OrderSchedule[] = [];
+  @ContentChildren(OrderSchedule) orderScheduleList: OrderSchedule[] = [];
 
 
-  
 
 
-  constructor(private el: ElementRef,private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.userOrder = navParams.data;  //订单对象
-   
+
 
     // this.fo.base64 = 'assets/img/avatar-ts-buzz.jpg';
     // this.fo.thumbPath = 'assets/img/avatar-ts-buzz.jpg';
@@ -44,7 +44,7 @@ export class UserListOrdersInfoPage {
     this.getAllOrder();
   }
 
-  cnt:number = 4;
+  cnt: number = 4;
 
   //获得所有订单
   getAllOrder() {
@@ -58,7 +58,7 @@ export class UserListOrdersInfoPage {
     // this.http.post("assets/data/testServlet.json", body, options).subscribe(function (data) {
     //   console.log(data)
     // })
-    
+
     this.http.get("assets/data/OrderSchedule.json").map(res => {
       this.orderScheduleList = res.json();
 
@@ -74,10 +74,10 @@ export class UserListOrdersInfoPage {
 
     return new Promise((resolve) => {
       setTimeout(() => {
-       
+
         this.http.get("assets/data/OrderSchedule.json").map(res => {
           for (var i = 0; i < res.json().length; i++) {
-           this.orderScheduleList.push(res.json()[i]);
+            this.orderScheduleList.push(res.json()[i]);
           }
 
         }).subscribe(function (data) {
@@ -94,54 +94,56 @@ export class UserListOrdersInfoPage {
   newSchedule() {
     this.navCtrl.push(NewSchedulePage, this.orderScheduleList);
   }
-  teststr:any;
-testChange(i){
- // var val = this.el.nativeElement.querySelector('#input'+i).value;
- if(!this.orderScheduleList[i].reply){
-   this.orderScheduleList[i].reply = [];
- }
- this.orderScheduleList[i].reply.push({
-                "id": "123",
-                "name": "chenyun",
-                "content": this.teststr,
-                "replyName": "chengpang",
-                "replyId": "123",
-                "time": "两分钟之前"
-            });
-this.teststr="";
-  //alert(this.teststr);
-}
-  testTo(){
-    this.el.nativeElement.querySelector('input').focus();
-   // this.el.nativeElement.querySelector('#content').a;
+  teststr: any;
+  testReply: any;
+  myplaceholder: any = '请输入回复内容…';
+  testChange2(i, replyName) {
+    this.testReply = replyName;
+    console.log(this.el.nativeElement.querySelector('#input' + i));
+    this.myplaceholder = '回复' + replyName;
+    this.el.nativeElement.querySelector('#input' + i).querySelector('input').focus();
+
   }
-  test(){                   
+  testChange(i) {
+    // var val = this.el.nativeElement.querySelector('#input'+i).value;
+    if (!this.orderScheduleList[i].reply) {
+      this.orderScheduleList[i].reply = [];
+    }
+    this.orderScheduleList[i].reply.push({
+      "id": "123",
+      "name": "chenyun",
+      "content": this.teststr,
+      "replyName": this.testReply,
+      "replyId": "",
+      "time": "两分钟之前"
+    });
+    this.teststr = "";
+    this.testReply = "";
+    this.myplaceholder = '请输入回复内容…';
+    //alert(this.teststr);
+  }
+  testTo() {
+    this.el.nativeElement.querySelector('input').focus();
+    // this.el.nativeElement.querySelector('#content').a;
+  }
+  test() {
     console.log("1111111111");
     this.http.get("assets/data/OrderSchedule.json").map(res => {
-          for (var i = 0; i < res.json().length; i++) {
-           this.orderScheduleList.push(res.json()[i]);
-          }
-           location.href = "#ion4";
-        }).subscribe(function (data) {
-          console.log(data)
-        })
-       
-    this.cnt = this.cnt+1;
+      for (var i = 0; i < res.json().length; i++) {
+        this.orderScheduleList.push(res.json()[i]);
+      }
+      location.href = "#ion4";
+    }).subscribe(function (data) {
+      console.log(data)
+    })
+
+    this.cnt = this.cnt + 1;
   }
 
-
-
-  ngAfterContentInit() {
-    console.log("2222222222222222222222222");
+  //這個方法導致 頁面進入會變卡
+  ionViewWillEnter() {
+    console.log("viewWillAppear");
+    location.href = '#ion0';
   }
 
-
-
-    barcodeScanner() {
-    console.log("gggggggggggggggg");
-  }
-
-  ngAfterViewChecked(){
-    console.log("1111111111111111111111111111");
-  }
 }

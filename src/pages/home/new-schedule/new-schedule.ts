@@ -56,5 +56,6 @@ thumb:Array<string> = new Array<string>(); //用于存放图片的base64
 
     this.orderScheduleList.unshift(orderSchedule);
     this.navCtrl.pop();
+  
   }
 }
