@@ -29,24 +29,24 @@ export class TabsPage {
         attrName: 6
       },
       {
-        root: ContactPage,
-        tabTitle: '我',
-        tabIcon: 'person',
-        attrName: 0
-      },
-      {
         root: UserListOrdersInfoPage,
         tabTitle: '所有进度',
         tabIcon: 'walk',
         attrName: 0
-      }
-      ,
+      },
       {
-        root: TestPage,
-        tabTitle: 'test',
-        tabIcon: 'app',
+        root: ContactPage,
+        tabTitle: '我',
+        tabIcon: 'person',
         attrName: 0
       }
+      // ,
+      // {
+      //   root: TestPage,
+      //   tabTitle: 'test',
+      //   tabIcon: 'app',
+      //   attrName: 0
+      // }
     ];
     }else{
       this.tabRoots = [
@@ -62,13 +62,13 @@ export class TabsPage {
         tabIcon: 'person',
         attrName: 0
       }
-      ,
-      {
-        root: TestPage,
-        tabTitle: 'test',
-        tabIcon: 'app',
-        attrName: 0
-      }
+      // ,
+      // {
+      //   root: TestPage,
+      //   tabTitle: 'test',
+      //   tabIcon: 'app',
+      //   attrName: 0
+      // }
     ];
     }
     

@@ -7,8 +7,8 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{userOrder.name?userOrder.name:'所有进度'}}<a href="#ion{{cnt}}" (click)="test()">(4)条新消息</a></ion-title>
-
+    <ion-title>{{userOrder.name?userOrder.name:'所有进度'}}</ion-title>
+<!-- <a href="#ion{{cnt}}" (click)="test()">(4)条新消息</a> -->
     <ion-buttons end>
       <button ion-button icon-only (click)="newSchedule()">
                 <ion-icon *ngIf="userOrder.name" name="add"></ion-icon>
@@ -62,7 +62,7 @@
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-          11h ago
+          9:30
         </ion-note>
       </ion-col>
     </ion-row>

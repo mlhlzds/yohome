@@ -25,8 +25,8 @@ import { FilterUserPipe } from '../pipes/search-info.pipe';
 //图片上传
 import { NativeService } from '../providers/NativeService';
 
-//图片放大
-
+//登录做缓存
+import {IonicStorageModule} from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -45,8 +45,8 @@ import { NativeService } from '../providers/NativeService';
     }),
     TestModule,
     HomeModule,
-    HttpModule
-
+    HttpModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -54,13 +54,14 @@ export class TestPage {
   constructor( private storage: Storage,private viewCtrl: ViewController,
    
     private nativeService: NativeService) {
+      this.storage.set('a',"1111aaabb");
     for (var i = 0; i < 30; i++) {
       this.items.push( this.items.length );
     }
   }
   doInfinite(): Promise<any> {
     console.log('Begin async operation');
-
+    
     return new Promise((resolve) => {
       setTimeout(() => {
         for (var i = 0; i < 30; i++) {
@@ -76,12 +77,16 @@ export class TestPage {
     this.thumb.splice(key, 1);
   };
   cliTest() {
+     console.log("====================================================");
+    console.log(this.storage.get('a'));
     console.log(this.thumb.length);
   }
   shouBigImage(img) {
 
   }
   pet:string = 'puppies';
+  msgType:boolean = true;
+  ///////////////////////////////////////////////
   score: number = 0;
   stars: any[] = [false, false, false, false, false];
   toChange(n) {

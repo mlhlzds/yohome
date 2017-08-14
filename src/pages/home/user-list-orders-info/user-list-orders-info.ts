@@ -25,7 +25,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 export class UserListOrdersInfoPage {
   fileObjList: FileObj[] = []; //所有图片
   fo: FileObj = new FileObj();
-  userOrder: UserOrder = new UserOrder; //传过来的订单对象
+  userOrder: UserOrder; //传过来的订单对象
   @ContentChildren(OrderSchedule) orderScheduleList: OrderSchedule[] = [];
 
 
@@ -141,9 +141,9 @@ export class UserListOrdersInfoPage {
   }
 
   //這個方法導致 頁面進入會變卡
-  ionViewWillEnter() {
-    console.log("viewWillAppear");
-    location.href = '#ion0';
-  }
+  // ionViewWillEnter() {
+  //   console.log("viewWillAppear");
+  //   location.href = '#ion0';
+  // }
 
 }
