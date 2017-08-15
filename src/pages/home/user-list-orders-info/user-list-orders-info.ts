@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { UserOrder } from "../../../model/UserOrder";
 import { NewSchedulePage } from '../new-schedule/new-schedule';
+import { ScheduleComplaintPage } from '../schedule-complaint/schedule-complaint';
 
 import { FileObj } from "../../../model/FileObj";
 import { OrderSchedule } from "../../../model/OrderSchedule";
@@ -28,24 +29,12 @@ export class UserListOrdersInfoPage {
   userOrder: UserOrder; //传过来的订单对象
   @ContentChildren(OrderSchedule) orderScheduleList: OrderSchedule[] = [];
 
-
-
-
-
   constructor(private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.userOrder = navParams.data;  //订单对象
-
-
-    // this.fo.base64 = 'assets/img/avatar-ts-buzz.jpg';
-    // this.fo.thumbPath = 'assets/img/avatar-ts-buzz.jpg';
-    // this.fo.origPath = 'assets/img/avatar-ts-buzz.jpg';
-
-    // this.fileObjList.push(this.fo);
     this.getAllOrder();
   }
 
   cnt: number = 4;
-
   //获得所有订单
   getAllOrder() {
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -90,6 +79,10 @@ export class UserListOrdersInfoPage {
     })
   }
 
+  //投诉
+  toScheduleComplaint() {
+    this.navCtrl.push(ScheduleComplaintPage, this.orderScheduleList);
+  }
   //发表新的进度
   newSchedule() {
     this.navCtrl.push(NewSchedulePage, this.orderScheduleList);
@@ -144,6 +137,15 @@ export class UserListOrdersInfoPage {
   // ionViewWillEnter() {
   //   console.log("viewWillAppear");
   //   location.href = '#ion0';
+  // }
+
+  // 方法二 发表新的进度 总是显示最上面的  也会卡顿
+  // osCont: number = this.orderScheduleList.length;
+  // ngAfterViewChecked() {
+  //   if (this.osCont < this.orderScheduleList.length) {
+  //     this.osCont = this.orderScheduleList.length;
+  //     location.href = '#ion0';
+  //   }
   // }
 
 }

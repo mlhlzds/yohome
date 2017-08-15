@@ -1,0 +1,50 @@
+<!--
+  Generated template for the ScheduleComplaintPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>投诉</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div class="main">  
+        <div class="main_inner clearfix">  
+            <div class="panel"></div>                   
+            <div id="chatArea" class="box chat">  
+                <div class="box_hd"></div>  
+                <div class="box_bd" id="messageList">  
+                    <div *ngFor="let scheduleComplaint of scheduleComplaintList" [ngClass]="{true:'message me',false:'message'}[scheduleComplaint.msgType]">  
+                        <img class="avatar" src="{{scheduleComplaint.headPortrait}}" />  
+                        <div class="content">  
+                            <div class="nickname"><span class="time">{{scheduleComplaint.dateTime}}</span></div>  
+                            <div [ngClass]="{true:'bubble bubble_primary right',false:'bubble bubble_default left'}[scheduleComplaint.msgType]">  
+                                <div class="bubble_cont">  
+                                    <div class="plain">  
+                                        <pre>{{scheduleComplaint.content}}</pre>  
+                                    </div>  
+                                </div>  
+                            </div>  
+                        </div>  
+                    </div>   
+
+                </div>  
+                <div class="box_ft">   
+                    <div class="box_ft_hd">  
+                        <div class="eaitWrap">  
+                    
+                            <ion-input (change)="complaintReply($event)" class="editArea" id="input{{i}}" [(ngModel)]="teststr"   type="text" placeholder="回复内容…" ></ion-input>  
+                        </div>  
+                       
+                    </div>  
+                </div>  
+            </div>  
+        </div>  
+    </div>  
+</ion-content>
