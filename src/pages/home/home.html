@@ -5,9 +5,9 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="search" style='border-left:0px;border-top:0px;border-right:0px;border-bottom:1px '></ion-searchbar>
 
-        <button ion-item (click)="toOrders(user)" *ngFor="let user of userList|filterUser:search">
+    <button ion-item (click)="toOrders(user)" *ngFor="let user of userList|filterUser:search">
                 <ion-avatar item-start>
                     <img src="{{user.imgPath}}">
                 </ion-avatar>
@@ -16,5 +16,5 @@
         </button>
 
 
- 
+
 </ion-content>

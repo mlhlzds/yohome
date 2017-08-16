@@ -31,7 +31,7 @@ export class ScheduleComplaintPage{
       console.log(data)
     })
   }
-
+  hi:number = -200;
   //投诉回复
   complaintReply(event: any) {
     var scheduleComplaint: ScheduleComplaint = new ScheduleComplaint;
@@ -44,6 +44,9 @@ export class ScheduleComplaintPage{
     this.scheduleComplaintList.push(scheduleComplaint);
 
     event.target.value = "";
+
+    //更改样式
+     event.target.style="transform:translate3d(0px,-150px, 0px) scale(1)"
   }
 
   sclCont: number = this.scheduleComplaintList.length;

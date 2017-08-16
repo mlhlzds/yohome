@@ -30,7 +30,16 @@
       <ion-avatar item-start>
         <img src="assets/img/marty-avatar.png">
       </ion-avatar>
+
+      <ion-row>
+        <ion-col>
       <h2>员工小李</h2>
+      </ion-col>
+               <ion-col> </ion-col>
+            <ion-col>
+      <p>2017年8月7日 12:56</p>
+      </ion-col>
+      </ion-row>
       <p>做yohome最好的员工</p>
     </ion-item>
     <ion-card-content>
@@ -54,6 +63,7 @@
         <div>12 Likes</div>
       </button>
       </ion-col>
+    <ion-col> </ion-col><ion-col> </ion-col>
       <ion-col>
         <button ion-button icon-left clear small (click)="toScheduleComplaint()">
         <ion-icon name="text"></ion-icon>
@@ -61,9 +71,7 @@
       </button>
       </ion-col>
       <ion-col center text-center>
-        <ion-note>
-          9:30
-        </ion-note>
+
       </ion-col>
     </ion-row>
 
@@ -73,8 +81,10 @@
               <span *ngIf="re.replyName" (click)="testChange2(i,re.replyName)">回复{{re.replyName}}</span>
               <span>: </span>{{re.content}}
             </p>    
-          </div>                 
-          <ion-input id="input{{i}}" [(ngModel)]="teststr" (change)="testChange(i)"  type="text" [placeholder]="myplaceholder" ></ion-input>
+          </div>   
+          <div style="position: static;">          
+          <ion-input  id="input{{i}}" [(ngModel)]="teststr" (change)="testChange(i)"  type="text" [placeholder]="myplaceholder" ></ion-input>
+          </div>    
         </div>
   </ion-card>
   </div>

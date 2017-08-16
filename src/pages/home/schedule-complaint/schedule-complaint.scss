@@ -1,28 +1,9 @@
 page-schedule-complaint {
-html {  
-    -ms-text-size-adjust: 100%;  
-    -webkit-text-size-adjust: 100%;  
-    height: 100%;  
-}  
+ 
   
-body {  
-    -webkit-font-smoothing: antialiased;  
-    line-height: 1.6;  
-    font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;  
-    height: 100%;  
-}  
+
   
-input, textarea, button, a {  
-    outline: 0;  
-}  
-  
-body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, fieldset, textarea {  
-    margin: 0;  
-}  
-  
-fieldset, legend, textarea, input {  
-    padding: 0;  
-}  
+
   
 ul, ol {  
     padding-left: 0;  
@@ -473,6 +454,6 @@ a.btn {
     background-color: transparent;  
 }  
 ion-input{
-    margin-left: 10px; 
+    margin-left: 0px; 
 }
 }
