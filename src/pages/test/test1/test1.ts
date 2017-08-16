@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
+import { OrderSchedule } from "../../../model/OrderSchedule";
 
 /**
  * Generated class for the Test1Page page.
@@ -16,13 +17,15 @@ import { ToastController } from 'ionic-angular';
 
 })
 export class Test1Page {
+  teststr:string = '';
+  @Input() orderScheduleList: OrderSchedule[] = [];
+  toScheduleComplaint(){
 
-  i: number = 0;
-
-  constructor() {
-    setInterval(() => {
-      this.i++;
-    }, 1000)
   }
+  testChange(){
 
+  }
+  doInfinite(){
+     console.log('2222222222222222aaaaaaaaaaaaaaa');
+  }
 }

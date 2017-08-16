@@ -12,10 +12,10 @@
     <ion-segment-button value="kittens">
       工程进度
     </ion-segment-button>
-    <ion-segment-button value="puppies">
+    <ion-segment-button value="archives">
       档案
     </ion-segment-button>
-     <ion-segment-button value="aaaa">
+     <ion-segment-button value="customerServicePage">
       售后
     </ion-segment-button>
 
@@ -30,11 +30,20 @@
   </button>
   </ion-list>
 
-  <ion-list *ngSwitchCase="'puppies'">
-    <button ion-item *ngFor="let userOrder of userOrders"  (click)="toOrderInfo(userOrder)">
+  <ion-list *ngSwitchCase="'archives'">
+    <button ion-item *ngFor="let userOrder of userOrders"  (click)="toArchivesPage(userOrder)">
         <p>{{userOrder.name}}</p>
         <p>{{userOrder.addr}}</p>
     </button>
   </ion-list>
+
+    <ion-list *ngSwitchCase="'customerServicePage'">
+    <button ion-item *ngFor="let userOrder of userOrders"  (click)="toCustomerServicePage(userOrder)">
+        <p>{{userOrder.name}}</p>
+        <p>{{userOrder.addr}}</p>
+    </button>
+  </ion-list>
+
+  
 </div>
 </ion-content>

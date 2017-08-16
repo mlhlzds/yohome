@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>售后</ion-title>
+        <ion-buttons end>
+      <button ion-button icon-only (click)="newSchedule()">
+               发表
+            </button>
+    </ion-buttons>
+    
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <div style="  margin-top: 10px;
+    margin-left: 10px;">
+    <div>
+      <textarea placeholder="进度描述……"  [(ngModel)]="describe"  rows="3">{{describe}}</textarea><hr/>
+    </div>
+
+     <div padding-vertical>
+        <page-select-pic [max]="8"   [(fileObjList)]="fileObjList"></page-select-pic>
+      </div>
+    <!-- 这里是我自己定义的img空间 -->
+    <!-- <div *ngFor="let item of thumb;let i = index" style="float:left">
+      <div id="a1">
+        <img [src]="item" style="width:60px;height:60px;background-size: cover;" />
+      </div>
+      <div class="divafter" (click)="img_del(i)">X</div>
+    </div>
+
+
+    <div class="file">
+      <input type="file" name="" id="" (change)="img_upload($event)">
+    </div> -->
+    <hr/>  
+  </div>
+</ion-content>

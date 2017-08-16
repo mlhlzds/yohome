@@ -8,6 +8,8 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { UserListOrdersInfoPage } from '../home/user-list-orders-info/user-list-orders-info';
+import { ArchivesPage } from "./archives/archives";
+import { CustomerServicePage } from "./customer-service/customer-service";
 
 
 @Component({
@@ -26,9 +28,19 @@ export class AboutPage {
     this.initUserOrders();
   }
 
-    //跳转到所有订单
+  //跳转到所有订单
   toOrderInfo(userOrder:UserOrder){
-    this.navCtrl.push(UserListOrdersInfoPage,userOrder);
+    this.navCtrl.push(UserListOrdersInfoPage,{});
+  }
+
+  //档案
+  toArchivesPage(){
+    this.navCtrl.push(ArchivesPage,{});
+  }
+
+  //售后
+  toCustomerServicePage(){
+    this.navCtrl.push(CustomerServicePage,{});
   }
 
   //初始化订单

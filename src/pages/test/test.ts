@@ -10,14 +10,14 @@ import { NativeService } from "../../providers/NativeService";
 import { FileObj } from "../../model/FileObj";
 import {Storage} from '@ionic/storage';
 
-
+import { Http, RequestOptions, Headers } from '@angular/http';
 /**
  * Generated class for the Test2Page page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
+import { OrderSchedule } from "../../model/OrderSchedule";
 @Component({
   selector: 'page-test',
   templateUrl: 'test.html',
@@ -25,6 +25,7 @@ import {Storage} from '@ionic/storage';
 
 })
 export class TestPage {
+  orderScheduleLista: OrderSchedule[] = [];
   fileObjList: FileObj[] = [];
   thumb: Array<string> = new Array<string>(); //用于存放图片的base64 
 
@@ -51,28 +52,43 @@ export class TestPage {
 
   };
   items = [];
-  constructor( private storage: Storage,private viewCtrl: ViewController,
+  constructor( private http: Http,private storage: Storage,private viewCtrl: ViewController,
    
     private nativeService: NativeService) {
+
+      this.http.get("assets/data/OrderSchedule.json").map(res => {
+      this.orderScheduleLista = res.json();
+      console.log(this.orderScheduleLista);
+
+    }).subscribe(function (data) {
+      console.log(data)
+    })
       this.storage.set('a',"1111aaabb");
     for (var i = 0; i < 30; i++) {
       this.items.push( this.items.length );
     }
+    this.name = 'Semlinker';
+        this.address = {
+            province: '福建',
+            city: '厦门'
+        }
   }
   doInfinite(): Promise<any> {
     console.log('Begin async operation');
     
     return new Promise((resolve) => {
-      setTimeout(() => {
-        for (var i = 0; i < 30; i++) {
-          this.items.push( this.items.length );
-        }
+      // setTimeout(() => {
+      //   for (var i = 0; i < 30; i++) {
+      //     this.items.push( this.items.length );
+      //   }
 
-        console.log('Async operation has ended');
-        resolve();
-      }, 500);
+      //   console.log('Async operation has ended');
+      //   resolve();
+      // }, 500);
     })
   }
+
+  
   img_del(key) {
     this.thumb.splice(key, 1);
   };
@@ -97,4 +113,8 @@ export class TestPage {
     }
     this.score = n + 1;
   }
+
+  //////////////////组件测试///////////////////
+      name: string;
+    address: any;
 }

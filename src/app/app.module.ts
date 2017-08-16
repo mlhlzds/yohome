@@ -18,6 +18,8 @@ import { LoginComponent } from '../components/login/login';
 //测试module C:\Users\ncbank\Desktop\github-ionic\yohome\src\pages\test\test.module.js
 import { TestModule } from '../pages/test/test.module';
 import { HttpModule } from "@angular/http";
+import { AboutModule } from '../pages/about/about.module';
+
 
 //自定义搜索管道
 import { FilterUserPipe } from '../pipes/search-info.pipe';
@@ -44,6 +46,7 @@ import {IonicStorageModule} from '@ionic/storage';
       backButtonText: '返回',
     }),
     TestModule,
+    AboutModule,
     HomeModule,
     HttpModule,
     IonicStorageModule.forRoot()
