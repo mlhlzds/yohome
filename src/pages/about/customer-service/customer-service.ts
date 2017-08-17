@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FileObj } from "../../../model/FileObj";
 import { OrderSchedule } from "../../../model/OrderSchedule";
+
+import { Content } from 'ionic-angular';
 /**
  * Generated class for the CustomerServicePage page.
  *
@@ -14,48 +16,22 @@ import { OrderSchedule } from "../../../model/OrderSchedule";
   templateUrl: 'customer-service.html',
 })
 export class CustomerServicePage {
-
-  describe:string = '';
+   @ViewChild(Content) content: Content;
+  describe: string = '';
   fileObjList: FileObj[] = []; //所有图片
-  orderScheduleList:OrderSchedule[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.orderScheduleList = navParams.data;  //订单对象
-  }
-
-thumb:Array<string> = new Array<string>(); //用于存放图片的base64 
-
-  img_upload(event: any) { //单次提交图片的函数 
-    
-    var reader = new FileReader(); //创建一个FileReader接口 
-    var guid = (new Date()).valueOf(); //通过时间戳创建一个随机数，作为键名使用 
-    var file = event.target.files[0];
-
-    reader.readAsDataURL(file); //FileReader的方法，把图片转成base64 
-    var self = this;
-
-   
-    reader.onload = function (e) {
-      self.thumb.push(this.result);
-      
-      console.log(guid);
-    }
-
-  };
-
-  img_del(key) {
-    this.thumb.splice(key, 1);
-  };
-  cliTest(){
-    console.log(this.thumb.length);
-  }
-     
-  newSchedule(){
-    let orderSchedule:OrderSchedule = new OrderSchedule();
-    orderSchedule.imgs = this.fileObjList;
-    orderSchedule.describe = this.describe;
-
-    this.orderScheduleList.unshift(orderSchedule);
-    this.navCtrl.pop();
   
+  customerList:Array<any> = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  }
+
+  newCustomer() {
+    var obj = {describe:this.describe,fileObjList:this.fileObjList};
+    this.customerList.unshift(obj);
+
+    this.describe = '';
+    this.fileObjList = []; //所有图片
+
+    this.content.scrollToTop(500);
   }
 }

@@ -1,54 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      客户小甜甜
-    </ion-title>
-
+  <ion-navbar>
+    <ion-title>Main Navbar</ion-title>
+  </ion-navbar>
+  <ion-toolbar *ngIf="showToolbar">
+    <ion-title>Dynamic Toolbar</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
-<ion-card>
-  
-  <ion-card-content>
-    <ion-card-title style="color: blue;">
-      合同信息
-      </ion-card-title>
-
-    <p >
-      上边描述少打几个字上边描述少打几个字上边描述少打几个字上边描述少打几个字
-    </p>
-  </ion-card-content>
-<img src="assets/img/sl1.png"/>
-</ion-card>
-
-<ion-card>
+<ion-content (ionScroll)="funIonScroll()">
+  <button ion-button (click)="toggleToolbar()">Toggle Toolbar</button>
+</ion-content>
+<ion-footer>
+      <ion-input id="myinput"  (blur)="funBlur()" (focus)="funFocus($event)" placeholder="回复内容…" ></ion-input> 
  
-  <ion-card-content>
-    <ion-card-title>
-      商品清单
-      </ion-card-title>
-    <p>
-      上边描述少打几个字
-    </p>
-  </ion-card-content>
- <img src="assets/img/sl2.png"/>
-</ion-card>
+</ion-footer>
 
-<ion-card>
-  
-  <ion-card-content>
-    <ion-card-title>
-      图纸
-      </ion-card-title>
-    <p>
-      上边描述少打几个字
-    </p>
-  </ion-card-content>
-<img src="assets/img/sl3.png"/>
-</ion-card>
-  <!-- <br/> <br/> <br/> <br/> <br/> <br/>
+<!-- <br/> <br/> <br/> <br/> <br/> <br/>
   <div style="  margin-top: 10px;
     margin-left: 10px;">
     <div>
@@ -65,4 +31,3 @@
   </div>
 
   <ion-icon class="icons-star" *ngFor="let star of stars;let n = index" name='star' [isActive]="star" (click)="toChange(n)"></ion-icon> -->
-</ion-content>

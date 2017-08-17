@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { User } from "../../model/User";
@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import { UserListOrdersInfoPage } from '../home/user-list-orders-info/user-list-orders-info';
 import { ArchivesPage } from "./archives/archives";
 import { CustomerServicePage } from "./customer-service/customer-service";
+
 
 
 @Component({

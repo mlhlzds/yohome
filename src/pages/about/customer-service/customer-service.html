@@ -2,38 +2,40 @@
 
   <ion-navbar>
     <ion-title>售后</ion-title>
-        <ion-buttons end>
-      <button ion-button icon-only (click)="newSchedule()">
-               提交
-            </button>
-    </ion-buttons>
-    
+
+
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
+  <div *ngFor="let customer of customerList;let i=index;">
+    <ion-card-content>
+      <p>{{customer.describe}}</p>
+    </ion-card-content>
+
+    <ion-item>
+      <div padding-vertical>
+        <page-select-pic [max]="6" [allowDelete]="false" [allowAdd]="false" [(fileObjList)]="customer.fileObjList"></page-select-pic>
+      </div>
+    </ion-item>
+  </div>
   <div style="  margin-top: 10px;
     margin-left: 10px;">
     <div>
-      <textarea placeholder="描述……"  [(ngModel)]="describe"  rows="3">{{describe}}</textarea><hr/>
+      <textarea placeholder="说下您的使用情况吧……" [(ngModel)]="describe" rows="3">{{describe}}</textarea>
+      <hr/>
     </div>
 
-     <div padding-vertical>
-        <page-select-pic [max]="8"   [(fileObjList)]="fileObjList"></page-select-pic>
-      </div>
-    <!-- 这里是我自己定义的img空间 -->
-    <!-- <div *ngFor="let item of thumb;let i = index" style="float:left">
-      <div id="a1">
-        <img [src]="item" style="width:60px;height:60px;background-size: cover;" />
-      </div>
-      <div class="divafter" (click)="img_del(i)">X</div>
+    <div padding-vertical>
+      <page-select-pic [max]="8" [(fileObjList)]="fileObjList"></page-select-pic>
     </div>
-
-
-    <div class="file">
-      <input type="file" name="" id="" (change)="img_upload($event)">
-    </div> -->
-    <hr/>  
   </div>
+  <button ion-button style="width:100%" (click)="newCustomer()">
+               提交
+            </button>
 </ion-content>
+<ion-footer>
+  <button ion-button style="width:100%;height:50px;" disabled="disabled" color="dark">客服电话：0512-66592866-818</button>
+
+</ion-footer>

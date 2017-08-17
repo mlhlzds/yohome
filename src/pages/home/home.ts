@@ -7,6 +7,10 @@ import 'rxjs/add/operator/map';
 import { UserListOrdersPage } from './user-list-orders/user-list-orders';
 
 import {User} from "../../model/User";
+
+import { IonicPage } from 'ionic-angular';
+
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
