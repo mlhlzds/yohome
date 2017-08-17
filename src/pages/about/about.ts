@@ -20,6 +20,8 @@ import { CustomerServicePage } from "./customer-service/customer-service";
 export class AboutPage {
 
   userOrders: UserOrder[] = [];
+  userOrders2: UserOrder[] = [];
+  userOrders3: UserOrder[] = [];
   usre: User = new User;  //传过来的用户
   homeObj = {};//传过来的消息数量
   pet:string = 'kittens';
@@ -48,6 +50,18 @@ export class AboutPage {
   initUserOrders() {
     this.http.get('./assets/data/userOrders.json').map(res => {
       this.userOrders = res.json(); 
+    }).subscribe(function (data) {
+      console.log(data)
+    })
+
+    this.http.get('./assets/data/userOrders2.json').map(res => {
+      this.userOrders2 = res.json(); 
+    }).subscribe(function (data) {
+      console.log(data)
+    })
+
+    this.http.get('./assets/data/userOrders3.json').map(res => {
+      this.userOrders3 = res.json(); 
     }).subscribe(function (data) {
       console.log(data)
     })

@@ -31,14 +31,14 @@
   </ion-list>
 
   <ion-list *ngSwitchCase="'archives'">
-    <button ion-item *ngFor="let userOrder of userOrders"  (click)="toArchivesPage(userOrder)">
+    <button ion-item *ngFor="let userOrder of userOrders2"  (click)="toArchivesPage(userOrder)">
         <p>{{userOrder.name}}</p>
         <p>{{userOrder.addr}}</p>
     </button>
   </ion-list>
 
     <ion-list *ngSwitchCase="'customerServicePage'">
-    <button ion-item *ngFor="let userOrder of userOrders"  (click)="toCustomerServicePage(userOrder)">
+    <button ion-item *ngFor="let userOrder of userOrders3"  (click)="toCustomerServicePage(userOrder)">
         <p>{{userOrder.name}}</p>
         <p>{{userOrder.addr}}</p>
     </button>

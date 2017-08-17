@@ -1,0 +1,22 @@
+[
+    {
+        "name": "小米笔记本",
+        "imgPath": "assets/img/avatar-ts-woody.png",
+        "addr": "江西省赣州地区兴国县北单家庄"
+    },
+    {
+        "name": "机械革命",
+        "imgPath": "assets/img/avatar-ts-jessie.png",
+        "addr": "广西壮族自治区桂林地区恭城瑶族自治县"
+    },
+    {
+        "name": "微星",
+        "imgPath": "assets/img/avatar-ts-potatohead.png",
+        "addr": "宁夏回族自治区吴忠市市辖区"
+    },
+     {
+        "name": "清华同方",
+        "imgPath": "assets/img/avatar-ts-potatohead.png",
+        "addr": "北京市房山县幸福大街甲970号"
+    }
+]
