@@ -1,49 +1,64 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-    我的家
+      我的家
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-<div padding=50px>
-  <ion-segment [(ngModel)]="pet">
-    <ion-segment-button value="kittens">
-      工程进度
-    </ion-segment-button>
-    <ion-segment-button value="archives">
-      档案
-    </ion-segment-button>
-     <ion-segment-button value="customerServicePage">
-      售后
-    </ion-segment-button>
+    <ion-segment [(ngModel)]="state">
+      <ion-segment-button value="3">
+        全部订单
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        进行中
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        已完结
+      </ion-segment-button>
+    </ion-segment>
+  <div *ngFor="let userOrder of userOrders;let i=index;">
+    <ion-item *ngIf="state==3?userOrder.state<state:userOrder.state==state">
+      <ion-row>
+        <ion-col>
+          <p>{{userOrder.name}}</p>
+        </ion-col>
+      </ion-row>
+      <p>
+        <ion-row>
+          <ion-col>{{userOrder.addr}}</ion-col>
+          <ion-col>
+            <p *ngIf="userOrder.state==2" style="color: red">已完结</p>
+            <p *ngIf="userOrder.state==1" style="color:blue;">进行中</p>
+          </ion-col>
+        </ion-row>
+      </p>
 
-  </ion-segment>
-</div>
 
-<div [ngSwitch]="pet">
-  <ion-list *ngSwitchCase="'kittens'">
-  <button ion-item *ngFor="let userOrder of userOrders"  (click)="toOrderInfo(userOrder)">
-      <p>{{userOrder.name}}</p>
-      <p>{{userOrder.addr}}</p>
-  </button>
-  </ion-list>
 
-  <ion-list *ngSwitchCase="'archives'">
-    <button ion-item *ngFor="let userOrder of userOrders2"  (click)="toArchivesPage(userOrder)">
-        <p>{{userOrder.name}}</p>
-        <p>{{userOrder.addr}}</p>
-    </button>
-  </ion-list>
+      <button ion-button color="primary" (click)="toOrderInfo()">
+     
+            <ion-icon name="book"></ion-icon>
+            进度
+       
+        </button>
 
-    <ion-list *ngSwitchCase="'customerServicePage'">
-    <button ion-item *ngFor="let userOrder of userOrders3"  (click)="toCustomerServicePage(userOrder)">
-        <p>{{userOrder.name}}</p>
-        <p>{{userOrder.addr}}</p>
-    </button>
-  </ion-list>
+      <button ion-button color="primary" (click)="toArchivesPage()">
+      
+            <ion-icon name="browsers"></ion-icon>
+            档案
+     
+        </button>
+      <button ion-button color="primary" (click)="toCustomerServicePage()" *ngIf="userOrder.state==2">
+        
+            <ion-icon name="call"></ion-icon>
+            售后
+                                                 
+        </button>
 
-  
-</div>
+    </ion-item>
+  </div>
+
+
 </ion-content>

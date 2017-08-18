@@ -6,13 +6,16 @@
     <ion-title>Dynamic Toolbar</ion-title>
   </ion-toolbar>
 </ion-header>
+
+
 <ion-content (ionScroll)="funIonScroll()">
-  <button ion-button (click)="toggleToolbar()">Toggle Toolbar</button>
+  <button ion-item *ngFor="let userOrder of userOrders"  (click)="toOrderInfo(userOrder)">
+      <p>{{userOrder.name}}<ion-badge item-right style="background-color: red;">{{homeObj.attrName}}</ion-badge></p>
+      <p>{{userOrder.addr}}</p>
+  </button>
 </ion-content>
-<ion-footer>
-      <ion-input id="myinput"  (blur)="funBlur()" (focus)="funFocus($event)" placeholder="回复内容…" ></ion-input> 
- 
-</ion-footer>
+
+
 
 <!-- <br/> <br/> <br/> <br/> <br/> <br/>
   <div style="  margin-top: 10px;

@@ -18,10 +18,9 @@ import { CustomerServicePage } from "./customer-service/customer-service";
   templateUrl: 'about.html'
 })
 export class AboutPage {
-
+  state:string = '3';  //初始化选中全部订单
   userOrders: UserOrder[] = [];
-  userOrders2: UserOrder[] = [];
-  userOrders3: UserOrder[] = [];
+
   usre: User = new User;  //传过来的用户
   homeObj = {};//传过来的消息数量
   pet:string = 'kittens';
@@ -31,7 +30,7 @@ export class AboutPage {
     this.initUserOrders();
   }
 
-  //跳转到所有订单
+  //进度
   toOrderInfo(userOrder:UserOrder){
     this.navCtrl.push(UserListOrdersInfoPage,{});
   }
@@ -50,18 +49,6 @@ export class AboutPage {
   initUserOrders() {
     this.http.get('./assets/data/userOrders.json').map(res => {
       this.userOrders = res.json(); 
-    }).subscribe(function (data) {
-      console.log(data)
-    })
-
-    this.http.get('./assets/data/userOrders2.json').map(res => {
-      this.userOrders2 = res.json(); 
-    }).subscribe(function (data) {
-      console.log(data)
-    })
-
-    this.http.get('./assets/data/userOrders3.json').map(res => {
-      this.userOrders3 = res.json(); 
     }).subscribe(function (data) {
       console.log(data)
     })
