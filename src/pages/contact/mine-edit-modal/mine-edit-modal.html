@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      编辑个人信息
+    </ion-title>
+    <ion-buttons>
+      <button ion-button (click)="dismiss()">关闭</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>姓名</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <div *ngIf="verifyMessages.name.errorMsg" class="validation-failed">{{verifyMessages.name.errorMsg}}</div>
+
+
+      <ion-item>
+        <ion-label floating>用户名</ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <div *ngIf="verifyMessages.username.errorMsg" class="validation-failed">{{verifyMessages.username.errorMsg}}</div>
+
+
+
+      <ion-item>
+        <ion-label floating>个性签名</ion-label>
+        <ion-textarea  formControlName="description"></ion-textarea>
+      </ion-item>
+      <div *ngIf="verifyMessages.description.errorMsg" class="validation-failed">{{verifyMessages.description.errorMsg}}</div>
+
+
+      <ion-item>
+        <ion-label floating>手机号码</ion-label>
+        <ion-input type="tel" formControlName="phone"></ion-input>
+      </ion-item>
+      <div *ngIf="verifyMessages.phone.errorMsg" class="validation-failed">{{verifyMessages.phone.errorMsg}}</div>
+
+      <ion-item>
+        <ion-label floating>备用手机号码</ion-label>
+        <ion-input type="tel" formControlName="phoneBak"></ion-input>
+      </ion-item>
+      <div *ngIf="verifyMessages.phone.errorMsg" class="validation-failed">{{verifyMessages.phone.errorMsg}}</div>
+
+      <ion-item>
+        <ion-label floating>电子邮箱</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <div *ngIf="verifyMessages.email.errorMsg" class="validation-failed">{{verifyMessages.email.errorMsg}}</div>
+
+        <ion-item>
+        <ion-label floating>住址</ion-label>
+        <ion-textarea  formControlName="address"></ion-textarea>
+      </ion-item>
+    <div *ngIf="verifyMessages.address.errorMsg" class="validation-failed">{{verifyMessages.address.errorMsg}}</div>
+
+    </ion-list>
+
+
+
+    <div padding-horizontal>
+      <button type="submit" ion-button block [disabled]="!userForm.valid">保 存</button>
+    </div>
+  </form>
+</ion-content>

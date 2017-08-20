@@ -4,7 +4,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomeModule } from '../pages/home/home.module';
 
 
@@ -19,7 +18,7 @@ import { LoginComponent } from '../components/login/login';
 import { TestModule } from '../pages/test/test.module';
 import { HttpModule } from "@angular/http";
 import { AboutModule } from '../pages/about/about.module';
-
+import { ContactModule } from '../pages/contact/contact.module';
 
 //自定义搜索管道
 import { FilterUserPipe } from '../pipes/search-info.pipe';
@@ -34,7 +33,6 @@ import {IonicStorageModule} from '@ionic/storage';
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
     LoginPage,
     TabsPage,
     LoginComponent
@@ -49,13 +47,13 @@ import {IonicStorageModule} from '@ionic/storage';
     AboutModule,
     HomeModule,
     HttpModule,
+    ContactModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
     LoginPage,
     TabsPage
   ],

@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 import { TabsPage } from "../tabs/tabs";
+import { UserInfo, LoginInfo } from "../../model/UserInfo";
+
+
+
+
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the LoginPage page.
  *
@@ -13,17 +19,39 @@ import { TabsPage } from "../tabs/tabs";
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  loginInfo: LoginInfo;
+  userInfo: UserInfo;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events, private storage: Storage) {
   }
 
   logIn(username: HTMLInputElement, password: HTMLInputElement) {
-    if (username.value=="yh001"){
-      this.navCtrl.push(TabsPage, {type: 1}); //操作员
-    }else{
-      this.navCtrl.push(TabsPage, {type: 2}); //客户
-    }
-    
+
+    // 初始化用户数据
+    let loginInfo = <LoginInfo>{
+      access_token: 'test_test_test_test_test_test_test',
+      user: {
+        id: '1',
+        username: 'nihao',
+        name: '小军',
+        email: 'yanxiaojun617@163.com',
+        phone: '18688498342',
+        phoneBak: '18688498343',
+        avatar: '',
+        avatarPath: 'assets/img/avatar-ts-jessie.png',
+        description: '有图有真相，一本正经的胡说八道..',
+        token: '',
+        address: '上海市浦东新区杨高南路陆家嘴金融中心'
+      }
+    };
+
+    console.log('11111111', loginInfo);
+    // this.events.publish('user:login', loginInfo);
+    this.storage.set('LoginInfo', loginInfo).then((loginInfo: LoginInfo) => {
+      console.log('444444', loginInfo);
+    });
+    this.navCtrl.push(TabsPage, { id: 111112222 });
+
+
     // if (username.value.length == 0) {
     //   console.log("请输入账号");
     // } else if (password.value.length == 0) {
