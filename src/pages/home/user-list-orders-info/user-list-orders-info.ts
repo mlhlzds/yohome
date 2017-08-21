@@ -8,8 +8,9 @@ import { ScheduleComplaintPage } from '../schedule-complaint/schedule-complaint'
 import { FileObj } from "../../../model/FileObj";
 import { OrderSchedule } from "../../../model/OrderSchedule";
 
-
+import {MineEditPage} from '../../contact/mine-edit/mine-edit'; 
 import { Http, RequestOptions, Headers } from '@angular/http';
+import { UserInfo, LoginInfo } from "../../../model/UserInfo";
 /**
  * Generated class for the UserListOrdersInfoPage page.
  *
@@ -32,6 +33,25 @@ export class UserListOrdersInfoPage {
   constructor(private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.userOrder = navParams.data;  //订单对象
     this.getAllOrder();
+  }
+  userInfo: UserInfo;
+  //跳转到员工信息
+  toMineEditPage(){
+    this.userInfo = <UserInfo>{
+        id: '1',
+        username: 'nihao',
+        name: '小军',
+        email: 'yanxiaojun617@163.com',
+        phone: '18688498342',
+        phoneBak: '18688498343',
+        avatar: '',
+        avatarPath: 'assets/img/avatar-ts-jessie.png',
+        description: '有图有真相，一本正经的胡说八道..',
+        token: '',
+        address: '上海市浦东新区杨高南路陆家嘴金融中心'
+      }
+
+    this.navCtrl.push(MineEditPage,{"userInfo":this.userInfo,"avatarPath":"assets/img/marty-avatar.png"});
   }
 
   cnt: number = 4;
