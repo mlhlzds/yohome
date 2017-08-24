@@ -26,7 +26,7 @@ export class TabsPage {
         root: HomePage,
         tabTitle: '我的客户',
         tabIcon: 'people',
-        attrName: 6
+        attrName: 0
       },
       {
         root: UserListOrdersInfoPage,
@@ -54,7 +54,7 @@ export class TabsPage {
         root: AboutPage,
         tabTitle: '我的家',
         tabIcon: 'home',
-        attrName: 6
+        attrName: 0
       },
       {
         root: ContactPage,

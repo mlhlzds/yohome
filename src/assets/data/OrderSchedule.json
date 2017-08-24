@@ -3,25 +3,25 @@
         "id": "李硕",
         "imgs": [
             {
-                "origPath": "assets/img/touyingyi1.jpg",
-                "thumbPath": "assets/img/touyingyi1.jpg",
-                "base64": "assets/img/touyingyi1.jpg"
+                "origPath": "assets/img/anjk2.png",
+                "thumbPath": "assets/img/anjk2.png",
+                "base64": "assets/img/anjk2.png"
             },
             {
-                "origPath": "assets/img/touyingyi2.jpg",
-                "thumbPath": "assets/img/touyingyi2.jpg",
-                "base64": "assets/img/touyingyi2.jpg"
+                "origPath": "assets/img/anjk3.png",
+                "thumbPath": "assets/img/anjk3.png",
+                "base64": "assets/img/anjk3.png"
             },
             {
-                "origPath": "assets/img/touyingyi3.jpg",
-                "thumbPath": "assets/img/touyingyi3.jpg",
-                "base64": "assets/img/touyingyi3.jpg"
+                "origPath": "assets/img/anjk4.png",
+                "thumbPath": "assets/img/anjk4.png",
+                "base64": "assets/img/anjk4.png"
             }
         ],
         "reply": [
             {
                 "id": "111",
-                "name": "chengpang",
+                "name": "小李",
                 "content": "上午看过房子，线路布置得不错",
                 "replyName": "chenyun",
                 "replyId": "123",
@@ -31,13 +31,13 @@
                 "id": "123",
                 "name": "chenyun",
                 "content": "感谢您对悦家的信任与支持！",
-                "replyName": "chengpang",
+                "replyName": "小李",
                 "replyId": "123",
                 "time": "两分钟之前"
             },
             {
                 "id": "111",
-                "name": "chengpang",
+                "name": "小李",
                 "content": "跟设计师沟通很顺畅，项目经理也很好说话，帮了我不少忙",
                 "replyName": "chenyun",
                 "replyId": "123",
@@ -52,25 +52,25 @@
                 "time": "两分钟之前"
             }
         ],
-        "describe": "根据设计图纸，已为你把智能投影仪所有线路布置完毕"
+        "describe": "根据设计图纸，已为你把安全监控系统布置完毕"
     },
     {
         "id": "李硕",
         "imgs": [
-            {
-                "origPath": "assets/img/touyingyi4.jpg",
-                "thumbPath": "assets/img/touyingyi4.jpg",
-                "base64": "assets/img/touyingyi4.jpg"
+             {
+                "origPath": "assets/img/qwjs1.png",
+                "thumbPath": "assets/img/qwjs1.png",
+                "base64": "assets/img/qwjs1.png"
             },
             {
-                "origPath": "assets/img/touyingyi5.jpg",
-                "thumbPath": "assets/img/touyingyi5.jpg",
-                "base64": "assets/img/touyingyi5.jpg"
+                "origPath": "assets/img/qwjs2.png",
+                "thumbPath": "assets/img/qwjs2.png",
+                "base64": "assets/img/qwjs2.png"
             },
             {
-                "origPath": "assets/img/touyingyi6.jpg",
-                "thumbPath": "assets/img/touyingyi6.jpg",
-                "base64": "assets/img/touyingyi6.jpg"
+                "origPath": "assets/img/qwjs3.png",
+                "thumbPath": "assets/img/qwjs3.png",
+                "base64": "assets/img/qwjs3.png"
             }
         ],
         "reply": [
@@ -107,61 +107,6 @@
                 "time": "两分钟之前"
             }
         ],
-        "describe": "已为您把智能投影仪和幕布安装完毕，已能正常使用"
-    },
-    {
-        "id": "李硕",
-        "imgs": [
-            {
-                "origPath": "assets/img/touyingyi7.jpg",
-                "thumbPath": "assets/img/touyingyi7.jpg",
-                "base64": "assets/img/touyingyi7.jpg"
-            },
-            {
-                "origPath": "assets/img/touyingyi8.jpg",
-                "thumbPath": "assets/img/touyingyi8.jpg",
-                "base64": "assets/img/touyingyi8.jpg"
-            },
-            {
-                "origPath": "assets/img/touyingyi9.jpg",
-                "thumbPath": "assets/img/touyingyi9.jpg",
-                "base64": "assets/img/touyingyi9.jpg"
-            }
-        ],
-        "reply": [
-            {
-                "id": "111",
-                "name": "waner",
-                "content": "嗯，去验收了，使用一切正常，感谢师傅的尽心尽力",
-                "replyName": "yu",
-                "replyId": "123",
-                "time": "两分钟之前"
-            },
-            {
-                "id": "123",
-                "name": "yu",
-                "content": "感谢您的反馈，我们会继续努力，为您带来更好的生活体验！",
-                "replyName": "waner",
-                "replyId": "123",
-                "time": "两分钟之前"
-            },
-            {
-                "id": "111",
-                "name": "waner",
-                "content": "公司服务态度不错，选择你们这家是选对了",
-                "replyName": "yu",
-                "replyId": "123",
-                "time": "两分钟之前"
-            },
-            {
-                "id": "123",
-                "name": "yu",
-                "content": "感谢，我们公司会有定期回访，您可以通过留言给我们最新的反馈",
-                "replyName": "waner",
-                "replyId": "123",
-                "time": "两分钟之前"
-            }
-        ],
-        "describe": "智能投影仪以为您安装完毕请及时验收，若有不符合要求，请反馈，谢谢！"
+        "describe": "已为您把全屋净水系统安装完毕，已能正常使用"
     }
 ]

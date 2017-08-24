@@ -1,48 +1,6 @@
-[{
+[ {
 		"id": "1",
-		"content": "111111111",
-		"dateTime": "9月8日 14:02",
-        "msgType": true,
-        "headPortrait":"assets/img/avatar-ts-jessie.png"
-	}, {
-		"id": "1",
-		"content": "22222222222222",
-		"dateTime": "9月8日 14:02",
-		"msgType": false,
-        "headPortrait":"assets/img/kh.jpg"
-	},{
-		"id": "1",
-		"content": "111111111",
-		"dateTime": "9月8日 14:02",
-        "msgType": true,
-        "headPortrait":"assets/img/avatar-ts-jessie.png"
-	}, {
-		"id": "1",
-		"content": "22222222222222",
-		"dateTime": "9月8日 14:02",
-		"msgType": false,
-        "headPortrait":"assets/img/kh.jpg"
-	},{
-		"id": "1",
-		"content": "111111111",
-		"dateTime": "9月8日 14:02",
-        "msgType": true,
-        "headPortrait":"assets/img/avatar-ts-jessie.png"
-	}, {
-		"id": "1",
-		"content": "22222222222222",
-		"dateTime": "9月8日 14:02",
-		"msgType": false,
-        "headPortrait":"assets/img/kh.jpg"
-	},{
-		"id": "1",
-		"content": "111111111",
-		"dateTime": "9月8日 14:02",
-        "msgType": true,
-        "headPortrait":"assets/img/avatar-ts-jessie.png"
-	}, {
-		"id": "1",
-		"content": "22222222222222",
+		"content": "您好，我是客户小李，很高心为您服务！",
 		"dateTime": "9月8日 14:02",
 		"msgType": false,
         "headPortrait":"assets/img/kh.jpg"

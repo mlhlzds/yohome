@@ -29,6 +29,7 @@ import { NativeService } from '../providers/NativeService';
 //登录做缓存
 import {IonicStorageModule} from '@ionic/storage';
 
+
 @NgModule({
   declarations: [
     MyApp,
