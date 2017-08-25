@@ -10,20 +10,17 @@ import { UserListOrdersInfoPage } from './user-list-orders-info/user-list-orders
 import { HomePage } from './home';
 import { FilterUserPipe } from '../../pipes/search-info.pipe';
 
-import { IonicPageModule } from 'ionic-angular';
 import { SharedModule } from '../../shared/shared.module';
 @NgModule({
     imports:[
         IonicModule.forRoot(MyApp,{  
             backButtonText: '返回',  
         }),
-        IonicPageModule.forChild(HomePage),
         SharedModule
     ],
     declarations:[FilterUserPipe,HomePage,NewSchedulePage,ScheduleComplaintPage,UserListPage,UserListOrdersPage,UserListOrdersInfoPage],
     entryComponents:[HomePage,NewSchedulePage,ScheduleComplaintPage,UserListPage,UserListOrdersPage,UserListOrdersInfoPage],
-    providers:[],
-    exports:[IonicModule]
+    providers:[]
 })
 
 export class HomeModule {

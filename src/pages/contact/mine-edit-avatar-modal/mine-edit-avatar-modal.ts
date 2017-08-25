@@ -4,7 +4,7 @@ import {Storage} from '@ionic/Storage';
 
 
 import { FileObj } from "../../../model/FileObj";
-import {UserInfo,LoginInfo} from "../../../model/UserInfo";
+import {LoginInfo} from "../../../model/UserInfo";
 
 /**
  * Generated class for the MineEditAvatarModalPage page.

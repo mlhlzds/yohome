@@ -1,6 +1,6 @@
-import { Component,ViewChild, ElementRef, KeyValueDiffers } from '@angular/core';
+import { Component,ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 
 import { ScheduleComplaint } from "../../../model/ScheduleComplaint";
 /**

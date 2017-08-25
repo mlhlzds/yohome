@@ -41,8 +41,10 @@
     "@ionic/app-scripts": "2.0.2",
     "@ionic/cli-plugin-cordova": "1.6.2",
     "@ionic/cli-plugin-ionic-angular": "1.4.1",
+    "browserify": "^14.4.0",
     "ionic": "3.7.0",
-    "typescript": "2.3.4"
+    "typescript": "2.3.4",
+    "uglifyjs": "^2.4.11"
   },
   "description": "An Ionic project",
   "ng2-pdf-viewer": {

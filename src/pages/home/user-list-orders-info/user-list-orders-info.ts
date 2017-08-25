@@ -1,4 +1,4 @@
-import { Component, ElementRef, ContentChildren, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, ContentChildren } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { UserOrder } from "../../../model/UserOrder";
@@ -9,8 +9,8 @@ import { FileObj } from "../../../model/FileObj";
 import { OrderSchedule } from "../../../model/OrderSchedule";
 
 import {MineEditPage} from '../../contact/mine-edit/mine-edit'; 
-import { Http, RequestOptions, Headers } from '@angular/http';
-import { UserInfo, LoginInfo } from "../../../model/UserInfo";
+import { Http } from '@angular/http';
+import { UserInfo } from "../../../model/UserInfo";
 /**
  * Generated class for the UserListOrdersInfoPage page.
  *
@@ -57,12 +57,12 @@ export class UserListOrdersInfoPage {
   cnt: number = 4;
   //获得所有订单
   getAllOrder() {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    // let options = new RequestOptions({ headers: headers });
 
-    let body = JSON.stringify({
-      code: "mk200"
-    });
+    // let body = JSON.stringify({
+    //   code: "mk200"
+    // });
 
     // this.http.post("assets/data/testServlet.json", body, options).subscribe(function (data) {
     //   console.log(data)

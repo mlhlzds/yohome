@@ -6,16 +6,16 @@ import { GoodsListPage } from './goods-list/goods-list';
 import { CustomerServicePage } from './customer-service/customer-service';
 
 import { SharedModule } from '../../shared/shared.module';
-//pdf
-import { PdfViewerComponent } from 'ng2-pdf-viewer';
+// //pdf
+// import { PdfViewerComponent } from 'ng2-pdf-viewer';
 @NgModule({
     imports:[
         IonicModule.forRoot(MyApp),
         SharedModule
         
     ],
-    declarations:[PdfViewerComponent,GoodsListPage,ArchivesPage,CustomerServicePage],
-    entryComponents:[PdfViewerComponent,GoodsListPage,ArchivesPage,CustomerServicePage],
+    declarations:[GoodsListPage,ArchivesPage,CustomerServicePage],//PdfViewerComponent,
+    entryComponents:[GoodsListPage,ArchivesPage,CustomerServicePage],//PdfViewerComponent,
     providers:[],
     exports:[IonicModule]
 })
