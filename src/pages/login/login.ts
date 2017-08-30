@@ -2,17 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
 import { TabsPage } from "../tabs/tabs";
 import { UserInfo, LoginInfo } from "../../model/UserInfo";
-
-
-
-
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
-/**
- * Generated class for the LoginPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 
 @Component({
   selector: 'page-login',
@@ -21,11 +13,10 @@ import { Storage } from '@ionic/storage';
 export class LoginPage {
   loginInfo: LoginInfo;
   userInfo: UserInfo;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events, private storage: Storage) {
+  constructor(private http: Http,public navCtrl: NavController, public navParams: NavParams, private events: Events, private storage: Storage) {
   }
 
   logIn(username: HTMLInputElement, password: HTMLInputElement) {
-
     // 初始化用户数据
     let loginInfo = <LoginInfo>{
       access_token: 'test_test_test_test_test_test_test',
@@ -44,23 +35,24 @@ export class LoginPage {
       }
     };
 
-    console.log('11111111', loginInfo);
-    // this.events.publish('user:login', loginInfo);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    let body = JSON.stringify({
+      username: username.value,
+      password: password.value
+    });
+
+    this.http.post("testServlet.json", body, options).map(res => {
+      loginInfo = res.json();
+    }).subscribe(function (data) {
+      console.log('1111');
+    })
+
+    //是否登录成功
     this.storage.set('LoginInfo', loginInfo).then((loginInfo: LoginInfo) => {
       console.log('444444', loginInfo);
     });
-    this.navCtrl.push(TabsPage, { id: 111112222 });
-
-
-    // if (username.value.length == 0) {
-    //   console.log("请输入账号");
-    // } else if (password.value.length == 0) {
-    //   console.log("请输入密码");
-    // } else {
-    //   let userinfo: string = '用户名：' + username.value + '密码：' + password.value;
-    //   console.log(userinfo);
-    //   this.navCtrl.push(TabsPage, {id: 111112222});
-    // }
+    this.navCtrl.push(TabsPage, { type:"1"});
   }
-
 }

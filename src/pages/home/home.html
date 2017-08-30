@@ -1,20 +1,16 @@
 <ion-header>
     <ion-navbar>
         <ion-title>我的客户</ion-title>
-
     </ion-navbar>
 </ion-header>
+
 <ion-content padding>
     <ion-searchbar [(ngModel)]="search" style='border-left:0px;border-top:0px;border-right:0px;border-bottom:1px '></ion-searchbar>
-
     <button ion-item (click)="toOrders(user)" *ngFor="let user of userList|filterUser:search">
-                <ion-avatar item-start>
-                    <img src="{{user.imgPath}}">
-                </ion-avatar>
-            <p>{{user.name}}<ion-badge item-right style="background-color: red;">{{homeObj.attrName}}</ion-badge></p>
-            <p>{{user.addr}}</p>
-        </button>
-
-
-
+        <ion-avatar item-start>
+            <img src="{{user.imgPath}}">
+        </ion-avatar>
+        <p>{{user.name}}<ion-badge item-right style="background-color: red;">{{homeObj.attrName}}</ion-badge></p>
+        <p>{{user.addr}}</p>
+    </button>
 </ion-content>

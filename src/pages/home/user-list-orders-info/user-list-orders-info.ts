@@ -1,98 +1,84 @@
 import { Component, ElementRef, ContentChildren } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
 import { UserOrder } from "../../../model/UserOrder";
 import { NewSchedulePage } from '../new-schedule/new-schedule';
 import { ScheduleComplaintPage } from '../schedule-complaint/schedule-complaint';
-
 import { FileObj } from "../../../model/FileObj";
 import { OrderSchedule } from "../../../model/OrderSchedule";
-
-import {MineEditPage} from '../../contact/mine-edit/mine-edit'; 
-import { Http } from '@angular/http';
+import { MineEditPage } from '../../contact/mine-edit/mine-edit';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserInfo } from "../../../model/UserInfo";
-/**
- * Generated class for the UserListOrdersInfoPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-user-list-orders-info',
-
   templateUrl: 'user-list-orders-info.html',
   styleUrls: ['/user-list-orders-info.scss']
 })
+
 export class UserListOrdersInfoPage {
   fileObjList: FileObj[] = []; //所有图片
-  fo: FileObj = new FileObj();
   userOrder: UserOrder; //传过来的订单对象
-  @ContentChildren(OrderSchedule) orderScheduleList: OrderSchedule[] = [];
+  orderScheduleList: OrderSchedule[] = [];
 
   constructor(private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.userOrder = navParams.data;  //订单对象
     this.getAllOrder();
   }
-  userInfo: UserInfo;
-  //跳转到员工信息
-  toMineEditPage(){
-    this.userInfo = <UserInfo>{
-        id: '1',
-        username: 'nihao',
-        name: '小军',
-        email: 'yanxiaojun617@163.com',
-        phone: '18688498342',
-        phoneBak: '18688498343',
-        avatar: '',
-        avatarPath: 'assets/img/avatar-ts-jessie.png',
-        description: '有图有真相，一本正经的胡说八道..',
-        token: '',
-        address: '上海市浦东新区杨高南路陆家嘴金融中心'
-      }
 
-    this.navCtrl.push(MineEditPage,{"userInfo":this.userInfo,"avatarPath":"assets/img/marty-avatar.png"});
+  //跳转到员工信息
+  toMineEditPage() {
+    var userInfo = <UserInfo>{
+      id: '1',
+      username: 'nihao',
+      name: '小军',
+      email: 'yanxiaojun617@163.com',
+      phone: '18688498342',
+      phoneBak: '18688498343',
+      avatar: '',
+      avatarPath: 'assets/img/avatar-ts-jessie.png',
+      description: '有图有真相，一本正经的胡说八道..',
+      token: '',
+      address: '上海市浦东新区杨高南路陆家嘴金融中心'
+    }
+
+    this.navCtrl.push(MineEditPage, { "userInfo": userInfo, "avatarPath": "assets/img/marty-avatar.png" });
   }
 
-  cnt: number = 4;
   //获得所有订单
   getAllOrder() {
     // let headers = new Headers({ 'Content-Type': 'application/json' });
     // let options = new RequestOptions({ headers: headers });
 
     // let body = JSON.stringify({
-    //   code: "mk200"
+    //   test:'test'
     // });
 
-    // this.http.post("assets/data/testServlet.json", body, options).subscribe(function (data) {
-    //   console.log(data)
+    // this.http.post("testServlet.json", body, options).map(res => {
+    //   res.json();
+    // }).subscribe(function (data) {
+    //   console.log('1111');
     // })
 
     this.http.get("assets/data/OrderSchedule.json").map(res => {
       this.orderScheduleList = res.json();
-
     }).subscribe(function (data) {
       console.log(data)
     })
 
   }
 
-  //加载数据
+  //往下拉 加载数据
   doInfinite(): Promise<any> {
     console.log('Begin async operation');
-
     return new Promise((resolve) => {
       setTimeout(() => {
-
         this.http.get("assets/data/OrderSchedule.json").map(res => {
           for (var i = 0; i < res.json().length; i++) {
             this.orderScheduleList.push(res.json()[i]);
           }
-
         }).subscribe(function (data) {
           console.log(data)
         })
-
         console.log('Async operation has ended');
         resolve();
       }, 500);
@@ -105,19 +91,20 @@ export class UserListOrdersInfoPage {
   }
   //发表新的进度
   newSchedule() {
+    location.href = '#ion0';
     this.navCtrl.push(NewSchedulePage, this.orderScheduleList);
   }
-  teststr: any;
-  testReply: any;
+
+  content: any;
+  replyName: any;
   myplaceholder: any = '请输入回复内容…';
-  testChange2(i, replyName) {
-    this.testReply = replyName;
+  replyToName(i, replyName) {
+    this.replyName = replyName;
     console.log(this.el.nativeElement.querySelector('#input' + i));
     this.myplaceholder = '回复' + replyName;
     this.el.nativeElement.querySelector('#input' + i).querySelector('input').focus();
-
   }
-  testChange(i) {
+  reply(i) {
     // var val = this.el.nativeElement.querySelector('#input'+i).value;
     if (!this.orderScheduleList[i].reply) {
       this.orderScheduleList[i].reply = [];
@@ -125,22 +112,20 @@ export class UserListOrdersInfoPage {
     this.orderScheduleList[i].reply.push({
       "id": "123",
       "name": "chenyun",
-      "content": this.teststr,
-      "replyName": this.testReply,
+      "content": this.content,
+      "replyName": this.replyName,
       "replyId": "",
       "time": "两分钟之前"
     });
-    this.teststr = "";
-    this.testReply = "";
+    this.content = "";
+    this.replyName = "";
     this.myplaceholder = '请输入回复内容…';
-    //alert(this.teststr);
   }
+
   testTo() {
     this.el.nativeElement.querySelector('input').focus();
-    // this.el.nativeElement.querySelector('#content').a;
   }
   test() {
-    console.log("1111111111");
     this.http.get("assets/data/OrderSchedule.json").map(res => {
       for (var i = 0; i < res.json().length; i++) {
         this.orderScheduleList.push(res.json()[i]);
@@ -150,7 +135,6 @@ export class UserListOrdersInfoPage {
       console.log(data)
     })
 
-    this.cnt = this.cnt + 1;
   }
 
   //這個方法導致 頁面進入會變卡

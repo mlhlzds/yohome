@@ -1,28 +1,16 @@
-<!--
-  Generated template for the UserListOrdersInfoPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{userOrder.name?userOrder.name:'所有进度'}}</ion-title>
-    <!-- <a href="#ion{{cnt}}" (click)="test()">(4)条新消息</a> -->
     <ion-buttons end>
       <button ion-button icon-only (click)="newSchedule()">
-                <ion-icon *ngIf="userOrder.name" name="add"></ion-icon>
-            </button>
+          <ion-icon *ngIf="userOrder.name" name="add"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content id="content" overflow-scroll="false" page-user-list-orders-info>
-
-
-
   <div *ngFor="let orderSchedule of orderScheduleList;let i=index;">
     <ion-card id="ion{{i}}">
       <a name="ion{{i}}"></a>
@@ -30,7 +18,6 @@
         <ion-avatar item-start>
           <img src="assets/img/marty-avatar.png">
         </ion-avatar>
-
         <ion-row (click)="toMineEditPage()">
           <ion-col>
             <h2>员工小李</h2>
@@ -47,14 +34,10 @@
       </ion-card-content>
 
       <ion-item>
-
         <div padding-vertical>
           <page-select-pic [max]="6" [allowDelete]="false" [allowAdd]="false" [(fileObjList)]="orderSchedule.imgs"></page-select-pic>
         </div>
-
-
       </ion-item>
-
 
       <ion-row>
         <ion-col>
@@ -74,24 +57,22 @@
       </button>
         </ion-col>
         <ion-col center text-center>
-
         </ion-col>
       </ion-row>
 
       <div class="cmt-wrap">
         <div class="cmt-list" *ngFor="let re of orderSchedule.reply">
           <p><span>{{re.name}}</span>
-            <span *ngIf="re.replyName" (click)="testChange2(i,re.replyName)">回复{{re.replyName}}</span>
+            <span *ngIf="re.replyName" (click)="replyToName(i,re.replyName)">回复{{re.replyName}}</span>
             <span>: </span>{{re.content}}
           </p>
         </div>
         <div style="position: static;">
-          <ion-input id="input{{i}}" [(ngModel)]="teststr" (change)="testChange(i)" type="text" [placeholder]="myplaceholder"></ion-input>
+          <ion-input id="input{{i}}" [(ngModel)]="content" (change)="reply(i)" type="text" [placeholder]="myplaceholder"></ion-input>
         </div>
       </div>
     </ion-card>
   </div>
-
 
   <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

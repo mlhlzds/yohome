@@ -1,19 +1,19 @@
 page-home {
-.imgBadge{
-    color: #fff;
-    position: relative;
-    margin-top: 10px;
-}
-.imgBadge:after {
-    content:attr(txt);
-    color: #fff;
-    text-align: center;
-    line-height: 20px;
+    .imgBadge{
+        color: #fff;
+        position: relative;
+        margin-top: 10px;
+    }
+    .imgBadge:after {
+        content:attr(txt);
+        color: #fff;
+        text-align: center;
+        line-height: 20px;
 
-    border-radius: 50%;
-    background-color: red;
-    position: absolute;
-    top: -4px;
-    right: 18px;       
-}
+        border-radius: 50%;
+        background-color: red;
+        position: absolute;
+        top: -4px;
+        right: 18px;       
+    }
 }
