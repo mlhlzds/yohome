@@ -1,0 +1,17 @@
+{
+	"flag": "cust",
+	"user": {
+		"descreption": "",
+		"imp": "",
+		"level": "1",
+		"name": "",
+		"password": "e10adc3949ba59abbe56e057f20f883e",
+		"phone": "",
+		"phoneBak": "",
+		"roleId": "1",
+		"serverUser": "100000",
+		"userGroup": "1",
+		"userId": "100000",
+		"username": "cust"
+	}
+}

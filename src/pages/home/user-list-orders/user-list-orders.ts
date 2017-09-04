@@ -4,6 +4,8 @@ import { User } from "../../../model/User";
 import { UserOrder } from "../../../model/UserOrder";
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserListOrdersInfoPage } from '../user-list-orders-info/user-list-orders-info';
+import { Storage } from '@ionic/Storage';
+import { UserInfo, LoginInfo } from "../../../model/UserInfo";
 
 @Component({
   selector: 'page-user-list-orders',
@@ -13,8 +15,9 @@ export class UserListOrdersPage {
   userOrders: UserOrder[] = [];
   usre: User = new User;  //传过来的用户
   homeObj = {};//传过来的消息数量
+  userInfo: any = null;
 
-  constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private storage: Storage, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.usre = navParams.get('user');
     this.homeObj = navParams.get('homeObj');
 
@@ -34,24 +37,43 @@ export class UserListOrdersPage {
 
   //初始化订单
   initUserOrders() {
-    // let headers = new Headers({ 'Content-Type': 'application/json' });
-    // let options = new RequestOptions({ headers: headers });
+   var loginInfo =  this.storage.get('LoginInfo');
+   console.log("loginInfo="+loginInfo);
+      // this.userInfo = loginInfo.user;
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
-    // let body = JSON.stringify({
-    //   test:'test'
-    // });
-
-    // this.http.post("testServlet.json", body, options).map(res => {
-    //   res.json();
-    // }).subscribe(function (data) {
-    //   console.log('1111');
-    // })
-
-    this.http.get('./assets/data/userOrders.json').map(res => {
-      this.userOrders = res.json();
+    let body = JSON.stringify({
+      userId: '100000',
+      pageSize: '5',
+      pageNo: '1'
+    });
+    console.log("获取用户所有订单");
+    this.http.post("/yuejia/user/custInfoList", body, options).map(res => {
+    // this.http.get('assets/data/userList2.json').map(res => {
+      for (var i = 0; i < res.json().size(); i++) {
+        var obj = res.json()[i];
+        alert(obj);
+        console.log(obj);
+        var uo = new UserOrder;
+        uo.addr = obj.adress;
+        uo.name = obj.info;
+        uo.state = 1;
+        this.userOrders.push(uo);
+      }
+      
     }).subscribe(function (data) {
-      console.log(data)
+
     })
+
+
+
+   
+    // this.http.get('./assets/data/userOrders.json').map(res => {
+    //   this.userOrders = res.json();
+    // }).subscribe(function (data) {
+    //   console.log(data)
+    // })
   }
 
 }

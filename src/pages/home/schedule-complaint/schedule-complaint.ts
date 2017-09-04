@@ -1,7 +1,7 @@
-import { Component,ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Http } from '@angular/http';
-
+import { Http, RequestOptions, Headers } from '@angular/http';
+import { UserOrder } from "../../../model/UserOrder";
 import { ScheduleComplaint } from "../../../model/ScheduleComplaint";
 /**
  * Generated class for the ScheduleComplaintPage page.
@@ -14,20 +14,22 @@ import { Content } from 'ionic-angular';
   selector: 'page-schedule-complaint',
   templateUrl: 'schedule-complaint.html',
 })
-export class ScheduleComplaintPage{
+export class ScheduleComplaintPage {
   @ViewChild(Content) content: Content; //控制键盘
   differ: any;//数据更新
+  userOrder: UserOrder; //传过来的订单对象
   constructor(private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+    this.userOrder = navParams.data;  //订单对象
     this.getScheduleComplaintData();//加载投诉内容
   }
-    funIonScroll(){
+  funIonScroll() {
     console.log("funIonScroll");
   }
-  funBlur(){
+  funBlur() {
     // var contentBottom = this.content.contentBottom;
     // this.el.nativeElement.querySelector("#myinput").style.height= contentBottom+"px";
   }
-  funFocus(event:any) {
+  funFocus(event: any) {
     // var scrollHeight = this.content.scrollHeight;
     // var contentTop = this.content.contentTop;
     // var scrollDownOnLoad = this.content.scrollDownOnLoad;
@@ -36,10 +38,10 @@ export class ScheduleComplaintPage{
     // console.log(this.el.nativeElement.querySelector("#myinput"));
     // this.el.nativeElement.querySelector("#myinput").style.height= contentBottom+60+"px";
 
-  // alert("scrollHeight="+scrollHeight+"---contentTop="+contentTop+"---scrollDownOnLoad="+scrollDownOnLoad
-  // +"contentHeight="+contentHeight+"---contentBottom="+contentBottom);
+    // alert("scrollHeight="+scrollHeight+"---contentTop="+contentTop+"---scrollDownOnLoad="+scrollDownOnLoad
+    // +"contentHeight="+contentHeight+"---contentBottom="+contentBottom);
   }
-  
+
 
 
   //投诉内容
@@ -47,15 +49,28 @@ export class ScheduleComplaintPage{
 
   //获得进度投诉的内容
   getScheduleComplaintData() {
-    this.http.get("assets/data/ScheduleComplaint.json").map(res => {
-      this.scheduleComplaintList = res.json();
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    let body = JSON.stringify({
+      // userId: loginInfo.user.id,
+      pageSize: '5',
+      pageNo: '1'
+    });
+    this.http.post("/yuejia/user/custInfoList", body, options).map(res => {
+      var objList = eval('(' + res.json() + ')');
+      this.scheduleComplaintList = objList;
     }).subscribe(function (data) {
-      console.log(data)
     })
+    // this.http.get("assets/data/ScheduleComplaint.json").map(res => {
+    //   this.scheduleComplaintList = res.json();
+    // }).subscribe(function (data) {
+    //   console.log(data)
+    // })
   }
-  hi:number = -200;
+  hi: number = -200;
   //投诉回复
-  replyStr:string = '';
+  replyStr: string = '';
   complaintReply(event: any) {
     var scheduleComplaint: ScheduleComplaint = new ScheduleComplaint;
     scheduleComplaint.id = "123";
@@ -63,6 +78,7 @@ export class ScheduleComplaintPage{
     scheduleComplaint.content = this.replyStr;
     scheduleComplaint.headPortrait = "assets/img/avatar-ts-jessie.png";
     scheduleComplaint.msgType = true;
+    scheduleComplaint.scheduleId = "123";
 
     this.scheduleComplaintList.push(scheduleComplaint);
 

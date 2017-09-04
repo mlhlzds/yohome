@@ -22,6 +22,9 @@ export class UserListOrdersInfoPage {
 
   constructor(private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.userOrder = navParams.data;  //订单对象
+    console.log("*********************订单对象*********************");
+    console.log(this.userOrder);
+    console.log("*********************订单对象*********************");
     this.getAllOrder();
   }
 
@@ -46,24 +49,30 @@ export class UserListOrdersInfoPage {
 
   //获得所有订单
   getAllOrder() {
-    // let headers = new Headers({ 'Content-Type': 'application/json' });
-    // let options = new RequestOptions({ headers: headers });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
-    // let body = JSON.stringify({
-    //   test:'test'
-    // });
+    let body = JSON.stringify({
+      orderId:this.userOrder.id,  //订单id
+      pageSize: "10", //页大小
+      pageNum:"1" //当前页
+    });
 
-    // this.http.post("testServlet.json", body, options).map(res => {
-    //   res.json();
-    // }).subscribe(function (data) {
-    //   console.log('1111');
-    // })
-
-    this.http.get("assets/data/OrderSchedule.json").map(res => {
-      this.orderScheduleList = res.json();
+    this.http.post("contract/contentList", body, options).map(res => {
+      console.log("*********************打印进度***********************************");
+      console.log(res.json());
+      console.log("*********************打印进度***********************************");
+      var objList = eval('(' + res.json() + ')');
+      this.orderScheduleList = objList;
     }).subscribe(function (data) {
-      console.log(data)
+      console.log('1111');
     })
+
+    // this.http.get("assets/data/OrderSchedule.json").map(res => {
+    //   this.orderScheduleList = res.json();
+    // }).subscribe(function (data) {
+    //   console.log(data)
+    // })
 
   }
 
@@ -110,7 +119,8 @@ export class UserListOrdersInfoPage {
       this.orderScheduleList[i].reply = [];
     }
     this.orderScheduleList[i].reply.push({
-      "id": "123",
+      "id": "",
+      "scheduleId": "123",
       "name": "chenyun",
       "content": this.content,
       "replyName": this.replyName,
