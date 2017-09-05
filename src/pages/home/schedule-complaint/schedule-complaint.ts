@@ -18,8 +18,10 @@ export class ScheduleComplaintPage {
   @ViewChild(Content) content: Content; //控制键盘
   differ: any;//数据更新
   userOrder: UserOrder; //传过来的订单对象
+  id:string;//进度id
   constructor(private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
-    this.userOrder = navParams.data;  //订单对象
+    console.log("navParams.data"+JSON.stringify(navParams.data));
+    this.id = navParams.data.id;  //订单对象
     this.getScheduleComplaintData();//加载投诉内容
   }
   funIonScroll() {
@@ -53,12 +55,15 @@ export class ScheduleComplaintPage {
     let options = new RequestOptions({ headers: headers });
 
     let body = JSON.stringify({
-      // userId: loginInfo.user.id,
+      scheduleId:this.id+"",
       pageSize: '5',
       pageNo: '1'
     });
-    this.http.post("/yuejia/user/custInfoList", body, options).map(res => {
+    this.http.post("content/complaint", body, options).map(res => {
       var objList = eval('(' + res.json() + ')');
+      console.log("222222222222222content complaint22222222222222222");
+      console.log(JSON.stringify(objList));
+      console.log("222222222222222content complaint22222222222222222");
       this.scheduleComplaintList = objList;
     }).subscribe(function (data) {
     })
@@ -72,13 +77,28 @@ export class ScheduleComplaintPage {
   //投诉回复
   replyStr: string = '';
   complaintReply(event: any) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
     var scheduleComplaint: ScheduleComplaint = new ScheduleComplaint;
-    scheduleComplaint.id = "123";
-    scheduleComplaint.dateTime = "9月7日 17:32";
+    scheduleComplaint.id = "";
+    scheduleComplaint.dateTime = "";
     scheduleComplaint.content = this.replyStr;
     scheduleComplaint.headPortrait = "assets/img/avatar-ts-jessie.png";
     scheduleComplaint.msgType = true;
-    scheduleComplaint.scheduleId = "123";
+    scheduleComplaint.scheduleId = this.id+"";
+
+    let body = JSON.stringify(scheduleComplaint);
+    this.http.post("content/addComplaint", body, options).map(res => {
+      var objList = eval('(' + res.json() + ')');
+      console.log("222222222222222addComplaint22222222222222222");
+      console.log(JSON.stringify(objList));
+      console.log("222222222222222addComplaint22222222222222222");
+      this.scheduleComplaintList = objList;
+    }).subscribe(function (data) {
+    })
+
+
 
     this.scheduleComplaintList.push(scheduleComplaint);
 

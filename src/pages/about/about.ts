@@ -51,8 +51,9 @@ export class AboutPage {
   initUserOrders() {
     this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
       if (this.flagLoginInfo) {
-
-
+        console.log("111111111111111111111111111111111111111");
+        console.log(JSON.stringify(loginInfo));
+        console.log("111111111111111111111111111111111111111");
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 

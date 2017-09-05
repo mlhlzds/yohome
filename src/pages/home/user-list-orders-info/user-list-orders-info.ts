@@ -95,8 +95,9 @@ export class UserListOrdersInfoPage {
   }
 
   //投诉
-  toScheduleComplaint() {
-    this.navCtrl.push(ScheduleComplaintPage, this.orderScheduleList);
+  toScheduleComplaint(id) {
+    console.log("toScheduleComplaint(id) {=="+id);
+    this.navCtrl.push(ScheduleComplaintPage, {"id":id});
   }
   //发表新的进度
   newSchedule() {
@@ -113,19 +114,42 @@ export class UserListOrdersInfoPage {
     this.myplaceholder = '回复' + replyName;
     this.el.nativeElement.querySelector('#input' + i).querySelector('input').focus();
   }
-  reply(i) {
+  reply(i,id) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    let body = JSON.stringify({
+      "id": "",
+      "scheduleId": id,
+      "name": "11",
+      "content": this.content,
+      "replyName": this.replyName,
+      "replyId": "",
+      "time": ""
+    });
+
+    this.http.post("content/addContentRecord", body, options).map(res => {
+      console.log("*********************addContentRecord***********************************");
+      console.log(res.json());
+      console.log("*********************addContentRecord***********************************");
+      var objList = eval('(' + res.json() + ')');
+      this.orderScheduleList = objList;
+    }).subscribe(function (data) {
+      console.log('1111');
+    })
+    // content/addContentRecord
     // var val = this.el.nativeElement.querySelector('#input'+i).value;
     if (!this.orderScheduleList[i].reply) {
       this.orderScheduleList[i].reply = [];
     }
     this.orderScheduleList[i].reply.push({
       "id": "",
-      "scheduleId": "123",
-      "name": "chenyun",
+      "scheduleId": id,
+      "name": "11",
       "content": this.content,
       "replyName": this.replyName,
       "replyId": "",
-      "time": "两分钟之前"
+      "time": ""
     });
     this.content = "";
     this.replyName = "";

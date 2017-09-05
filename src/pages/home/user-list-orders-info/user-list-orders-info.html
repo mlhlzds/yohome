@@ -51,9 +51,9 @@
         <ion-col> </ion-col>
         <ion-col> </ion-col>
         <ion-col>
-          <button ion-button icon-left clear small (click)="toScheduleComplaint()">
+          <button ion-button icon-left clear small (click)="toScheduleComplaint(orderSchedule.id)">
         <ion-icon name="text"></ion-icon>
-        <div>投诉</div>
+        <div>投诉---{{orderSchedule.id}}---</div>
       </button>
         </ion-col>
         <ion-col center text-center>
@@ -68,7 +68,7 @@
           </p>
         </div>
         <div style="position: static;">
-          <ion-input id="input{{i}}" [(ngModel)]="content" (change)="reply(i)" type="text" [placeholder]="myplaceholder"></ion-input>
+          <ion-input id="input{{i}}" [(ngModel)]="content" (change)="reply(i,orderSchedule.id)" type="text" [placeholder]="myplaceholder"></ion-input>
         </div>
       </div>
     </ion-card>
