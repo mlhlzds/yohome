@@ -20,7 +20,7 @@ export class TabsPage {
   constructor(public navParams: NavParams) {
     var logType = this.navParams.get('type');
     console.log(this.navParams.get('type'));
-    if(logType==1){
+    if(logType=="user"){
       this.tabRoots = [
       {             
         root: HomePage,

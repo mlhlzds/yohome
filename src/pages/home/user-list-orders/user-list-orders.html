@@ -4,9 +4,9 @@
   </ion-navbar>
 </ion-header>
 
-
+<!-- |filterUser:search -->
 <ion-content>
-  <button ion-item *ngFor="let userOrder of userOrders|filterUser:search"  (click)="toOrderInfo(userOrder)">
+  <button ion-item *ngFor="let userOrder of userOrders"  (click)="toOrderInfo(userOrder)">
       <p>{{userOrder.name}}<ion-badge item-right style="background-color: red;">{{homeObj.attrName}}</ion-badge></p>
       <p>{{userOrder.addr}}</p>
   </button>

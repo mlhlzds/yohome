@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FileObj } from "../../../model/FileObj";
-
+import { UserOrder } from "../../../model/UserOrder";
 import { GoodsListPage } from '../goods-list/goods-list';
 /**
  * Generated class for the ArchivesPage page.
@@ -20,7 +20,13 @@ export class ArchivesPage {
   pdfSrc:string = 'assets/data/test.docx';
   page:number = 1;
   htList: FileObj[] = []; //所有图片
+  userOrders: UserOrder;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    console.log("*******************商品清单this.userOrders************************")
+    this.userOrders = navParams.data;
+    console.log(JSON.stringify(this.userOrders));
+    console.log("*******************商品清单this.userOrders************************")
+
     let f1: FileObj = new FileObj;
     f1.base64 = 'assets/img/ht1.jpg';
     f1.origPath = 'assets/img/ht1.jpg';
@@ -53,7 +59,7 @@ export class ArchivesPage {
     console.log('ionViewDidLoad ArchivesPage');
   }
   toGoodsListPage(){
-    this.navCtrl.push(GoodsListPage);
+    this.navCtrl.push(GoodsListPage,this.userOrders);
   }
 
 

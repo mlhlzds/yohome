@@ -19,11 +19,11 @@
       <div *ngIf="verifyMessages.name.errorMsg" class="validation-failed">{{verifyMessages.name.errorMsg}}</div>
 
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-label floating>用户名</ion-label>
         <ion-input type="text" formControlName="username"></ion-input>
       </ion-item>
-      <div *ngIf="verifyMessages.username.errorMsg" class="validation-failed">{{verifyMessages.username.errorMsg}}</div>
+      <div *ngIf="verifyMessages.username.errorMsg" class="validation-failed">{{verifyMessages.username.errorMsg}}</div> -->
 
 
 
@@ -63,7 +63,8 @@
 
 
     <div padding-horizontal>
-      <button type="submit" ion-button block [disabled]="!userForm.valid">保 存</button>
+      <!-- [disabled]="!userForm.valid" -->
+      <button type="submit" ion-button block >保 存</button>
     </div>
   </form>
 </ion-content>

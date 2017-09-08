@@ -37,8 +37,8 @@ export class AboutPage {
   }
 
   //档案
-  toArchivesPage() {
-    this.navCtrl.push(ArchivesPage, {});
+  toArchivesPage(userOrder) {
+    this.navCtrl.push(ArchivesPage,userOrder);
   }
 
   //售后

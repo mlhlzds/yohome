@@ -6,7 +6,7 @@ import {NavParams, ViewController} from 'ionic-angular';
 import {NativeService} from '../../../providers/NativeService';
 import {UserInfo} from "../../../model/UserInfo";
 import {Validators} from "../../../providers/Validators";
-
+import { Http, RequestOptions, Headers } from '@angular/http';
 @Component({
   selector: 'page-mine-edit-modal',
   templateUrl: 'mine-edit-modal.html'
@@ -48,7 +48,7 @@ export class MineEditModalPage {
     }
   };
 
-  constructor(private params: NavParams,
+  constructor(private params: NavParams, private http: Http,
               private viewCtrl: ViewController,
               private storage: Storage,
               private formBuilder: FormBuilder,
@@ -81,7 +81,22 @@ export class MineEditModalPage {
   }
 
   onSubmit() {
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        let body = JSON.stringify(this.userForm.value);
+        this.http.post("user/updateUserInfo", body, options).map(res => {
+          // this.http.get('assets/data/userList2.json').map(res => {
+          var objList = eval('(' + res.json() + ')');
+
+  
+        }).subscribe(function (data) {
+        })
+
+
+
     Object.assign(this.userInfo, this.userForm.value);
+    console.log(JSON.stringify(this.userForm.value));
     this.storage.set('UserInfo', this.userInfo);
     this.nativeService.showToast('保存成功');
     this.viewCtrl.dismiss(this.userInfo);

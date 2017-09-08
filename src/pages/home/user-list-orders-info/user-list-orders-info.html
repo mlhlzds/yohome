@@ -68,7 +68,8 @@
           </p>
         </div>
         <div style="position: static;">
-          <ion-input id="input{{i}}" [(ngModel)]="content" (change)="reply(i,orderSchedule.id)" type="text" [placeholder]="myplaceholder"></ion-input>
+          <ion-input id="input{{i}}" [(ngModel)]="content"  type="text" [placeholder]="myplaceholder"></ion-input>
+          <button ion-button (click)="reply2(i,orderSchedule.id)">发送</button>
         </div>
       </div>
     </ion-card>

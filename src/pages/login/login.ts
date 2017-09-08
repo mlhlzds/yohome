@@ -50,7 +50,7 @@ export class LoginPage {
       console.log("==========================================================输出："+res.json());
               
        var objList = eval('(' + res.json() + ')');   
-         let user = objList.user;     
+       let user = objList.user;     
          
       this.loginInfo = <LoginInfo>{
         access_token: 'test_test_test_test_test_test_test',
@@ -70,10 +70,14 @@ export class LoginPage {
       };
       //是否登录成功
       this.storage.set('LoginInfo', this.loginInfo).then((loginInfo: LoginInfo) => {
-
+        console.log("000000000000000000000000000000000000");
+        console.log(JSON.stringify(this.loginInfo));
+        console.log("000000000000000000000000000000000000");
+        console.log("---"+JSON.stringify(user));
+        this.navCtrl.push(TabsPage, { type: objList.flag });
+        console.log(JSON.stringify(this.loginInfo));
       });
-      this.navCtrl.push(TabsPage, { type: "2" });
-      console.log(JSON.stringify(this.loginInfo));
+
 
     }).subscribe(function (data) {
 

@@ -53,9 +53,9 @@ export class UserListOrdersInfoPage {
     let options = new RequestOptions({ headers: headers });
 
     let body = JSON.stringify({
-      orderId:this.userOrder.id,  //订单id
+      orderId: this.userOrder.id,  //订单id
       pageSize: "10", //页大小
-      pageNum:"1" //当前页
+      pageNum: "1" //当前页
     });
 
     this.http.post("contract/contentList", body, options).map(res => {
@@ -96,13 +96,16 @@ export class UserListOrdersInfoPage {
 
   //投诉
   toScheduleComplaint(id) {
-    console.log("toScheduleComplaint(id) {=="+id);
-    this.navCtrl.push(ScheduleComplaintPage, {"id":id});
+    console.log("toScheduleComplaint(id) {==" + id);
+    this.navCtrl.push(ScheduleComplaintPage, { "id": id });
   }
   //发表新的进度
   newSchedule() {
     location.href = '#ion0';
-    this.navCtrl.push(NewSchedulePage, this.orderScheduleList);
+    console.log("******************newSchedule***************");
+    console.log(JSON.stringify(this.userOrder));
+    console.log("******************newSchedule***************");
+    this.navCtrl.push(NewSchedulePage, { "id": this.userOrder.id,"list": this.orderScheduleList});
   }
 
   content: any;
@@ -114,7 +117,7 @@ export class UserListOrdersInfoPage {
     this.myplaceholder = '回复' + replyName;
     this.el.nativeElement.querySelector('#input' + i).querySelector('input').focus();
   }
-  reply(i,id) {
+  reply2(i, id) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
@@ -132,8 +135,8 @@ export class UserListOrdersInfoPage {
       console.log("*********************addContentRecord***********************************");
       console.log(res.json());
       console.log("*********************addContentRecord***********************************");
-      var objList = eval('(' + res.json() + ')');
-      this.orderScheduleList = objList;
+      // var objList = eval('(' + res.json() + ')');
+      // this.orderScheduleList = objList;
     }).subscribe(function (data) {
       console.log('1111');
     })

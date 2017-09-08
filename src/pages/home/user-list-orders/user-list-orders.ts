@@ -37,38 +37,38 @@ export class UserListOrdersPage {
 
   //初始化订单
   initUserOrders() {
-   var loginInfo =  this.storage.get('LoginInfo');
-   console.log("loginInfo="+loginInfo);
-      // this.userInfo = loginInfo.user;
-      let headers = new Headers({ 'Content-Type': 'application/json' });
+    var loginInfo = this.storage.get('LoginInfo');
+    console.log("loginInfo=" + loginInfo);
+    // this.userInfo = loginInfo.user;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
     let body = JSON.stringify({
-      userId: '100000',
+      userId: this.usre.user_id,
       pageSize: '5',
       pageNo: '1'
     });
     console.log("获取用户所有订单");
     this.http.post("/yuejia/user/custInfoList", body, options).map(res => {
-    // this.http.get('assets/data/userList2.json').map(res => {
-      for (var i = 0; i < res.json().size(); i++) {
-        var obj = res.json()[i];
-        alert(obj);
-        console.log(obj);
+      // this.http.get('assets/data/userList2.json').map(res => {
+      var objList = eval('(' + res.json() + ')');
+      for (var i = 0; i < objList.length; i++) {
+        var obj = objList[i];
         var uo = new UserOrder;
+        uo.id = obj.contract_id;
         uo.addr = obj.adress;
         uo.name = obj.info;
-        uo.state = 1;
+        uo.state = obj.status;
         this.userOrders.push(uo);
       }
-      
+
     }).subscribe(function (data) {
 
     })
 
 
 
-   
+
     // this.http.get('./assets/data/userOrders.json').map(res => {
     //   this.userOrders = res.json();
     // }).subscribe(function (data) {
