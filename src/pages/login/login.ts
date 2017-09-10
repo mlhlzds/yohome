@@ -4,7 +4,7 @@ import { TabsPage } from "../tabs/tabs";
 import { UserInfo, LoginInfo } from "../../model/UserInfo";
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
-
+import { TestPage } from '../test/test';
 
 @Component({
   selector: 'page-login',
@@ -16,6 +16,9 @@ export class LoginPage {
   constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams, private events: Events, private storage: Storage) {
   }
 
+  testPage(){
+    this.navCtrl.push(TestPage);
+  }
   logIn(username: HTMLInputElement, password: HTMLInputElement) {
     // 初始化用户数据
 

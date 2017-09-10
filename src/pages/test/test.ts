@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 import { NavParams, App } from 'ionic-angular';
-
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Content } from 'ionic-angular';
 @Component({
   selector: 'page-test',
@@ -9,50 +9,32 @@ import { Content } from 'ionic-angular';
 
 })
 export class TestPage {
-  @ViewChild(Content) content: Content;
-  showToolbar: boolean = true;
 
+  testInfo:string;//存放测试结果的结果
 
-  toggleToolbar() {
-    this.showToolbar = !this.showToolbar;
-    this.content.resize();
-  }
-  funIonScroll(){
-    console.log("funIonScroll");
-  }
-  funBlur(){
-    var contentBottom = this.content.contentBottom;
-    this.el.nativeElement.querySelector("#myinput").style.height= contentBottom+"px";
-  }
-  funFocus(event:any) {
-    var scrollHeight = this.content.scrollHeight;
-    var scrollTop = this.content.scrollTop;
-    var scrollDownOnLoad = this.content.scrollDownOnLoad;
-    var contentHeight = this.content.contentHeight;
-    var contentBottom = this.content.contentBottom;
-    
-    this.el.nativeElement.querySelector("#myinput").style.height= contentBottom+"px";
+  test1() {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
-  //   alert("scrollHeight="+scrollHeight+"---contentBottom="+contentBottom+"---scrollDownOnLoad="+scrollDownOnLoad
-  // +"contentHeight="+contentHeight+"---contentBottom="+contentBottom);
+    //请求参数
+    let body = JSON.stringify({
+      pageSize: '5',
+      pageNo: '1'
+    });
+
+    this.http.post("/yuejia/user/custInfoList", body, options).map(res => {
+
+      var objList = eval('(' + res.json() + ')');  //返回的结果
+
+      this.testInfo = JSON.stringify(objList);  //testInfo 用来给页面显示结果
+
+      console.log(JSON.stringify(objList));
+    }).subscribe(function (data) {
+
+    })
   }
-  
-  constructor(private el: ElementRef, public navParams: NavParams) {
+  constructor(private http: Http, private el: ElementRef, public navParams: NavParams) {
   }
 
-  ///////////////////////////////////////////////
-  score: number = 0;
-  stars: any[] = [false, false, false, false, false];
-  toChange(n) {
-    this.stars = [];
-    for (let i = 0; i < 5; i++) {
-      this.stars.push(i <= n);
 
-    }
-    this.score = n + 1;
-  }
-
-  //////////////////组件测试///////////////////
-  name: string;
-  address: any;
 }

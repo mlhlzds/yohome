@@ -1,18 +1,26 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Main Navbar</ion-title>
-  </ion-navbar>
-  <ion-toolbar *ngIf="showToolbar">
-    <ion-title>Dynamic Toolbar</ion-title>
-  </ion-toolbar>
+
 </ion-header>
 
 
-<ion-content (ionScroll)="funIonScroll()">
-  <button ion-item *ngFor="let userOrder of userOrders"  (click)="toOrderInfo(userOrder)">
-      <p>{{userOrder.name}}<ion-badge item-right style="background-color: red;">{{homeObj.attrName}}</ion-badge></p>
-      <p>{{userOrder.addr}}</p>
+<ion-content >
+  <button  ion-button (click)="test1()">
+    test1
   </button>
+  <P>
+    按钮1测试结果：
+    {{testInfo}}
+
+  </P>
+
+  <button ion-button (click)="test2()">
+    test2
+  </button>
+  <P>
+    按钮2测试结果：
+    {{testInfo}}
+
+  </P>
 </ion-content>
 
 
