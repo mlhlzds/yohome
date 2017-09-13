@@ -33,7 +33,7 @@ export class AboutPage {
 
   //进度
   toOrderInfo(userOrder: UserOrder) {
-    this.navCtrl.push(UserListOrdersInfoPage, userOrder);
+    this.navCtrl.push(UserListOrdersInfoPage, { "userOrder": userOrder,"userInfo":this.userInfo });
   }
 
   //档案
@@ -50,6 +50,7 @@ export class AboutPage {
   //初始化订单
   initUserOrders() {
     this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
+      this.userInfo = loginInfo.user;
       if (this.flagLoginInfo) {
         console.log("111111111111111111111111111111111111111");
         console.log(JSON.stringify(loginInfo));

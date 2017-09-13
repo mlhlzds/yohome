@@ -27,12 +27,17 @@ export class UserListOrdersPage {
     if (this.homeObj['attrName'] == 0) {
       this.homeObj['attrName'] = '';
     }
-    this.initUserOrders();
+    this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
+      this.userInfo = loginInfo.user;
+      this.initUserOrders();
+
+    })
+
   }
 
   //跳转到所有订单
   toOrderInfo(userOrder: UserOrder) {
-    this.navCtrl.push(UserListOrdersInfoPage, userOrder);
+    this.navCtrl.push(UserListOrdersInfoPage, { "userOrder": userOrder,"userInfo":this.userInfo });
   }
 
   //初始化订单

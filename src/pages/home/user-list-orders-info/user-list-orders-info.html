@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{userOrder.name?userOrder.name:'所有进度'}}</ion-title>
-    <ion-buttons end>
+    <ion-buttons end  *ngIf="userInfo.userType=='user'">
       <button ion-button icon-only (click)="newSchedule()">
-          <ion-icon *ngIf="userOrder.name" name="add"></ion-icon>
+          <ion-icon  name="add"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -16,18 +16,18 @@
       <a name="ion{{i}}"></a>
       <ion-item>
         <ion-avatar item-start>
-          <img src="assets/img/marty-avatar.png">
+          <img [src]="userInfo.avatarPath">
         </ion-avatar>
         <ion-row (click)="toMineEditPage()">
           <ion-col>
-            <h2>员工小李</h2>
+            <h2>{{userInfo.name}}</h2>
           </ion-col>
           <ion-col> </ion-col>
           <ion-col>
-            <p>2017年8月7日 12:56</p>
+            <p>{{orderSchedule.time}}</p>
           </ion-col>
         </ion-row>
-        <p>做yohome最好的员工</p>
+        <p>{{userInfo.description}}</p>
       </ion-item>
       <ion-card-content>
         <p>{{orderSchedule.describe}}</p>
@@ -42,18 +42,18 @@
       <ion-row>
         <ion-col>
         </ion-col>
-        <ion-col>
-          <!-- <button ion-button icon-left clear small>
+        <ion-col >
+      <button ion-button icon-left clear small disabled="userInfo.userType=='user'">
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>12 Likes</div>
-      </button> -->
+        <div>已赞</div>
+      </button>
         </ion-col>
         <ion-col> </ion-col>
         <ion-col> </ion-col>
-        <ion-col>
+        <ion-col >
           <button ion-button icon-left clear small (click)="toScheduleComplaint(orderSchedule.id)">
         <ion-icon name="text"></ion-icon>
-        <div>投诉---{{orderSchedule.id}}---</div>
+        <div>投诉</div>
       </button>
         </ion-col>
         <ion-col center text-center>
@@ -68,10 +68,10 @@
           </p>
         </div>
         <div style="position: static;">
-          <ion-input id="input{{i}}" [(ngModel)]="content"  type="text" [placeholder]="myplaceholder"></ion-input>
-          <button ion-button (click)="reply2(i,orderSchedule.id)">发送</button>
+          <ion-input (change)="reply2(i,orderSchedule.id)" id="input{{i}}" [(ngModel)]="content" type="text" [placeholder]="myplaceholder"></ion-input>
+          <!-- <button ion-button >发送</button> -->
         </div>
-      </div>
+      </div>               
     </ion-card>
   </div>
 

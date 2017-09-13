@@ -7,8 +7,9 @@ import { FileObj } from "../../../model/FileObj";
 import { OrderSchedule } from "../../../model/OrderSchedule";
 import { MineEditPage } from '../../contact/mine-edit/mine-edit';
 import { Http, RequestOptions, Headers } from '@angular/http';
-import { UserInfo } from "../../../model/UserInfo";
-
+import { UserInfo, LoginInfo } from "../../../model/UserInfo";
+import { Storage } from '@ionic/Storage';
+import { LoadingController, ToastController } from 'ionic-angular';
 @Component({
   selector: 'page-user-list-orders-info',
   templateUrl: 'user-list-orders-info.html',
@@ -19,14 +20,20 @@ export class UserListOrdersInfoPage {
   fileObjList: FileObj[] = []; //所有图片
   userOrder: UserOrder; //传过来的订单对象
   orderScheduleList: OrderSchedule[] = [];
+  userInfo: any = null;
 
-  constructor(private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
-    this.userOrder = navParams.data;  //订单对象
+  constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+    this.userOrder = navParams.data.userOrder;  //订单对象
+    this.userInfo = navParams.data.userInfo;  //订单对象
     console.log("*********************订单对象*********************");
     console.log(this.userOrder);
     console.log("*********************订单对象*********************");
     this.getAllOrder();
+
+
   }
+
+
 
   //跳转到员工信息
   toMineEditPage() {
@@ -41,12 +48,14 @@ export class UserListOrdersInfoPage {
       avatarPath: 'assets/img/avatar-ts-jessie.png',
       description: '有图有真相，一本正经的胡说八道..',
       token: '',
-      address: '上海市浦东新区杨高南路陆家嘴金融中心'
+      address: '上海市浦东新区杨高南路陆家嘴金融中心',
+      userType: ''
     }
 
     this.navCtrl.push(MineEditPage, { "userInfo": userInfo, "avatarPath": "assets/img/marty-avatar.png" });
   }
-
+  pageNum: number = 1;
+  pageSize: number = 2;
   //获得所有订单
   getAllOrder() {
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -54,8 +63,8 @@ export class UserListOrdersInfoPage {
 
     let body = JSON.stringify({
       orderId: this.userOrder.id,  //订单id
-      pageSize: "10", //页大小
-      pageNum: "1" //当前页
+      pageSize: this.pageSize + "", //页大小
+      pageNum: this.pageNum + "" //当前页
     });
 
     this.http.post("contract/contentList", body, options).map(res => {
@@ -81,13 +90,26 @@ export class UserListOrdersInfoPage {
     console.log('Begin async operation');
     return new Promise((resolve) => {
       setTimeout(() => {
-        this.http.get("assets/data/OrderSchedule.json").map(res => {
-          for (var i = 0; i < res.json().length; i++) {
-            this.orderScheduleList.push(res.json()[i]);
+        this.pageNum = this.pageNum + 1;
+
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        let body = JSON.stringify({
+          orderId: this.userOrder.id,  //订单id
+          pageSize: this.pageSize + "", //页大小
+          pageNum: this.pageNum + "" //当前页
+        });
+
+        this.http.post("contract/contentList", body, options).map(res => {
+          var objList = eval('(' + res.json() + ')');
+          for (var i = 0; i < objList.length; i++) {
+            this.orderScheduleList.push(objList[i]);
           }
         }).subscribe(function (data) {
-          console.log(data)
+          console.log('1111');
         })
+
         console.log('Async operation has ended');
         resolve();
       }, 500);
@@ -97,7 +119,7 @@ export class UserListOrdersInfoPage {
   //投诉
   toScheduleComplaint(id) {
     console.log("toScheduleComplaint(id) {==" + id);
-    this.navCtrl.push(ScheduleComplaintPage, { "id": id });
+    this.navCtrl.push(ScheduleComplaintPage, { "id": id, "userType": this.userInfo.userType });
   }
   //发表新的进度
   newSchedule() {
@@ -105,7 +127,7 @@ export class UserListOrdersInfoPage {
     console.log("******************newSchedule***************");
     console.log(JSON.stringify(this.userOrder));
     console.log("******************newSchedule***************");
-    this.navCtrl.push(NewSchedulePage, { "id": this.userOrder.id,"list": this.orderScheduleList});
+    this.navCtrl.push(NewSchedulePage, { "id": this.userOrder.id, "list": this.orderScheduleList });
   }
 
   content: any;
@@ -124,7 +146,7 @@ export class UserListOrdersInfoPage {
     let body = JSON.stringify({
       "id": "",
       "scheduleId": id,
-      "name": "11",
+      "name": this.userInfo.name,
       "content": this.content,
       "replyName": this.replyName,
       "replyId": "",
@@ -135,28 +157,38 @@ export class UserListOrdersInfoPage {
       console.log("*********************addContentRecord***********************************");
       console.log(res.json());
       console.log("*********************addContentRecord***********************************");
-      // var objList = eval('(' + res.json() + ')');
+      var objList = eval('(' + res.json() + ')');
+      if (objList.msg == 'true') {
+        if (!this.orderScheduleList[i].reply) {
+          this.orderScheduleList[i].reply = [];
+        }
+        this.orderScheduleList[i].reply.push({
+          "id": "",
+          "scheduleId": id,
+          "name": this.userInfo.name,
+          "content": this.content,
+          "replyName": this.replyName,
+          "replyId": "",
+          "time": ""
+        });
+      } else {
+        let toast = this.toastCtrl.create({
+          message: '网络繁忙，请稍后再试！',
+          duration: 3000
+        });
+        toast.present();
+      }
+      this.content = "";
+      this.replyName = "";
+      this.myplaceholder = '请输入回复内容…';
       // this.orderScheduleList = objList;
     }).subscribe(function (data) {
       console.log('1111');
     })
     // content/addContentRecord
     // var val = this.el.nativeElement.querySelector('#input'+i).value;
-    if (!this.orderScheduleList[i].reply) {
-      this.orderScheduleList[i].reply = [];
-    }
-    this.orderScheduleList[i].reply.push({
-      "id": "",
-      "scheduleId": id,
-      "name": "11",
-      "content": this.content,
-      "replyName": this.replyName,
-      "replyId": "",
-      "time": ""
-    });
-    this.content = "";
-    this.replyName = "";
-    this.myplaceholder = '请输入回复内容…';
+
+
   }
 
   testTo() {

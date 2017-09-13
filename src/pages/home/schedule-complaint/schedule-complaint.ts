@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserOrder } from "../../../model/UserOrder";
 import { ScheduleComplaint } from "../../../model/ScheduleComplaint";
+import { UserInfo, LoginInfo } from "../../../model/UserInfo";
+import { Storage } from '@ionic/Storage';
 /**
  * Generated class for the ScheduleComplaintPage page.
  *
@@ -18,11 +20,18 @@ export class ScheduleComplaintPage {
   @ViewChild(Content) content: Content; //控制键盘
   differ: any;//数据更新
   userOrder: UserOrder; //传过来的订单对象
-  id:string;//进度id
-  constructor(private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
-    console.log("navParams.data"+JSON.stringify(navParams.data));
+  id: string;//进度id
+  userType: string;//进度id
+  userInfo: any = null;
+  constructor(private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+    console.log("navParams.data" + JSON.stringify(navParams.data));
     this.id = navParams.data.id;  //订单对象
-    this.getScheduleComplaintData();//加载投诉内容
+    this.userType = navParams.data.userType;  //订单对象
+    this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
+      this.userInfo = loginInfo.user;
+      this.getScheduleComplaintData();//加载投诉内容
+    });
+
   }
   funIonScroll() {
     console.log("funIonScroll");
@@ -55,7 +64,7 @@ export class ScheduleComplaintPage {
     let options = new RequestOptions({ headers: headers });
 
     let body = JSON.stringify({
-      scheduleId:this.id+"",
+      scheduleId: this.id + "",
       pageSize: '5',
       pageNo: '1'
     });
@@ -84,9 +93,9 @@ export class ScheduleComplaintPage {
     scheduleComplaint.id = "";
     scheduleComplaint.dateTime = "";
     scheduleComplaint.content = this.replyStr;
-    scheduleComplaint.headPortrait = "assets/img/avatar-ts-jessie.png";
+    scheduleComplaint.headPortrait = this.userInfo.avatarPath;
     scheduleComplaint.msgType = true;
-    scheduleComplaint.scheduleId = this.id+"";
+    scheduleComplaint.scheduleId = this.id + "";
 
     let body = JSON.stringify(scheduleComplaint);
     this.http.post("content/addComplaint", body, options).map(res => {
@@ -94,13 +103,14 @@ export class ScheduleComplaintPage {
       console.log("222222222222222addComplaint22222222222222222");
       console.log(JSON.stringify(objList));
       console.log("222222222222222addComplaint22222222222222222");
-      this.scheduleComplaintList = objList;
+
+      this.scheduleComplaintList.push(scheduleComplaint);
+
     }).subscribe(function (data) {
     })
 
 
 
-    this.scheduleComplaintList.push(scheduleComplaint);
 
     this.replyStr = "";
 
