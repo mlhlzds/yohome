@@ -5,4 +5,5 @@ export class OrderSchedule {
   imgs: FileObj[];     
   describe: string;
   reply:any[];    
+  time:string;
 }

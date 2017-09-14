@@ -91,7 +91,7 @@ export class ScheduleComplaintPage {
 
     var scheduleComplaint: ScheduleComplaint = new ScheduleComplaint;
     scheduleComplaint.id = "";
-    scheduleComplaint.dateTime = "";
+   
     scheduleComplaint.content = this.replyStr;
     scheduleComplaint.headPortrait = this.userInfo.avatarPath;
     scheduleComplaint.msgType = true;
@@ -100,6 +100,7 @@ export class ScheduleComplaintPage {
     let body = JSON.stringify(scheduleComplaint);
     this.http.post("content/addComplaint", body, options).map(res => {
       var objList = eval('(' + res.json() + ')');
+      scheduleComplaint.dateTime = objList.msg;
       console.log("222222222222222addComplaint22222222222222222");
       console.log(JSON.stringify(objList));
       console.log("222222222222222addComplaint22222222222222222");

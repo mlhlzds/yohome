@@ -7,17 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>设置</ion-title>
+    <ion-title>修改密码</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-      <ion-item >
-      当前版本:{{versionNo}}
-    </ion-item>
-    <ion-item (click)="updateLog()">
+  <!-- <ion-item (click)="updateLog()">
       更新日志
     </ion-item>
     <ion-item (click)="features()">
@@ -25,5 +22,22 @@
     </ion-item>
     <ion-item (click)="feedBack()">
       我的反馈
-    </ion-item>
+    </ion-item> -->
+
+  <ion-item>
+    <ion-label fixed>旧密码</ion-label>
+    <ion-input type="password"  placeholder="请输入旧密码" #pwd></ion-input>
+  </ion-item>                                     
+  <ion-item>
+    <ion-label fixed>新密码</ion-label>
+    <ion-input type="password"  placeholder="请输入密码" #oldPwd></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed>确认密码</ion-label>
+    <ion-input type="password"  placeholder="请输入确认密码" #oldPwd2></ion-input>
+  </ion-item>
+
+    <button ion-button block color="danger" (click)="updatePwd(pwd, oldPwd,oldPwd2)">
+      提交
+    </button>
 </ion-content>

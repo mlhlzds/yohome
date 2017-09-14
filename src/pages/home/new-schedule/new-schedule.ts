@@ -61,20 +61,23 @@ export class NewSchedulePage {
     orderSchedule.describe = this.describe;
     orderSchedule.id = this.orderId;
 
-    console.log("this.orderIdthis.orderId==="+this.orderId);
-   
+    console.log("this.orderIdthis.orderId===" + this.orderId);
+
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
     let body = JSON.stringify(orderSchedule);
     this.http.post("content/newSchedule", body, options).map(res => {
       console.log(res.json());
+      var objList = eval('(' + res.json() + ')');
+      orderSchedule.time = objList.time;
+      this.orderScheduleList.unshift(orderSchedule);
+      this.navCtrl.pop();
+      console.log(this.fileObjList);
     }).subscribe(function (data) {
     })
 
-    this.orderScheduleList.unshift(orderSchedule);
-    this.navCtrl.pop();
-    console.log(this.fileObjList);
+
 
   }
 }

@@ -1,10 +1,11 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
-import { Storage } from '@ionic/Storage';
+import {App } from 'ionic-angular';  
+import { LoginPage } from '../../pages/login/login';
 import { MineEditPage } from './mine-edit/mine-edit';
 import { NewSchedulePage } from '../home/new-schedule/new-schedule';
 import { UserInfo, LoginInfo } from "../../model/UserInfo";
-
+import { Storage } from '@ionic/Storage';
 import { MineEditModalPage } from './mine-edit-modal/mine-edit-modal';
 import { MineEditAvatarModalPage } from './mine-edit-avatar-modal/mine-edit-avatar-modal';
 import { WePage } from './we/we';
@@ -17,7 +18,7 @@ import { SettingPage } from './setting/setting';
 export class ContactPage {
   avatarPath: String = 'assets/img/avatar-ts-buzz.png';
   userInfo: UserInfo;
-  constructor(public navCtrl: NavController, private storage: Storage, private modalCtrl: ModalController, public changeDetectorRef: ChangeDetectorRef) {
+  constructor(private app: App,public navCtrl: NavController, private storage: Storage, private modalCtrl: ModalController, public changeDetectorRef: ChangeDetectorRef) {
     this.initUserInfo();
 
   }
@@ -39,6 +40,9 @@ export class ContactPage {
     });
   }
 
+  loginOut(){
+    this.app.getRootNav().setRoot(LoginPage);  
+  }
   // ionViewWillEnter() {
   //   this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
   //   console.log(loginInfo,'+++++++++++++++++++++++++++++++++++++++');

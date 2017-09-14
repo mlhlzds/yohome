@@ -31,8 +31,8 @@ export class GoodsListPage {
     let body = JSON.stringify({
       orderId: this.userOrders.id,
       type: "1"
-    });
-    this.http.post("conten/getGoodsList", body, options).map(res => {
+    });                          
+    this.http.post("contract/contractInfo", body, options).map(res => {
       // this.http.get('assets/data/userList2.json').map(res => {
       var objList = eval('(' + res.json() + ')');
       console.log("***************getGoodsList***************");
