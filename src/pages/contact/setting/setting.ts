@@ -60,7 +60,7 @@ export class SettingPage {
 
       this.http.post("user/updatePassword", body, options).map(res => {
         var objList = eval('(' + res.json() + ')');
-        if (objList.flag == 'false') {
+        if (objList.msg == 'false') {
           let toast = this.toastCtrl.create({
             message: '密码错误！',
             duration: 1000

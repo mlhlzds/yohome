@@ -22,15 +22,25 @@ export class UserListOrdersInfoPage {
   orderScheduleList: OrderSchedule[] = [];
   userInfo: any = null;
 
+  f:number = 1;  //进度
+
   constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.userOrder = navParams.data.userOrder;  //订单对象
     this.userInfo = navParams.data.userInfo;  //订单对象
     console.log("*********************订单对象*********************");
     console.log(this.userOrder);
     console.log("*********************订单对象*********************");
-    this.getAllOrder();
+    if(this.userInfo!=null){
+      this.getAllOrder();
+    }else{
+      this.f = 0;
+      this.userInfo = UserInfo;
+      this.userInfo.userType="user2";
+      this.getAllOrder2();
+    }
+    
 
-
+    
   }
 
 
@@ -77,12 +87,36 @@ export class UserListOrdersInfoPage {
       console.log('1111');
     })
 
+  
+
+
     // this.http.get("assets/data/OrderSchedule.json").map(res => {
     //   this.orderScheduleList = res.json();
     // }).subscribe(function (data) {
     //   console.log(data)
     // })
 
+  }
+
+    //获得所有订单
+  getAllOrder2() {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    let body = JSON.stringify({
+      pageSize: this.pageSize + "", //页大小
+      pageNum: this.pageNum + "" //当前页
+    });
+
+    this.http.post("content/allContent", body, options).map(res => {
+      console.log("*********************打印进度***********************************");
+      console.log(res.json());
+      console.log("*********************打印进度***********************************");
+      var objList = eval('(' + res.json() + ')');
+      this.orderScheduleList = objList;
+    }).subscribe(function (data) {
+      console.log('1111');
+    })
   }
 
   //往下拉 加载数据
@@ -95,13 +129,22 @@ export class UserListOrdersInfoPage {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        let body = JSON.stringify({
+       let body;
+        var url = 'contract/contentList';
+        if(this.f == 0){
+          url = 'content/allContent';
+          body = JSON.stringify({
+          pageSize: this.pageSize + "", //页大小
+          pageNum: this.pageNum + "" //当前页
+        });
+        }else{
+          body = JSON.stringify({
           orderId: this.userOrder.id,  //订单id
           pageSize: this.pageSize + "", //页大小
           pageNum: this.pageNum + "" //当前页
         });
-
-        this.http.post("contract/contentList", body, options).map(res => {
+        }
+        this.http.post(url, body, options).map(res => {
           var objList = eval('(' + res.json() + ')');
           for (var i = 0; i < objList.length; i++) {
             this.orderScheduleList.push(objList[i]);

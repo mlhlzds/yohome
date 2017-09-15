@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{userOrder.name?userOrder.name:'所有进度'}}</ion-title>
-    <ion-buttons end  *ngIf="userInfo.userType=='user'">
+    <ion-title>{{userOrder&&userOrder.name?userOrder.name:'所有进度'}}</ion-title>
+    <ion-buttons end  *ngIf="userInfo && userInfo.userType=='user'">
       <button ion-button icon-only (click)="newSchedule()">
           <ion-icon  name="add"></ion-icon>
       </button>
@@ -27,7 +27,7 @@
             <p>{{orderSchedule.time}}</p>
           </ion-col>
         </ion-row>
-        <p>{{userInfo.description}}</p>
+        <!-- <p>{{userInfo.description}}</p> -->
       </ion-item>
       <ion-card-content>
         <p>{{orderSchedule.describe}}</p>
@@ -43,7 +43,7 @@
         <ion-col>
         </ion-col>
         <ion-col >
-      <button ion-button icon-left clear small disabled="userInfo.userType=='user'">
+      <button ion-button icon-left clear small disabled="userInfo && userInfo.userType=='user'">
         <ion-icon name="thumbs-up"></ion-icon>
         <div>已赞</div>
       </button>
