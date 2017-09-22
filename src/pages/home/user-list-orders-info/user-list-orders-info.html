@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{userOrder&&userOrder.name?userOrder.name:'所有进度'}}</ion-title>
-    <ion-buttons end  *ngIf="userInfo && userInfo.userType=='user'">
+    <ion-buttons end *ngIf="userInfo && userInfo.userType=='user'">
       <button ion-button icon-only (click)="newSchedule()">
           <ion-icon  name="add"></ion-icon>
       </button>
@@ -10,7 +10,7 @@
 </ion-header>
 
 
-<ion-content id="content" overflow-scroll="false" page-user-list-orders-info>
+<ion-content id="content" overflow-scroll="false">
   <div *ngFor="let orderSchedule of orderScheduleList;let i=index;">
     <ion-card id="ion{{i}}">
       <a name="ion{{i}}"></a>
@@ -18,13 +18,15 @@
         <ion-avatar item-start>
           <img [src]="orderSchedule.img">
         </ion-avatar>
-        <ion-row (click)="toMineEditPage()">
+        <!-- (click)="toMineEditPage()" -->
+        <ion-row>
           <ion-col>
             <h2>{{orderSchedule.name}}</h2>
           </ion-col>
           <ion-col> </ion-col>
           <ion-col>
-            <p>{{orderSchedule.time}}</p>
+            <p>{{orderSchedule.time}}&nbsp;&nbsp; <a *ngIf="userInfo && userInfo.userType=='user'" (click)="delJd(orderSchedule.id,i)"
+                style="color:brown;">删除</a></p>
           </ion-col>
         </ion-row>
         <!-- <p>{{userInfo.description}}</p> -->
@@ -42,15 +44,15 @@
       <ion-row>
         <ion-col>
         </ion-col>
-        <ion-col >
-      <button ion-button icon-left clear small disabled="userInfo && userInfo.userType=='user'">
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div>已赞</div>
+        <ion-col>
+          <button (click)="dianZan(i,orderSchedule.id)" ion-button icon-left clear small>
+        <ion-icon name="thumbs-up" ></ion-icon>
+        <div>{{orderSchedule.isAdmire=='true'?'已赞':''}}</div>
       </button>
         </ion-col>
         <ion-col> </ion-col>
         <ion-col> </ion-col>
-        <ion-col >
+        <ion-col>
           <button ion-button icon-left clear small (click)="toScheduleComplaint(orderSchedule.id)">
         <ion-icon name="text"></ion-icon>
         <div>投诉</div>
@@ -61,17 +63,18 @@
       </ion-row>
 
       <div class="cmt-wrap">
-        <div class="cmt-list" *ngFor="let re of orderSchedule.reply">
-          <p><span>{{re.name}}</span>
+        <div class="cmt-list" *ngFor="let re of orderSchedule.reply;let i2=index;">
+          <p id="p{{i2}}" (press)="delHf(re.update_user_id,re.id,i,i2)"><span>{{re.name}}</span>
             <span *ngIf="re.replyName" (click)="replyToName(i,re.replyName)">回复{{re.replyName}}</span>
             <span>: </span>{{re.content}}
           </p>
         </div>
         <div style="position: static;">
-          <ion-input (change)="reply2(i,orderSchedule.id)" id="input{{i}}" [(ngModel)]="content" type="text" [placeholder]="myplaceholder"></ion-input>
-          <!-- <button ion-button >发送</button> -->
+          <input style="width:80%;margin-left: 8px;" (blur)="inpBlur(i)" (focus)="inpFocus(i)" id="input{{i}}" [(ngModel)]="content" type="text" [placeholder]="myplaceholder"/>
+          <button (click)="reply2(i,orderSchedule.id)">发送</button>
+
         </div>
-      </div>               
+      </div>
     </ion-card>
   </div>
 

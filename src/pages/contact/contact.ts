@@ -34,7 +34,8 @@ export class ContactPage {
       console.log(loginInfo, '+++++++++++++++++++++++++++++++++++++++');
       let userInfo = loginInfo.user;
       if (userInfo) {
-        this.userInfo = userInfo;
+        this.userInfo = userInfo;           
+        console.log("+_+_+_+_+_+_+_+_+_:"+JSON.stringify(this.userInfo));
         this.avatarPath = userInfo.avatarPath;
       }
     });
@@ -71,7 +72,7 @@ export class ContactPage {
   }
 
   about() {
-    this.navCtrl.push(WePage);
+    this.navCtrl.push(WePage,{"welfare":this.userInfo.welfare});
   }
 
   setting() {

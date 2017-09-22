@@ -40,10 +40,12 @@ export class LoginPage {
         phoneBak: '18688498343',
         avatar: '',
         avatarPath: 'assets/img/avatar-ts-jessie.png',
-        description: '有图有真相，一本正经的胡说八道..',
+        descreption: '有图有真相，一本正经的胡说八道..',
         token: '',
         address: '上海市浦东新区杨高南路陆家嘴金融中心',
-        userType:''
+        userType: '',
+        termsOfSale: '',
+        welfare: ''
       }
     };
 
@@ -61,7 +63,7 @@ export class LoginPage {
       console.log("==========================================================输出：" + res.json());
 
       var objList = eval('(' + res.json() + ')');
-      if (objList.flag==false) {
+      if (objList.flag == false) {
         let toast = this.toastCtrl.create({
           message: '账号或者密码错误！',
           duration: 3000
@@ -79,12 +81,15 @@ export class LoginPage {
             email: user.email,
             phone: user.phone,
             phoneBak: user.phone,
+            descreption:user.descreption,
             avatar: '',
             avatarPath: user.imp,
             description: user.description,
             token: '',
             address: user.address,
-            userType:objList.flag
+            userType: objList.flag,
+            termsOfSale: objList.termsOfSale,
+            welfare: objList.welfare
           }
         };
         this.storage.set('LoginInfo', this.loginInfo).then((loginInfo: LoginInfo) => {

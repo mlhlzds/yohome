@@ -20,9 +20,10 @@
             <div id="chatArea" class="box chat">
                 <div class="box_hd"></div>
                 <div class="box_bd" id="messageList">
-                    <div *ngFor="let scheduleComplaint of scheduleComplaintList" [ngClass]="{true:'message me',false:'message'}[scheduleComplaint.msgType]">
+                    <div  *ngFor="let scheduleComplaint of scheduleComplaintList;let i=index;" [ngClass]="{true:'message me',false:'message'}[scheduleComplaint.msgType]">
                         <img class="avatar" src="{{scheduleComplaint.headPortrait}}" />
-                        <div class="content">
+             
+                        <div class="content" (press)="delTs(scheduleComplaint.id,i)">
                             <div class="nickname"><span class="time">{{scheduleComplaint.dateTime}}</span></div>
                             <div [ngClass]="{true:'bubble bubble_primary right',false:'bubble bubble_default left'}[scheduleComplaint.msgType]">
                                 <div class="bubble_cont">
@@ -43,7 +44,8 @@
 
 </ion-content>
 <ion-footer>
-    <ion-input *ngIf="userType!='user'" (change)="complaintReply($event)" [(ngModel)]="replyStr" [(ngModel)]="teststr" (blur)="funBlur()" (focus)="funFocus($event)"
+
+    <ion-input *ngIf="userType=='cust'" (change)="complaintReply($event)" [(ngModel)]="replyStr" [(ngModel)]="teststr" (blur)="funBlur()" (focus)="funFocus($event)"
         placeholder="投诉内容…"></ion-input>
 
     <button ion-button style="width:100%;height:50px;" disabled="disabled" color="dark">投诉电话：0512-66592866-818</button>

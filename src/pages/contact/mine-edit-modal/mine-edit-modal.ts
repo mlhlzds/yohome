@@ -41,7 +41,7 @@ export class MineEditModalPage {
       'required': '',
       'maxlength': '请输入的长度在30个以内'
     },
-    'description': {
+    'descreption': {
       'errorMsg': '',
       'required': '',
       'maxlength': '请输入的长度在20个以内'
@@ -61,7 +61,7 @@ export class MineEditModalPage {
       phoneBak: [this.userInfo.phone, [Validators.required, Validators.phone]],
       email: [this.userInfo.email, [Validators.required, Validators.email]],
       address:[this.userInfo.address,[Validators.maxLength(30)]],
-      description:[this.userInfo.description,[Validators.maxLength(20)]]
+      descreption:[this.userInfo.descreption,[Validators.maxLength(20)]]
     });
     this.userForm.valueChanges
       .subscribe(data => {

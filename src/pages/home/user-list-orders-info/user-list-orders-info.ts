@@ -1,5 +1,5 @@
 import { Component, ElementRef, ContentChildren } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { UserOrder } from "../../../model/UserOrder";
 import { NewSchedulePage } from '../new-schedule/new-schedule';
 import { ScheduleComplaintPage } from '../schedule-complaint/schedule-complaint';
@@ -10,6 +10,8 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserInfo, LoginInfo } from "../../../model/UserInfo";
 import { Storage } from '@ionic/Storage';
 import { LoadingController, ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+
 @Component({
   selector: 'page-user-list-orders-info',
   templateUrl: 'user-list-orders-info.html',
@@ -22,25 +24,25 @@ export class UserListOrdersInfoPage {
   orderScheduleList: OrderSchedule[] = [];
   userInfo: any = null;
 
-  f:number = 1;  //进度
+  f: number = 1;  //进度
 
-  constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public toastCtrl: ToastController, public loadingCtrl: LoadingController, private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.userOrder = navParams.data.userOrder;  //订单对象
     this.userInfo = navParams.data.userInfo;  //订单对象
     console.log("*********************订单对象*********************");
     console.log(this.userOrder);
     console.log("*********************订单对象*********************");
-    if(this.userInfo!=null){
+    if (this.userInfo != null) {
       this.getAllOrder();
-    }else{
+    } else {
       this.f = 0;
       this.userInfo = UserInfo;
-      this.userInfo.userType="user2";
+      this.userInfo.userType = "user2";
       this.getAllOrder2();
     }
-    
 
-    
+
+
   }
 
 
@@ -56,13 +58,135 @@ export class UserListOrdersInfoPage {
       phoneBak: '18688498343',
       avatar: '',
       avatarPath: 'assets/img/avatar-ts-jessie.png',
-      description: '有图有真相，一本正经的胡说八道..',
+      descreption: '有图有真相，一本正经的胡说八道..',
       token: '',
       address: '上海市浦东新区杨高南路陆家嘴金融中心',
-      userType: ''
+      userType: '',
+      termsOfSale: '',
+      welfare: ''
+
     }
 
     this.navCtrl.push(MineEditPage, { "userInfo": userInfo, "avatarPath": "assets/img/marty-avatar.png" });
+  }
+
+
+  dianZan(i, scheduleId) {
+    if (this.userInfo.userType != 'cust' || this.orderScheduleList[i].isAdmire == 'true') {
+      return;
+    }
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    let body = JSON.stringify({
+      scheduleId: scheduleId
+    });
+
+    this.http.post("content/admire", body, options).map(res => {
+      var objList = eval('(' + res.json() + ')');
+      if (objList.msg == 'true') {
+        this.orderScheduleList[i].isAdmire = 'true';
+
+      }
+    }).subscribe(function (data) {
+      console.log('1111');
+    })
+  }
+
+  inpFocus(i) {
+    this.el.nativeElement.querySelector('#input' + i).querySelector('input').style = "background-color:#FEFFFF";
+  }
+
+  inpBlur(i) {
+    this.el.nativeElement.querySelector('#input' + i).querySelector('input').style = "background-color:none";
+  }
+  delHf(update_user_id, contentRecordId, i, i2) {
+    console.log("update_user_id=" + update_user_id + "-----this.userInfo.id=" + this.userInfo.id);
+    if (update_user_id != this.userInfo.id) {
+      return;
+    }
+    this.el.nativeElement.querySelector("#p" + i2).style = "background-color:#989CA2";
+    let that = this;
+    that.actionSheetCtrl.create({
+      buttons: [
+        {
+          text: '删除',
+          role: 'destructive',
+          handler: () => {
+            let headers = new Headers({ 'Content-Type': 'application/json' });
+            let options = new RequestOptions({ headers: headers });
+
+            let body = JSON.stringify({
+              contentRecordId: contentRecordId
+            });
+
+            this.http.post("content/cancelContentRecord", body, options).map(res => {
+              var objList = eval('(' + res.json() + ')');
+              if (objList.msg == 'true') {
+                that.orderScheduleList[i].reply.splice(i2, 1);
+              }
+            }).subscribe(function (data) {
+              console.log('1111');
+            })
+
+
+
+            // that.fileObjList.splice(i, 1);
+          }
+        },
+        {
+          text: '取消',
+          role: 'cancel',
+          handler: () => {
+            this.el.nativeElement.querySelector("#p" + i2).style = "background-color:none;";
+          }
+        }
+      ]
+    }).present();
+  }
+
+  delJd(scheduleId, index) {
+    let prompt = this.alertCtrl.create({
+      title: '提示',
+      message: "您确定要删除吗？",
+      buttons: [
+        {
+          text: '确定',
+          handler: data => {
+            let headers = new Headers({ 'Content-Type': 'application/json' });
+            let options = new RequestOptions({ headers: headers });
+
+            let body = JSON.stringify({
+              contentId: scheduleId
+            });
+
+            this.http.post("content/cancelContent", body, options).map(res => {
+              var objList = eval('(' + res.json() + ')');
+              if (objList.msg == 'true') {
+                this.orderScheduleList.splice(index, 1);
+              } else {
+                let toast = this.toastCtrl.create({
+                  message: '删除失败，此进度已过24小时，无法删除！',
+                  duration: 2000
+                });
+                toast.present();
+              }
+            }).subscribe(function (data) {
+              console.log('1111');
+            })
+          }
+        },
+        {
+          text: '取消',
+          handler: data => {
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
+
+
   }
   pageNum: number = 1;
   pageSize: number = 2;
@@ -87,7 +211,7 @@ export class UserListOrdersInfoPage {
       console.log('1111');
     })
 
-  
+
 
 
     // this.http.get("assets/data/OrderSchedule.json").map(res => {
@@ -98,7 +222,7 @@ export class UserListOrdersInfoPage {
 
   }
 
-    //获得所有订单
+  //获得所有订单
   getAllOrder2() {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -129,20 +253,20 @@ export class UserListOrdersInfoPage {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-       let body;
+        let body;
         var url = 'contract/contentList';
-        if(this.f == 0){
+        if (this.f == 0) {
           url = 'content/allContent';
           body = JSON.stringify({
-          pageSize: this.pageSize + "", //页大小
-          pageNum: this.pageNum + "" //当前页
-        });
-        }else{
+            pageSize: this.pageSize + "", //页大小
+            pageNum: this.pageNum + "" //当前页
+          });
+        } else {
           body = JSON.stringify({
-          orderId: this.userOrder.id,  //订单id
-          pageSize: this.pageSize + "", //页大小
-          pageNum: this.pageNum + "" //当前页
-        });
+            orderId: this.userOrder.id,  //订单id
+            pageSize: this.pageSize + "", //页大小
+            pageNum: this.pageNum + "" //当前页
+          });
         }
         this.http.post(url, body, options).map(res => {
           var objList = eval('(' + res.json() + ')');
@@ -170,7 +294,7 @@ export class UserListOrdersInfoPage {
     console.log("******************newSchedule***************");
     console.log(JSON.stringify(this.userOrder));
     console.log("******************newSchedule***************");
-    this.navCtrl.push(NewSchedulePage, { "id": this.userOrder.id, "list": this.orderScheduleList });
+    this.navCtrl.push(NewSchedulePage, { "userInfo": this.userInfo, "id": this.userOrder.id, "list": this.orderScheduleList });
   }
 
   content: any;
@@ -206,12 +330,13 @@ export class UserListOrdersInfoPage {
           this.orderScheduleList[i].reply = [];
         }
         this.orderScheduleList[i].reply.push({
-          "id": "",
+          "id": objList.content_record_id,
           "scheduleId": id,
           "name": this.userInfo.name,
           "content": this.content,
           "replyName": this.replyName,
           "replyId": "",
+          "update_user_id": this.userInfo.id,
           "time": ""
         });
       } else {

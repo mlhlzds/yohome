@@ -5,7 +5,9 @@
 </ion-header>
 
 <ion-content padding>
-     <ion-searchbar [(ngModel)]="search" ></ion-searchbar> 
+     <!-- <ion-searchbar [(ngModel)]="search" ></ion-searchbar>  -->
+
+     <ion-input type="text" [(ngModel)]="search" placeholder="请输入地址或者名字搜索~" style="width:95%;border-color: #878787; border-style: solid; border-top-width: 0px;border-right-width: 0px; border-bottom-width: 1px;border-left-width: 0px"  ></ion-input>
     <!-- |filterUser:search -->
     <button ion-item (click)="toOrders(user)" *ngFor="let user of userList|filterUser:search">
         <ion-avatar item-start>

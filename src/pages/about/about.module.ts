@@ -5,6 +5,8 @@ import { ArchivesPage } from './archives/archives';
 import { GoodsListPage } from './goods-list/goods-list';
 import { CustomerServicePage } from './customer-service/customer-service';
 
+import { CustomerServiceNewPage } from './customer-service-new/customer-service-new';
+import { CustomerServiceListPage } from './customer-service-list/customer-service-list';
 import { SharedModule } from '../../shared/shared.module';
 // //pdf
 // import { PdfViewerComponent } from 'ng2-pdf-viewer';
@@ -14,8 +16,8 @@ import { SharedModule } from '../../shared/shared.module';
         SharedModule
         
     ],
-    declarations:[GoodsListPage,ArchivesPage,CustomerServicePage],//PdfViewerComponent,
-    entryComponents:[GoodsListPage,ArchivesPage,CustomerServicePage],//PdfViewerComponent,
+    declarations:[GoodsListPage,ArchivesPage,CustomerServicePage,CustomerServiceNewPage,CustomerServiceListPage],//PdfViewerComponent,
+    entryComponents:[GoodsListPage,ArchivesPage,CustomerServicePage,CustomerServiceNewPage,CustomerServiceListPage],//PdfViewerComponent,
     providers:[],
     exports:[IonicModule]
 })

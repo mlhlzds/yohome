@@ -1,9 +1,14 @@
-import { Component,ViewChild } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { FileObj } from "../../../model/FileObj";
 import { OrderSchedule } from "../../../model/OrderSchedule";
-
+import { UserOrder } from "../../../model/UserOrder";
 import { Content } from 'ionic-angular';
+import { Http, RequestOptions, Headers } from '@angular/http';
+import { LoadingController } from 'ionic-angular';
+
+import { CustomerServiceNewPage } from '../customer-service-new/customer-service-new';
+import { CustomerServiceListPage } from '../customer-service-list/customer-service-list';
 /**
  * Generated class for the CustomerServicePage page.
  *
@@ -16,22 +21,23 @@ import { Content } from 'ionic-angular';
   templateUrl: 'customer-service.html',
 })
 export class CustomerServicePage {
-   @ViewChild(Content) content: Content;
-  describe: string = '';
-  fileObjList: FileObj[] = []; //所有图片
-  
-  customerList:Array<any> = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  termsOfSale: string = '';
 
+  userOrder: UserOrder;
+
+  constructor(public loadingCtrl: LoadingController, private actionSheetCtrl: ActionSheetController, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+    this.termsOfSale = this.navParams.data.termsOfSale;
+    this.userOrder = this.navParams.data.userOrder;
+
+   
   }
 
-  newCustomer() {
-    var obj = {describe:this.describe,fileObjList:this.fileObjList};
-    this.customerList.unshift(obj);
-
-    this.describe = '';
-    this.fileObjList = []; //所有图片
-
-    this.content.scrollToTop(500);
+  toCustomerServiceNewPage(){
+    this.navCtrl.push(CustomerServiceNewPage,{"termsOfSale":this.termsOfSale,"userOrder":this.userOrder});
   }
+
+  toCustomerServiceListPage(){
+    this.navCtrl.push(CustomerServiceListPage,{"termsOfSale":this.termsOfSale,"userOrder":this.userOrder});
+  }
+
 }

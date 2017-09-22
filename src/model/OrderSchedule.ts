@@ -6,4 +6,7 @@ export class OrderSchedule {
   describe: string;
   reply:any[];    
   time:string;
+  img:string;
+  name:string;
+  isAdmire:string;
 }

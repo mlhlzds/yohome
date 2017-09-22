@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar >
+  <ion-navbar>
     <ion-title>个人信息</ion-title>
     <ion-buttons end>
       <button ion-button (click)="openModal()">
@@ -22,6 +22,10 @@
     <ion-item>
       用户名：{{userInfo.username}}
     </ion-item>
+    <ion-item>
+      个性签名：{{userInfo.descreption}}
+    </ion-item>
+
     <ion-item>
       手机号码：{{userInfo.phone}}
     </ion-item>

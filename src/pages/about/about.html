@@ -50,7 +50,7 @@
             档案
      
         </button>
-      <button ion-button color="primary" (click)="toCustomerServicePage()" *ngIf="userOrder.state==2">
+      <button ion-button color="primary" (click)="toCustomerServicePage(userOrder)" *ngIf="userOrder.state==2">
         
             <ion-icon name="call"></ion-icon>
             售后

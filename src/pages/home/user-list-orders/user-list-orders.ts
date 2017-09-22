@@ -29,7 +29,7 @@ export class UserListOrdersPage {
     }
     this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
       this.userInfo = loginInfo.user;
-      this.initUserOrders();
+      // this.initUserOrders();
 
     })
 
@@ -57,6 +57,7 @@ export class UserListOrdersPage {
     this.http.post("/yuejia/user/custInfoList", body, options).map(res => {
       // this.http.get('assets/data/userList2.json').map(res => {
       var objList = eval('(' + res.json() + ')');
+      console.log(">>>>>>>>>>>>>>>>>>>>>"+JSON.stringify(objList));
       for (var i = 0; i < objList.length; i++) {
         var obj = objList[i];
         var uo = new UserOrder;
@@ -64,6 +65,7 @@ export class UserListOrdersPage {
         uo.addr = obj.adress;
         uo.name = obj.info;
         uo.state = obj.status;
+        uo.recordNo = obj.recordNo;
         this.userOrders.push(uo);
       }
 
@@ -79,6 +81,11 @@ export class UserListOrdersPage {
     // }).subscribe(function (data) {
     //   console.log(data)
     // })
+  }
+
+  ionViewWillEnter(){
+    this.userOrders.splice(0,this.userOrders.length);//
+    this.initUserOrders();
   }
 
 }

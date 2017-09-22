@@ -4,12 +4,15 @@ export class UserInfo {
   name: string;
   email: string;
   phone: string;
-  phoneBak:String;
+  phoneBak: String;
   avatar: string;
-  avatarPath:String;
-  description: string;
+  avatarPath: String;
+  descreption: string;
   token: string;
-  address:String;
+  address: String;
+  userType: string;
+  termsOfSale: string;
+  welfare: string;
 }
 
 

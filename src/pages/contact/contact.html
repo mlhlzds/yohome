@@ -14,7 +14,7 @@
         <img src="{{avatarPath}}">
       </ion-avatar>
       <h2>{{userInfo?.name}}</h2>
-      <p>{{userInfo?.description}}</p>
+      <p>{{userInfo?.descreption}}</p>
       <ion-icon name='ios-arrow-forward' item-right></ion-icon>
     </ion-item>
     <br/>
@@ -24,12 +24,12 @@
       <ion-icon name='ios-arrow-forward' item-right></ion-icon>
     </ion-item>
 <br/> -->
-    <ion-item (click)="about()">
+    <ion-item (click)="about()" *ngIf="userInfo?.userType=='cust'">
       <ion-icon name="information-circle" item-left color="secondary"></ion-icon>
       VIP会员福利
       <ion-icon name='ios-arrow-forward' item-right></ion-icon>
     </ion-item>
-    <br/>
+    <br *ngIf="userInfo?.userType=='cust'"/>
   </ion-list>
 
   <ion-list>

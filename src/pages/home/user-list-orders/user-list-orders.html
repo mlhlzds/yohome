@@ -7,7 +7,7 @@
 <!-- |filterUser:search -->
 <ion-content>
   <button ion-item *ngFor="let userOrder of userOrders"  (click)="toOrderInfo(userOrder)">
-      <p>{{userOrder.name}}<ion-badge item-right style="background-color: red;">{{homeObj.attrName}}</ion-badge></p>
+      <p>{{userOrder.name}}<ion-badge *ngIf="userOrder.recordNo!=0" item-right style="background-color: red;">{{userOrder.recordNo}}</ion-badge></p>
       <p>{{userOrder.addr}}</p>
   </button>
 </ion-content>

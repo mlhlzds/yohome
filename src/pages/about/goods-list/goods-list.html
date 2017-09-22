@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>商品清单</ion-title>
+    <ion-title>{{spqd}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,12 +18,14 @@
 
     <ion-card-content>
       <ion-card-title>
-        商品清单
+        {{spqd}}
       </ion-card-title>
       <p>
-        
+
       </p>
     </ion-card-content>
-    <show-img imgPath="assets/img/spqd.png"></show-img>
+    <div *ngFor="let img of imgs">
+      <show-img [imgPath]="img"></show-img><br/><br/>
+    </div>
   </ion-card>
 </ion-content>

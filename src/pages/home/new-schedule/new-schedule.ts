@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FileObj } from "../../../model/FileObj";
 import { OrderSchedule } from "../../../model/OrderSchedule";
-
+import { LoadingController } from 'ionic-angular';
 import { Http, RequestOptions, Headers } from '@angular/http';
-
+import { UserInfo, LoginInfo } from "../../../model/UserInfo";
 
 /**
  * Generated class for the NewSchedulePage page.
@@ -23,9 +23,10 @@ export class NewSchedulePage {
   fileObjList: FileObj[] = []; //所有图片
   orderId: string;
   orderScheduleList: OrderSchedule[] = [];
-  constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public loadingCtrl: LoadingController, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.orderScheduleList = navParams.get("list");  //订单对象
     this.orderId = navParams.get("id");  //订单对象
+    this.userInfo = navParams.get("userInfo");  //订单对象
   }
 
   thumb: Array<string> = new Array<string>(); //用于存放图片的base64 
@@ -54,12 +55,19 @@ export class NewSchedulePage {
   cliTest() {
     console.log(this.thumb.length);
   }
-
+  userInfo: any = null;
   newSchedule() {
+    let loading = this.loadingCtrl.create({
+      content: '发表中...'//设置loading时显示的文字
+    });
+    loading.present();
+
     let orderSchedule: OrderSchedule = new OrderSchedule();
     orderSchedule.imgs = this.fileObjList;
     orderSchedule.describe = this.describe;
     orderSchedule.id = this.orderId;
+    orderSchedule.img = this.userInfo.avatarPath;
+    orderSchedule.name = this.userInfo.name;
 
     console.log("this.orderIdthis.orderId===" + this.orderId);
 
@@ -69,9 +77,14 @@ export class NewSchedulePage {
     let body = JSON.stringify(orderSchedule);
     this.http.post("content/newSchedule", body, options).map(res => {
       console.log(res.json());
+
+
       var objList = eval('(' + res.json() + ')');
       orderSchedule.time = objList.time;
+
+      orderSchedule.id = objList.contentId
       this.orderScheduleList.unshift(orderSchedule);
+      loading.dismiss();
       this.navCtrl.pop();
       console.log(this.fileObjList);
     }).subscribe(function (data) {

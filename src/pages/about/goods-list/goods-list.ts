@@ -15,26 +15,41 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 })
 export class GoodsListPage {
 
+  type: string;
+  spqd: string;
   userOrders: UserOrder;
   constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     console.log("*******************商品清单this.userOrders************************")
-    this.userOrders = navParams.data;
+    this.userOrders = navParams.data.userOrders;
+    this.type = navParams.data.type;
     this.initData();
+    if (this.type == '1') {
+      this.spqd = "商品清单";
+    }
+    if (this.type == '2') {
+      this.spqd = "合同信息";
+    }
+    if (this.type == '3') {
+      this.spqd = "施工设计";
+    }
+    
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad GoodsListPage');
   }
+  imgs: string[];
   initData() {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
     let body = JSON.stringify({
       orderId: this.userOrders.id,
-      type: "1"
-    });                          
+      type: this.type
+    });
     this.http.post("contract/contractInfo", body, options).map(res => {
       // this.http.get('assets/data/userList2.json').map(res => {
       var objList = eval('(' + res.json() + ')');
+      this.imgs = objList.imgs;
       console.log("***************getGoodsList***************");
       console.log(JSON.stringify(objList));
       console.log("***************getGoodsList***************");

@@ -42,8 +42,8 @@ export class AboutPage {
   }
 
   //售后
-  toCustomerServicePage() {
-    this.navCtrl.push(CustomerServicePage, {});
+  toCustomerServicePage(userOrder) {
+    this.navCtrl.push(CustomerServicePage, {"userOrder":userOrder,"termsOfSale":this.userInfo.termsOfSale});
   }
 
   flagLoginInfo: boolean = true;

@@ -1,10 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserOrder } from "../../../model/UserOrder";
 import { ScheduleComplaint } from "../../../model/ScheduleComplaint";
 import { UserInfo, LoginInfo } from "../../../model/UserInfo";
 import { Storage } from '@ionic/Storage';
+
+
 /**
  * Generated class for the ScheduleComplaintPage page.
  *
@@ -23,7 +25,7 @@ export class ScheduleComplaintPage {
   id: string;//进度id
   userType: string;//进度id
   userInfo: any = null;
-  constructor(private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private actionSheetCtrl: ActionSheetController, private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     console.log("navParams.data" + JSON.stringify(navParams.data));
     this.id = navParams.data.id;  //订单对象
     this.userType = navParams.data.userType;  //订单对象
@@ -58,6 +60,44 @@ export class ScheduleComplaintPage {
   //投诉内容
   scheduleComplaintList: ScheduleComplaint[] = [];
 
+  delTs(scheduleComplaintId, i) {
+    console.log("删除投诉");
+    if (this.userInfo.userType != 'cust') {
+      return;
+    }
+    let that = this;
+    that.actionSheetCtrl.create({
+      buttons: [
+        {
+          text: '删除',
+          role: 'destructive',
+          handler: () => {
+
+            let headers = new Headers({ 'Content-Type': 'application/json' });
+            let options = new RequestOptions({ headers: headers });
+
+            let body = JSON.stringify({
+              complaintId: scheduleComplaintId
+            });
+
+            this.http.post("content/cancelComplaint", body, options).map(res => {
+              var objList = eval('(' + res.json() + ')');
+              if (objList.msg == 'true') {
+                that.scheduleComplaintList.splice(i, 1);
+              }
+            }).subscribe(function (data) {
+              console.log('1111');
+            })
+          }
+        },
+        {
+          text: '取消',
+          role: 'cancel'
+        }
+      ]
+    }).present();
+  }
+
   //获得进度投诉的内容
   getScheduleComplaintData() {
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -91,7 +131,7 @@ export class ScheduleComplaintPage {
 
     var scheduleComplaint: ScheduleComplaint = new ScheduleComplaint;
     scheduleComplaint.id = "";
-   
+
     scheduleComplaint.content = this.replyStr;
     scheduleComplaint.headPortrait = this.userInfo.avatarPath;
     scheduleComplaint.msgType = true;
@@ -101,6 +141,7 @@ export class ScheduleComplaintPage {
     this.http.post("content/addComplaint", body, options).map(res => {
       var objList = eval('(' + res.json() + ')');
       scheduleComplaint.dateTime = objList.msg;
+      scheduleComplaint.id = objList.id;
       console.log("222222222222222addComplaint22222222222222222");
       console.log(JSON.stringify(objList));
       console.log("222222222222222addComplaint22222222222222222");

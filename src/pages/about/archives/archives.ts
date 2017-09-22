@@ -58,9 +58,10 @@ export class ArchivesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ArchivesPage');
   }
-  toGoodsListPage(){
-    this.navCtrl.push(GoodsListPage,this.userOrders);
+  toGoodsListPage(type){
+    this.navCtrl.push(GoodsListPage,{"userOrders":this.userOrders,"type":type});
   }
+
 
 
 }

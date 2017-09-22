@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { NativeService } from "../../../providers/NativeService";
 import { YoHomePage } from "../yo-home/yo-home";
 import { SoftwarePage } from "../software/software";
@@ -10,8 +10,14 @@ import { SoftwarePage } from "../software/software";
 })
 export class WePage {
 
-  constructor(private navCtrl: NavController,
-    private nativeService: NativeService) {
+  welfare:string;
+  welfares:string[];
+  constructor(private navCtrl: NavController,private nativeService: NativeService, public navParams: NavParams) {
+    this.welfare = this.navParams.data.welfare;
+
+    this.welfares = this.welfare.split('<br/>');
+    console.log("this.welfares="+JSON.stringify(this.welfares));
+
   }
 
   yohome() {
