@@ -45,8 +45,12 @@
 </ion-content>
 <ion-footer>
 
-    <ion-input *ngIf="userType=='cust'" (change)="complaintReply($event)" [(ngModel)]="replyStr" [(ngModel)]="teststr" (blur)="funBlur()" (focus)="funFocus($event)"
-        placeholder="投诉内容…"></ion-input>
+    <!-- <ion-input *ngIf="userType=='cust'" (change)="complaintReply($event)" [(ngModel)]="replyStr" [(ngModel)]="teststr" (blur)="funBlur()" (focus)="funFocus($event)"
+        placeholder="投诉内容…"></ion-input> -->
 
+                       
+    <input *ngIf="userType=='cust'" style="border-top-width: 0px;border-right-width: 0px; border-bottom-width: 1px;border-left-width: 0px;width:80%;margin-left: 8px;margin-top: 2px;" [(ngModel)]="replyStr"  (blur)="funBlur()" (focus)="funFocus($event)"
+        placeholder="投诉内容…"/>
+    <button (click)="complaintReply($event)" [disabled]="replyStr==''">发送</button>
     <button ion-button style="width:100%;height:50px;" disabled="disabled" color="dark">投诉电话：0512-66592866-818</button>
 </ion-footer>

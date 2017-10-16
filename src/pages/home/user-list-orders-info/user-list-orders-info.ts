@@ -94,11 +94,13 @@ export class UserListOrdersInfoPage {
   }
 
   inpFocus(i) {
-    this.el.nativeElement.querySelector('#input' + i).querySelector('input').style = "background-color:#FEFFFF";
+    //.querySelector('input')
+    this.el.nativeElement.querySelector('#input' + i).style = "border-top-width: 0px;border-right-width: 0px; border-bottom-width: 1px;border-left-width: 0px;width:80%;margin-left: 8px;margin-top: 2px;background-color:#FEFFFF";
   }
 
   inpBlur(i) {
-    this.el.nativeElement.querySelector('#input' + i).querySelector('input').style = "background-color:none";
+    //.querySelector('input')
+    this.el.nativeElement.querySelector('#input' + i).style = "border-top-width: 0px;border-right-width: 0px; border-bottom-width: 1px;border-left-width: 0px;width:80%;margin-left: 8px;margin-top: 2px;background-color:none";
   }
   delHf(update_user_id, contentRecordId, i, i2) {
     console.log("update_user_id=" + update_user_id + "-----this.userInfo.id=" + this.userInfo.id);
@@ -297,7 +299,7 @@ export class UserListOrdersInfoPage {
     this.navCtrl.push(NewSchedulePage, { "userInfo": this.userInfo, "id": this.userOrder.id, "list": this.orderScheduleList });
   }
 
-  content: any;
+  content: any='';
   replyName: any;
   myplaceholder: any = '请输入回复内容…';
   replyToName(i, replyName) {

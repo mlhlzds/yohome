@@ -124,7 +124,7 @@ export class ScheduleComplaintPage {
   }
   hi: number = -200;
   //投诉回复
-  replyStr: string = '';
+  replyStr: string = '';              
   complaintReply(event: any) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });

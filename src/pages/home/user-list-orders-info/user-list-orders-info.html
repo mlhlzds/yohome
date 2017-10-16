@@ -70,8 +70,8 @@
           </p>
         </div>
         <div style="position: static;">
-          <input style="width:80%;margin-left: 8px;" (blur)="inpBlur(i)" (focus)="inpFocus(i)" id="input{{i}}" [(ngModel)]="content" type="text" [placeholder]="myplaceholder"/>
-          <button (click)="reply2(i,orderSchedule.id)">发送</button>
+          <input style="width:80%;margin-left: 8px;margin-top: 2px;background-color:#FEFFFF;border-top-width: 0px;border-right-width: 0px; border-bottom-width: 1px;border-left-width: 0px;" (blur)="inpBlur(i)" (focus)="inpFocus(i)" id="input{{i}}" [(ngModel)]="content" type="text" [placeholder]="myplaceholder"/>
+          <button (click)="reply2(i,orderSchedule.id)" [disabled]="content==''" >发送</button>
 
         </div>
       </div>
