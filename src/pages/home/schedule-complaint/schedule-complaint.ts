@@ -25,13 +25,17 @@ export class ScheduleComplaintPage {
   id: string;//进度id
   userType: string;//进度id
   userInfo: any = null;
+  afterSalePhone:string;
   constructor(private actionSheetCtrl: ActionSheetController, private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     console.log("navParams.data" + JSON.stringify(navParams.data));
     this.id = navParams.data.id;  //订单对象
     this.userType = navParams.data.userType;  //订单对象
+    this.afterSalePhone=navParams.data.afterSalePhone;
     this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
       this.userInfo = loginInfo.user;
       this.getScheduleComplaintData();//加载投诉内容
+
+      console.log(";;;;;;;;;;;;;;;;;;;"+JSON.stringify(this.userInfo));
     });
 
   }

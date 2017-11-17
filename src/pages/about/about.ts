@@ -43,7 +43,8 @@ export class AboutPage {
 
   //售后
   toCustomerServicePage(userOrder) {
-    this.navCtrl.push(CustomerServicePage, {"userOrder":userOrder,"termsOfSale":this.userInfo.termsOfSale});
+    console.log("this.userInfo.afterSalePhone:"+this.userInfo.afterSalePhone);
+    this.navCtrl.push(CustomerServicePage, {"userOrder":userOrder,"afterSalePhone":this.userInfo.afterSalePhone,"termsOfSale":this.userInfo.termsOfSale});
   }
 
   flagLoginInfo: boolean = true;

@@ -19,10 +19,11 @@ export class CustomerServiceNewPage {
   userOrder: UserOrder;
   termsOfSale: string = '';
   termsOfSales: string[];
+  afterSalePhone:string;
   constructor(public alertCtrl: AlertController, private app: App, public loadingCtrl: LoadingController, private actionSheetCtrl: ActionSheetController, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.termsOfSale = this.navParams.data.termsOfSale;
     this.userOrder = this.navParams.data.userOrder;
-
+    this.afterSalePhone = this.navParams.data.afterSalePhone;
     this.termsOfSales = this.termsOfSale.split('<br/>');
   }
 
@@ -56,6 +57,7 @@ export class CustomerServiceNewPage {
           subTitle: '申请售后成功，可在售后详情中查看！',
           buttons: ['OK']
         });
+        
         alert.present();
         // this.navCtrl.pop();
         // this.navCtrl.push(CustomerServiceListPage, { "termsOfSale": this.termsOfSale, "userOrder": this.userOrder });

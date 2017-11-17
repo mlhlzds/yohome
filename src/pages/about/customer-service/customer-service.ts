@@ -24,16 +24,16 @@ export class CustomerServicePage {
   termsOfSale: string = '';
 
   userOrder: UserOrder;
-
+afterSalePhone:string;
   constructor(public loadingCtrl: LoadingController, private actionSheetCtrl: ActionSheetController, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.termsOfSale = this.navParams.data.termsOfSale;
     this.userOrder = this.navParams.data.userOrder;
-
+this.afterSalePhone = this.navParams.data.afterSalePhone;
    
   }
 
   toCustomerServiceNewPage(){
-    this.navCtrl.push(CustomerServiceNewPage,{"termsOfSale":this.termsOfSale,"userOrder":this.userOrder});
+    this.navCtrl.push(CustomerServiceNewPage,{"termsOfSale":this.termsOfSale,"afterSalePhone":this.afterSalePhone,"userOrder":this.userOrder});
   }
 
   toCustomerServiceListPage(){

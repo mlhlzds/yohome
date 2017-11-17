@@ -27,12 +27,15 @@
   </div>
   <button ion-button style="width:100%" (click)="newCustomer()">
                提交
-            </button><br/>
+            </button><br/><br/>
+              <div style="text-align:center">
+                
+              <h3>管家式服务，售后无忧</h3></div>
   <p *ngFor="let termsOfSale of termsOfSales">
     {{termsOfSale}}<br/>
   </p>
 </ion-content>
 <ion-footer>
-  <button ion-button style="width:100%;height:50px;" disabled="disabled" color="dark">客服电话：0512-66592866-818</button>
+  <button ion-button style="width:100%;height:50px;" disabled="disabled" color="dark">客服电话：{{afterSalePhone}}</button>
 
 </ion-footer>

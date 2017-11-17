@@ -288,17 +288,17 @@ export class UserListOrdersInfoPage {
   //投诉
   toScheduleComplaint(id) {
     console.log("toScheduleComplaint(id) {==" + id);
-    this.navCtrl.push(ScheduleComplaintPage, { "id": id, "userType": this.userInfo.userType });
+    this.navCtrl.push(ScheduleComplaintPage, { "id": id, "userType": this.userInfo.userType, "afterSalePhone": this.userInfo.afterSalePhone });
   }
   //发表新的进度
   newSchedule() {
-    location.href = '#ion0';
-    console.log("******************newSchedule***************");
+                                    
+    console.log("******************newSchedule**1111111111111111*************");
     console.log(JSON.stringify(this.userOrder));
     console.log("******************newSchedule***************");
     this.navCtrl.push(NewSchedulePage, { "userInfo": this.userInfo, "id": this.userOrder.id, "list": this.orderScheduleList });
   }
-
+                                
   content: any='';
   replyName: any;
   myplaceholder: any = '请输入回复内容…';

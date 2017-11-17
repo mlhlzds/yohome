@@ -89,7 +89,8 @@ export class LoginPage {
             address: user.address,
             userType: objList.flag,
             termsOfSale: objList.termsOfSale,
-            welfare: objList.welfare
+            welfare: objList.welfare,
+            afterSalePhone:objList.afterSalePhone
           }
         };
         this.storage.set('LoginInfo', this.loginInfo).then((loginInfo: LoginInfo) => {
