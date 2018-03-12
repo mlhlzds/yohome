@@ -13,6 +13,7 @@ export class UserInfo {
   userType: string;
   termsOfSale: string;
   welfare: string;
+  password:string;
 }
 
 

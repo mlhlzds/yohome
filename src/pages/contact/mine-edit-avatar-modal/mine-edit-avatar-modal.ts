@@ -12,7 +12,8 @@ import { LoginInfo } from "../../../model/UserInfo";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-mine-edit-avatar-modal',
   templateUrl: 'mine-edit-avatar-modal.html',
@@ -28,12 +29,8 @@ export class MineEditAvatarModalPage {
   //当进入页面时触发
   ionViewDidEnter() {
     if (this.fileObjList[0] != null) {
-      // console.log( this.fileObjList[0].base64);
-      console.log(this.fileObjList, 11111);
       this.avatarPath = this.fileObjList[0].base64;
       this.isChange = true;//头像是否改变标识
-
-      console.log(this.fileObjList, 222222);
     }
 
   }
@@ -69,7 +66,6 @@ export class MineEditAvatarModalPage {
             this.storage.set('LoginInfo', loginInfo);
           });
 
-          console.log("头像是：" + this.avatarPath);
           this.viewCtrl.dismiss({ 'avatarPath': this.avatarPath });
         } else {
           let toast = this.toastCtrl.create({

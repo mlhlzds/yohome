@@ -6,9 +6,11 @@ import { UserOrder } from "../../../model/UserOrder";
 import { Content } from 'ionic-angular';
 import { Http, RequestOptions, Headers } from '@angular/http';
 
-import { CustomerServiceListPage } from '../customer-service-list/customer-service-list';
 import { App } from 'ionic-angular';
 import { LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
+
 @Component({
   selector: 'page-customer-service-new',
   templateUrl: 'customer-service-new.html',
@@ -28,7 +30,7 @@ export class CustomerServiceNewPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CustomerServiceNewPage');
+
   }
 
   newCustomer() {
@@ -48,7 +50,6 @@ export class CustomerServiceNewPage {
 
     let body = JSON.stringify(orderSchedule);
     this.http.post("contract/callService", body, options).map(res => {
-      console.log(res.json());
       var objList = eval('(' + res.json() + ')');
 
       if (objList.msg == 'true') {
@@ -64,7 +65,6 @@ export class CustomerServiceNewPage {
 
       }
 
-      console.log(this.fileObjList);
       this.describe = '';
       this.fileObjList = []; //所有图片
       loading.dismiss();

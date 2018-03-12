@@ -3,10 +3,11 @@ import { NavController, NavParams } from 'ionic-angular';
 import { User } from "../../../model/User";
 import { UserOrder } from "../../../model/UserOrder";
 import { Http, RequestOptions, Headers } from '@angular/http';
-import { UserListOrdersInfoPage } from '../user-list-orders-info/user-list-orders-info';
 import { Storage } from '@ionic/Storage';
 import { UserInfo, LoginInfo } from "../../../model/UserInfo";
 
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-user-list-orders',
   templateUrl: 'user-list-orders.html',
@@ -37,13 +38,13 @@ export class UserListOrdersPage {
 
   //跳转到所有订单
   toOrderInfo(userOrder: UserOrder) {
-    this.navCtrl.push(UserListOrdersInfoPage, { "userOrder": userOrder,"userInfo":this.userInfo });
+    this.navCtrl.push('UserListOrdersInfoPage', { "userOrder": userOrder,"userInfo":this.userInfo });
   }
 
   //初始化订单
   initUserOrders() {
     var loginInfo = this.storage.get('LoginInfo');
-    console.log("loginInfo=" + loginInfo);
+
     // this.userInfo = loginInfo.user;
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -53,11 +54,11 @@ export class UserListOrdersPage {
       pageSize: '5',
       pageNo: '1'
     });
-    console.log("获取用户所有订单");
+    //获取用户所有订单
     this.http.post("/yuejia/user/custInfoList", body, options).map(res => {
       // this.http.get('assets/data/userList2.json').map(res => {
       var objList = eval('(' + res.json() + ')');
-      console.log(">>>>>>>>>>>>>>>>>>>>>"+JSON.stringify(objList));
+
       for (var i = 0; i < objList.length; i++) {
         var obj = objList[i];
         var uo = new UserOrder;
@@ -79,7 +80,7 @@ export class UserListOrdersPage {
     // this.http.get('./assets/data/userOrders.json').map(res => {
     //   this.userOrders = res.json();
     // }).subscribe(function (data) {
-    //   console.log(data)
+
     // })
   }
 

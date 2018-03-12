@@ -18,7 +18,7 @@ export class SoftwarePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SoftwarePage');
+
   }
 
 }

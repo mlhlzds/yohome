@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ViewerPic } from "./viewer-pic";
 /**
  * Generated class for the ShowImgPage page.
  *
@@ -22,6 +21,6 @@ export class ShowImg {
 
     picturePaths.push(this.imgPath);
 
-    this.navCtrl.push(ViewerPic, { 'initialSlide': 0, 'picturePaths': picturePaths });
+    this.navCtrl.push('ViewerPic', { 'initialSlide': 0, 'picturePaths': picturePaths });
   }
 }

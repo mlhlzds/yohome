@@ -77,7 +77,6 @@
        }, options)).then((imageData) => {
          resolve(imageData);
        }, (err) => {
-         console.log(err);
          err == 20 ? this.showToast('没有权限,请在设置中开启权限') : reject(err);
        });
      });

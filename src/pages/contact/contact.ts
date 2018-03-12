@@ -2,15 +2,11 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import {App } from 'ionic-angular';  
 import { LoginPage } from '../../pages/login/login';
-import { MineEditPage } from './mine-edit/mine-edit';
-import { NewSchedulePage } from '../home/new-schedule/new-schedule';
 import { UserInfo, LoginInfo } from "../../model/UserInfo";
 import { Storage } from '@ionic/Storage';
-import { MineEditModalPage } from './mine-edit-modal/mine-edit-modal';
-import { MineEditAvatarModalPage } from './mine-edit-avatar-modal/mine-edit-avatar-modal';
-import { WePage } from './we/we';
-import { SettingPage } from './setting/setting';
 
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html'
@@ -29,13 +25,10 @@ export class ContactPage {
   }
 
   initUserInfo() {
-
     this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
-      console.log(loginInfo, '+++++++++++++++++++++++++++++++++++++++');
       let userInfo = loginInfo.user;
       if (userInfo) {
         this.userInfo = userInfo;           
-        console.log("+_+_+_+_+_+_+_+_+_:"+JSON.stringify(this.userInfo));
         this.avatarPath = userInfo.avatarPath;
       }
     });
@@ -46,7 +39,7 @@ export class ContactPage {
   }
   // ionViewWillEnter() {
   //   this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
-  //   console.log(loginInfo,'+++++++++++++++++++++++++++++++++++++++');
+
   //     let userInfo = loginInfo.user;
   //     if (userInfo) {
   //       this.userInfo = userInfo;
@@ -57,25 +50,27 @@ export class ContactPage {
 
 
   edit() {
-    console.log(this.userInfo);
-    this.navCtrl.push(MineEditPage, { 'userInfo': this.userInfo, 'avatarPath': this.avatarPath });
+    this.navCtrl.push('MineEditPage', { 'userInfo': this.userInfo, 'avatarPath': this.avatarPath });
     //  this.navCtrl.push(PersonEditPage);
   }
 
   viewAvatar($event) {
-    $event.stopPropagation();
-    let modal = this.modalCtrl.create(MineEditAvatarModalPage, { avatarPath: this.avatarPath });
-    modal.present();
-    modal.onDidDismiss(data => {
-      data && (this.avatarPath = data.avatarPath)
-    });
+    // $event.stopPropagation();
+    // let modal = this.modalCtrl.create('MineEditAvatarModalPage', { avatarPath: this.avatarPath });
+    // modal.present();
+    // modal.onDidDismiss(data => {
+    //   data && (this.avatarPath = data.avatarPath)
+    // });
+
+    this.navCtrl.push('MineEditAvatarModalPage', { avatarPath: this.avatarPath });
+
   }
 
   about() {
-    this.navCtrl.push(WePage,{"welfare":this.userInfo.welfare});
+    this.navCtrl.push('WePage',{"welfare":this.userInfo.welfare});
   }
 
   setting() {
-    this.navCtrl.push(SettingPage);
+    this.navCtrl.push('SettingPage');
   }
 }

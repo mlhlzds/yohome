@@ -1,8 +1,6 @@
 import { Component, ElementRef, ContentChildren } from '@angular/core';
 import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { UserOrder } from "../../../model/UserOrder";
-import { NewSchedulePage } from '../new-schedule/new-schedule';
-import { ScheduleComplaintPage } from '../schedule-complaint/schedule-complaint';
 import { FileObj } from "../../../model/FileObj";
 import { OrderSchedule } from "../../../model/OrderSchedule";
 import { MineEditPage } from '../../contact/mine-edit/mine-edit';
@@ -11,7 +9,8 @@ import { UserInfo, LoginInfo } from "../../../model/UserInfo";
 import { Storage } from '@ionic/Storage';
 import { LoadingController, ToastController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-user-list-orders-info',
   templateUrl: 'user-list-orders-info.html',
@@ -29,9 +28,6 @@ export class UserListOrdersInfoPage {
   constructor(private actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public toastCtrl: ToastController, public loadingCtrl: LoadingController, private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.userOrder = navParams.data.userOrder;  //订单对象
     this.userInfo = navParams.data.userInfo;  //订单对象
-    console.log("*********************订单对象*********************");
-    console.log(this.userOrder);
-    console.log("*********************订单对象*********************");
     if (this.userInfo != null) {
       this.getAllOrder();
     } else {
@@ -63,11 +59,12 @@ export class UserListOrdersInfoPage {
       address: '上海市浦东新区杨高南路陆家嘴金融中心',
       userType: '',
       termsOfSale: '',
-      welfare: ''
+      welfare: '',
+      password: ''
 
     }
 
-    this.navCtrl.push(MineEditPage, { "userInfo": userInfo, "avatarPath": "assets/img/marty-avatar.png" });
+    this.navCtrl.push('MineEditPage', { "userInfo": userInfo, "avatarPath": "assets/img/marty-avatar.png" });
   }
 
 
@@ -89,7 +86,7 @@ export class UserListOrdersInfoPage {
 
       }
     }).subscribe(function (data) {
-      console.log('1111');
+
     })
   }
 
@@ -103,7 +100,6 @@ export class UserListOrdersInfoPage {
     this.el.nativeElement.querySelector('#input' + i).style = "border-top-width: 0px;border-right-width: 0px; border-bottom-width: 1px;border-left-width: 0px;width:80%;margin-left: 8px;margin-top: 2px;background-color:none";
   }
   delHf(update_user_id, contentRecordId, i, i2) {
-    console.log("update_user_id=" + update_user_id + "-----this.userInfo.id=" + this.userInfo.id);
     if (update_user_id != this.userInfo.id) {
       return;
     }
@@ -128,7 +124,7 @@ export class UserListOrdersInfoPage {
                 that.orderScheduleList[i].reply.splice(i2, 1);
               }
             }).subscribe(function (data) {
-              console.log('1111');
+
             })
 
 
@@ -174,14 +170,14 @@ export class UserListOrdersInfoPage {
                 toast.present();
               }
             }).subscribe(function (data) {
-              console.log('1111');
+
             })
           }
         },
         {
           text: '取消',
           handler: data => {
-            console.log('Saved clicked');
+
           }
         }
       ]
@@ -203,26 +199,30 @@ export class UserListOrdersInfoPage {
       pageNum: this.pageNum + "" //当前页
     });
 
+
+
     this.http.post("contract/contentList", body, options).map(res => {
-      console.log("*********************打印进度***********************************");
-      console.log(res.json());
-      console.log("*********************打印进度***********************************");
       var objList = eval('(' + res.json() + ')');
+      console.log(JSON.stringify(objList));
       this.orderScheduleList = objList;
     }).subscribe(function (data) {
-      console.log('1111');
+
     })
-
-
-
-
     // this.http.get("assets/data/OrderSchedule.json").map(res => {
     //   this.orderScheduleList = res.json();
     // }).subscribe(function (data) {
-    //   console.log(data)
+
     // })
 
   }
+
+  //通过地址 跳到这个地址的所有订单
+  custJd(userOrder) {                            
+    userOrder.id = userOrder.contract_id;
+    this.navCtrl.push('UserListOrdersInfoPage2', { "userOrder": userOrder, "userInfo": this.userInfo });
+
+  }
+
 
   //获得所有订单
   getAllOrder2() {
@@ -235,19 +235,16 @@ export class UserListOrdersInfoPage {
     });
 
     this.http.post("content/allContent", body, options).map(res => {
-      console.log("*********************打印进度***********************************");
-      console.log(res.json());
-      console.log("*********************打印进度***********************************");
       var objList = eval('(' + res.json() + ')');
       this.orderScheduleList = objList;
     }).subscribe(function (data) {
-      console.log('1111');
+      ;
     })
   }
 
   //往下拉 加载数据
   doInfinite(): Promise<any> {
-    console.log('Begin async operation');
+
     return new Promise((resolve) => {
       setTimeout(() => {
         this.pageNum = this.pageNum + 1;
@@ -276,10 +273,8 @@ export class UserListOrdersInfoPage {
             this.orderScheduleList.push(objList[i]);
           }
         }).subscribe(function (data) {
-          console.log('1111');
-        })
 
-        console.log('Async operation has ended');
+        })
         resolve();
       }, 500);
     })
@@ -287,24 +282,19 @@ export class UserListOrdersInfoPage {
 
   //投诉
   toScheduleComplaint(id) {
-    console.log("toScheduleComplaint(id) {==" + id);
-    this.navCtrl.push(ScheduleComplaintPage, { "id": id, "userType": this.userInfo.userType, "afterSalePhone": this.userInfo.afterSalePhone });
+    this.navCtrl.push('ScheduleComplaintPage', { "id": id, "userType": this.userInfo.userType, "afterSalePhone": this.userInfo.afterSalePhone });
   }
   //发表新的进度
   newSchedule() {
-                                    
-    console.log("******************newSchedule**1111111111111111*************");
-    console.log(JSON.stringify(this.userOrder));
-    console.log("******************newSchedule***************");
-    this.navCtrl.push(NewSchedulePage, { "userInfo": this.userInfo, "id": this.userOrder.id, "list": this.orderScheduleList });
+    this.navCtrl.push('NewSchedulePage', { "userInfo": this.userInfo, "id": this.userOrder.id, "list": this.orderScheduleList });
   }
-                                
-  content: any='';
+
+  content: any = '';
   replyName: any;
   myplaceholder: any = '请输入回复内容…';
   replyToName(i, replyName) {
     this.replyName = replyName;
-    console.log(this.el.nativeElement.querySelector('#input' + i));
+
     this.myplaceholder = '回复' + replyName;
     this.el.nativeElement.querySelector('#input' + i).querySelector('input').focus();
   }
@@ -323,9 +313,6 @@ export class UserListOrdersInfoPage {
     });
 
     this.http.post("content/addContentRecord", body, options).map(res => {
-      console.log("*********************addContentRecord***********************************");
-      console.log(res.json());
-      console.log("*********************addContentRecord***********************************");
       var objList = eval('(' + res.json() + ')');
       if (objList.msg == 'true') {
         if (!this.orderScheduleList[i].reply) {
@@ -353,7 +340,7 @@ export class UserListOrdersInfoPage {
       this.myplaceholder = '请输入回复内容…';
       // this.orderScheduleList = objList;
     }).subscribe(function (data) {
-      console.log('1111');
+
     })
     // content/addContentRecord
     // var val = this.el.nativeElement.querySelector('#input'+i).value;
@@ -371,14 +358,14 @@ export class UserListOrdersInfoPage {
       }
       location.href = "#ion4";
     }).subscribe(function (data) {
-      console.log(data)
+
     })
 
   }
 
   //這個方法導致 頁面進入會變卡
   // ionViewWillEnter() {
-  //   console.log("viewWillAppear");
+
   //   location.href = '#ion0';
   // }
 

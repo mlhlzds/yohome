@@ -25,7 +25,7 @@ export class UploadPicturePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UploadPicturePage');
+
   }
 
   img_upload(event: any) { //单次提交图片的函数 
@@ -44,8 +44,7 @@ export class UploadPicturePage {
       fileObj.thumbPath = this.result;
       fileObj.origPath = this.result;
       self.fileObjList.unshift(fileObj);
-      
-      console.log(guid);
+
     }
   };
 

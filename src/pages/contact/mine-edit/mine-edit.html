@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>个人信息</ion-title>
     <ion-buttons end>
       <button ion-button (click)="openModal()">
@@ -15,7 +15,7 @@
       <ion-avatar item-left (click)="viewAvatar($event)">
         <img [(src)]="avatarPath">
       </ion-avatar>
-      <h2>{{userInfo.name}}</h2>
+       <h2>{{userInfo.name}}</h2> 
       <p>{{userInfo.description}}</p>
       <i class="icon ion-chevron-right icon-accessory"></i>
     </ion-item>

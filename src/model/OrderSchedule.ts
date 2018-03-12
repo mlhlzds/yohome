@@ -9,4 +9,5 @@ export class OrderSchedule {
   img:string;
   name:string;
   isAdmire:string;
+  complaint_flag:string;               
 }

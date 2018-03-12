@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>
       我的家
     </ion-title>
@@ -45,10 +45,8 @@
         </button>
 
       <button ion-button color="primary" (click)="toArchivesPage(userOrder)">
-      
             <ion-icon name="browsers"></ion-icon>
             档案
-     
         </button>
       <button ion-button color="primary" (click)="toCustomerServicePage(userOrder)" *ngIf="userOrder.state==2">
         

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http, RequestOptions, Headers } from '@angular/http';
-import { UserListOrdersPage } from './user-list-orders/user-list-orders';
 import { User } from "../../model/User";
 import { UserInfo, LoginInfo } from "../../model/UserInfo";
 import { Storage } from '@ionic/Storage';
 import 'rxjs/add/operator/map';
-
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -22,7 +22,7 @@ export class HomePage {
 
     this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
       this.userInfo = loginInfo.user;
-      console.log("客户列表获取：" + JSON.stringify(this.userInfo) + "0000000000000000");
+
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
 
@@ -31,22 +31,17 @@ export class HomePage {
         pageSize: '5',
         pageNo: '1'
       });
-      console.log("获取用户所有订单");
+
       this.http.post("user/allCust", body, options).map(res => {
         var objList = eval('(' + res.json() + ')');
         this.userList = objList;
-        //  loginInfo = res.json().user;
-        console.log("************************************");
-        console.log(JSON.stringify(this.userList));
-        console.log("************************************");
-
       }).subscribe(function (data) {
-        console.log('1111');
+
       })
     });
 
 
-    // console.log("获取用户所有订单结束结束");
+    //获取用户所有订单结束结束
     // this.http.get('assets/data/userList2.json').map(res => {
     //   //   name: string;     //姓名
     //   // imgPath: string;  //图片路径
@@ -68,7 +63,8 @@ export class HomePage {
 
   //跳转到所有订单
   toOrders(user: User) {
-    this.navCtrl.push(UserListOrdersPage, { user: user, homeObj: this.homeObj });
+    console.log("============="+user+"=============="+this.homeObj );
+    this.navCtrl.push('UserListOrdersPage', { user: user, homeObj: this.homeObj });
   }
 
   ionViewDidLoad() {

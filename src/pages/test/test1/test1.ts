@@ -10,7 +10,9 @@ import { OrderSchedule } from "../../../model/OrderSchedule";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+import { IonicPage } from 'ionic-angular';
 
+@IonicPage()
 @Component({
   selector: 'page-test1',
   templateUrl: 'test1.html',
@@ -26,6 +28,6 @@ export class Test1Page {
 
   }
   doInfinite(){
-     console.log('2222222222222222aaaaaaaaaaaaaaa');
+
   }
 }

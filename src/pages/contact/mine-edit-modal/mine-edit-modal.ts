@@ -1,12 +1,14 @@
-import {Component} from '@angular/core';
-import {Storage} from '@ionic/storage';
+import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
-import {FormBuilder} from '@angular/forms';
-import {NavParams, ViewController} from 'ionic-angular';
-import {NativeService} from '../../../providers/NativeService';
-import {UserInfo} from "../../../model/UserInfo";
-import {Validators} from "../../../providers/Validators";
+import { FormBuilder } from '@angular/forms';
+import { NavParams, ViewController } from 'ionic-angular';
+import { NativeService } from '../../../providers/NativeService';
+import { UserInfo } from "../../../model/UserInfo";
+import { Validators } from "../../../providers/Validators";
 import { Http, RequestOptions, Headers } from '@angular/http';
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-mine-edit-modal',
   templateUrl: 'mine-edit-modal.html'
@@ -21,7 +23,7 @@ export class MineEditModalPage {
       'minlength': '姓名最少2个字符',
       'chinese': '姓名必须是中文'
     },
-     'username': {
+    'username': {
       'errorMsg': '',
       'required': '用户名为必填项',
       'minlength': '姓名最少2个字符'
@@ -49,25 +51,33 @@ export class MineEditModalPage {
   };
 
   constructor(private params: NavParams, private http: Http,
-              private viewCtrl: ViewController,
-              private storage: Storage,
-              private formBuilder: FormBuilder,
-              private nativeService: NativeService) {
+    private viewCtrl: ViewController,
+    private storage: Storage,
+    private formBuilder: FormBuilder,
+    private nativeService: NativeService) {
     this.userInfo = this.params.get('userInfo');
+    // this.userForm = this.formBuilder.group({
+    //   name: [this.userInfo.name, [Validators.required]],
+    //   username: [this.userInfo.username, [Validators.required]],
+    //   phone: [this.userInfo.phone, [Validators.required, Validators.phone]],
+    //   phoneBak: [this.userInfo.phone, [Validators.required, Validators.phone]],
+    //   email: [this.userInfo.email, [Validators.required, Validators.email]],
+    //   address:[this.userInfo.address,[Validators.maxLength(30)]],
+    //   descreption:[this.userInfo.descreption,[Validators.maxLength(20)]]
+    // });
     this.userForm = this.formBuilder.group({
-      name: [this.userInfo.name, [Validators.required, Validators.minLength(2), Validators.chinese]],
-      username: [this.userInfo.username, [Validators.required, Validators.minLength(2)]],
-      phone: [this.userInfo.phone, [Validators.required, Validators.phone]],
-      phoneBak: [this.userInfo.phone, [Validators.required, Validators.phone]],
-      email: [this.userInfo.email, [Validators.required, Validators.email]],
-      address:[this.userInfo.address,[Validators.maxLength(30)]],
-      descreption:[this.userInfo.descreption,[Validators.maxLength(20)]]
+      name: [this.userInfo.name],
+      username: [this.userInfo.username],
+      phone: [this.userInfo.phone],
+      phoneBak: [this.userInfo.phone],
+      email: [this.userInfo.email],
+      address: [this.userInfo.address],
+      descreption: [this.userInfo.descreption]
     });
     this.userForm.valueChanges
       .subscribe(data => {
         const verifyMessages = this.verifyMessages;
         for (const field in verifyMessages) {
-          console.log(field);
           verifyMessages[field].errorMsg = '';
           const control = this.userForm.get(field);
           if (control && control.dirty && !control.valid) {
@@ -81,28 +91,27 @@ export class MineEditModalPage {
   }
 
   onSubmit() {
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
-        let body = JSON.stringify(this.userForm.value);
-        this.http.post("user/updateUserInfo", body, options).map(res => {
-          // this.http.get('assets/data/userList2.json').map(res => {
-          var objList = eval('(' + res.json() + ')');
+    let body = JSON.stringify(this.userForm.value);
+    this.http.post("user/updateUserInfo", body, options).map(res => {
+      // this.http.get('assets/data/userList2.json').map(res => {
+      var objList = eval('(' + res.json() + ')');
 
-  
-        }).subscribe(function (data) {
-        })
+
+    }).subscribe(function (data) {
+    })
 
 
 
     Object.assign(this.userInfo, this.userForm.value);
-    console.log(JSON.stringify(this.userForm.value));
     this.storage.set('UserInfo', this.userInfo);
     this.nativeService.showToast('保存成功');
     this.viewCtrl.dismiss(this.userInfo);
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    // this.viewCtrl.dismiss();
   }
 }

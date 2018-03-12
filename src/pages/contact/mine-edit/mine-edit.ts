@@ -3,8 +3,6 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/Storage';
 
 import { UserInfo, LoginInfo } from '../../../model/UserInfo';
-import { MineEditModalPage } from '../mine-edit-modal/mine-edit-modal';
-import { MineEditAvatarModalPage } from '../mine-edit-avatar-modal/mine-edit-avatar-modal';
 
 /**
  * Generated class for the MineEditPage page.
@@ -12,7 +10,8 @@ import { MineEditAvatarModalPage } from '../mine-edit-avatar-modal/mine-edit-ava
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-mine-edit',
   templateUrl: 'mine-edit.html',
@@ -26,28 +25,28 @@ export class MineEditPage {
     this.avatarPath = this.navParams.get('avatarPath');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MineEditPage');
-  }
-  ionViewWillEnter() { }
-  ionViewDidEnter() {
-    this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
-    //  this.avatarPath = loginInfo.user.avatarPath;
-    }
-    );
-  }
+
+
+  // ionViewDidEnter() {
+  //   this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
+  //   //  this.avatarPath = loginInfo.user.avatarPath;
+  //   }
+  //   );
+  // }
 
   openModal() {
-    this.navCtrl.push(MineEditModalPage, { 'userInfo': this.userInfo });
+    this.navCtrl.push('MineEditModalPage', { 'userInfo': this.userInfo });
   }
 
   viewAvatar($event) {
-    $event.stopPropagation();
-    let modal = this.modalCtrl.create(MineEditAvatarModalPage, { avatarPath: this.avatarPath });
-    modal.present();
-    modal.onDidDismiss(data => {
-      data && (this.avatarPath = data.avatarPath)
-    });
+    // $event.stopPropagation();
+    // let modal = this.modalCtrl.create('MineEditAvatarModalPage', { avatarPath: this.avatarPath });
+    // modal.present();
+    // modal.onDidDismiss(data => {
+    //   data && (this.avatarPath = data.avatarPath)
+    // });
+
+    this.navCtrl.push('MineEditAvatarModalPage', { avatarPath: this.avatarPath });
   }
 
 

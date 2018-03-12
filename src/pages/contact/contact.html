@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>
       我的
     </ion-title>
@@ -10,10 +10,10 @@
 
   <ion-list>
     <ion-item (click)="edit()">
-      <ion-avatar item-left (click)="viewAvatar($event)">
+     <ion-avatar item-left >  <!-- (click)="viewAvatar($event)" -->
         <img src="{{avatarPath}}">
       </ion-avatar>
-      <h2>{{userInfo?.name}}</h2>
+       <h2>{{userInfo?.name}}</h2> 
       <p>{{userInfo?.descreption}}</p>
       <ion-icon name='ios-arrow-forward' item-right></ion-icon>
     </ion-item>

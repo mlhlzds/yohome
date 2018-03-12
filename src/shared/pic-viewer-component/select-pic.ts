@@ -48,8 +48,6 @@ export class SelectPic {
       fileObj.thumbPath = this.result;
       fileObj.origPath = this.result;
       self.fileObjList.push(fileObj);
-      
-      console.log(guid);
     }
   };
   addPicture() {//新增照片
@@ -59,13 +57,13 @@ export class SelectPic {
         {
           text: '从相册选择',
           handler: () => {
-            console.log("从相册选择");
+           
           }
         },
         {
           text: '拍照',
           handler: () => {
-            console.log("pai zhao");
+         
           }
         },
         {
@@ -103,7 +101,7 @@ export class SelectPic {
     for (let fileObj of this.fileObjList) {
       picturePaths.push(fileObj.origPath);
     }
-    this.navCtrl.push(ViewerPic, {'initialSlide': index, 'picturePaths': picturePaths});
+    this.navCtrl.push('ViewerPic', {'initialSlide': index, 'picturePaths': picturePaths});
   }
 
   private getPictureSuccess(img) {

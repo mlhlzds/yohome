@@ -9,6 +9,8 @@ import { GoodsListPage } from '../goods-list/goods-list';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 
 @Component({
   selector: 'page-archives',
@@ -16,16 +18,13 @@ import { GoodsListPage } from '../goods-list/goods-list';
 })
 export class ArchivesPage {
 
-  originalSize:boolean = true;
-  pdfSrc:string = 'assets/data/test.docx';
-  page:number = 1;
+  originalSize: boolean = true;
+  pdfSrc: string = 'assets/data/test.docx';
+  page: number = 1;
   htList: FileObj[] = []; //所有图片
   userOrders: UserOrder;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log("*******************商品清单this.userOrders************************")
     this.userOrders = navParams.data;
-    console.log(JSON.stringify(this.userOrders));
-    console.log("*******************商品清单this.userOrders************************")
 
     let f1: FileObj = new FileObj;
     f1.base64 = 'assets/img/ht1.jpg';
@@ -52,14 +51,14 @@ export class ArchivesPage {
     this.htList.push(f3);
     this.htList.push(f4);
   }
-  doubleFun(){
+  doubleFun() {
     alert("1 ");
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ArchivesPage');
+
   }
-  toGoodsListPage(type){
-    this.navCtrl.push(GoodsListPage,{"userOrders":this.userOrders,"type":type});
+  toGoodsListPage(type) {
+    this.navCtrl.push('GoodsListPage', { "userOrders": this.userOrders, "type": type });
   }
 
 

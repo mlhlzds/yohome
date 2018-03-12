@@ -14,6 +14,9 @@ import { Storage } from '@ionic/Storage';
  * on Ionic pages and navigation.
  */
 import { Content } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
+
 @Component({
   selector: 'page-schedule-complaint',
   templateUrl: 'schedule-complaint.html',
@@ -27,20 +30,18 @@ export class ScheduleComplaintPage {
   userInfo: any = null;
   afterSalePhone:string;
   constructor(private actionSheetCtrl: ActionSheetController, private storage: Storage, private el: ElementRef, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
-    console.log("navParams.data" + JSON.stringify(navParams.data));
+
     this.id = navParams.data.id;  //订单对象
     this.userType = navParams.data.userType;  //订单对象
     this.afterSalePhone=navParams.data.afterSalePhone;
     this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
       this.userInfo = loginInfo.user;
       this.getScheduleComplaintData();//加载投诉内容
-
-      console.log(";;;;;;;;;;;;;;;;;;;"+JSON.stringify(this.userInfo));
     });
 
   }
   funIonScroll() {
-    console.log("funIonScroll");
+
   }
   funBlur() {
     // var contentBottom = this.content.contentBottom;
@@ -52,7 +53,7 @@ export class ScheduleComplaintPage {
     // var scrollDownOnLoad = this.content.scrollDownOnLoad;
     // var contentHeight = this.content.contentHeight;
     // var contentBottom = this.content.contentBottom;
-    // console.log(this.el.nativeElement.querySelector("#myinput"));
+
     // this.el.nativeElement.querySelector("#myinput").style.height= contentBottom+60+"px";
 
     // alert("scrollHeight="+scrollHeight+"---contentTop="+contentTop+"---scrollDownOnLoad="+scrollDownOnLoad
@@ -65,7 +66,7 @@ export class ScheduleComplaintPage {
   scheduleComplaintList: ScheduleComplaint[] = [];
 
   delTs(scheduleComplaintId, i) {
-    console.log("删除投诉");
+
     if (this.userInfo.userType != 'cust') {
       return;
     }
@@ -90,7 +91,7 @@ export class ScheduleComplaintPage {
                 that.scheduleComplaintList.splice(i, 1);
               }
             }).subscribe(function (data) {
-              console.log('1111');
+       
             })
           }
         },
@@ -114,16 +115,13 @@ export class ScheduleComplaintPage {
     });
     this.http.post("content/complaint", body, options).map(res => {
       var objList = eval('(' + res.json() + ')');
-      console.log("222222222222222content complaint22222222222222222");
-      console.log(JSON.stringify(objList));
-      console.log("222222222222222content complaint22222222222222222");
       this.scheduleComplaintList = objList;
     }).subscribe(function (data) {
     })
     // this.http.get("assets/data/ScheduleComplaint.json").map(res => {
     //   this.scheduleComplaintList = res.json();
     // }).subscribe(function (data) {
-    //   console.log(data)
+
     // })
   }
   hi: number = -200;
@@ -146,9 +144,7 @@ export class ScheduleComplaintPage {
       var objList = eval('(' + res.json() + ')');
       scheduleComplaint.dateTime = objList.msg;
       scheduleComplaint.id = objList.id;
-      console.log("222222222222222addComplaint22222222222222222");
-      console.log(JSON.stringify(objList));
-      console.log("222222222222222addComplaint22222222222222222");
+
 
       this.scheduleComplaintList.push(scheduleComplaint);
 
@@ -185,6 +181,6 @@ export class ScheduleComplaintPage {
   // }
   // resize(){
   //   alert("111");
-  //   console.log(this.content.contentTop);
+
   // }
 }

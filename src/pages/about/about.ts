@@ -7,14 +7,12 @@ import { UserOrder } from "../../model/UserOrder";
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { UserListOrdersInfoPage } from '../home/user-list-orders-info/user-list-orders-info';
-import { ArchivesPage } from "./archives/archives";
-import { CustomerServicePage } from "./customer-service/customer-service";
 import { Storage } from '@ionic/Storage';
 import { UserInfo, LoginInfo } from "../../model/UserInfo";
 
 
-
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html'
@@ -33,18 +31,17 @@ export class AboutPage {
 
   //进度
   toOrderInfo(userOrder: UserOrder) {
-    this.navCtrl.push(UserListOrdersInfoPage, { "userOrder": userOrder,"userInfo":this.userInfo });
+    this.navCtrl.push('UserListOrdersInfoPage', { "userOrder": userOrder,"userInfo":this.userInfo });
   }
 
   //档案
   toArchivesPage(userOrder) {
-    this.navCtrl.push(ArchivesPage,userOrder);
+    this.navCtrl.push('ArchivesPage',userOrder);
   }
 
   //售后
   toCustomerServicePage(userOrder) {
-    console.log("this.userInfo.afterSalePhone:"+this.userInfo.afterSalePhone);
-    this.navCtrl.push(CustomerServicePage, {"userOrder":userOrder,"afterSalePhone":this.userInfo.afterSalePhone,"termsOfSale":this.userInfo.termsOfSale});
+    this.navCtrl.push('CustomerServicePage', {"userOrder":userOrder,"afterSalePhone":this.userInfo.afterSalePhone,"termsOfSale":this.userInfo.termsOfSale});
   }
 
   flagLoginInfo: boolean = true;
@@ -53,9 +50,6 @@ export class AboutPage {
     this.storage.get('LoginInfo').then((loginInfo: LoginInfo) => {
       this.userInfo = loginInfo.user;
       if (this.flagLoginInfo) {
-        console.log("111111111111111111111111111111111111111");
-        console.log(JSON.stringify(loginInfo));
-        console.log("111111111111111111111111111111111111111");
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
@@ -65,7 +59,6 @@ export class AboutPage {
           pageNo: '1'
         });
         this.http.post("/yuejia/user/custInfoList", body, options).map(res => {
-          // this.http.get('assets/data/userList2.json').map(res => {
           var objList = eval('(' + res.json() + ')');
           for (var i = 0; i < objList.length; i++) {
             var obj = objList[i];

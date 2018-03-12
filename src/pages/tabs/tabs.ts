@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
-
-import { HomePage } from '../home/home';
-import { UserListOrdersInfoPage } from '../home/user-list-orders-info/user-list-orders-info';
-
 //测试带参数
 import { NavParams } from 'ionic-angular';
-import { TestPage } from '../test/test';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -19,23 +12,22 @@ export class TabsPage {
   //初始化tabs
   constructor(public navParams: NavParams) {
     var logType = this.navParams.get('type');
-    console.log(this.navParams.get('type'));
     if(logType=="user"){
       this.tabRoots = [
       {             
-        root: HomePage,
+        root: 'HomePage',
         tabTitle: '我的客户',
         tabIcon: 'people',
         attrName: 0
       },
       {
-        root: UserListOrdersInfoPage,
+        root: 'UserListOrdersInfoPage',
         tabTitle: '所有进度',
         tabIcon: 'walk',
         attrName: 0
       },
       {
-        root: ContactPage,
+        root: 'ContactPage',
         tabTitle: '我',
         tabIcon: 'person',
         attrName: 0
@@ -51,13 +43,13 @@ export class TabsPage {
     }else{
       this.tabRoots = [
       {             
-        root: AboutPage,
+        root: 'AboutPage',
         tabTitle: '我的家',
         tabIcon: 'home',
         attrName: 0
       },
       {
-        root: ContactPage,
+        root: 'ContactPage',
         tabTitle: '我',
         tabIcon: 'person',
         attrName: 0

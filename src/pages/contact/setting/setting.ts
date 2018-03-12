@@ -12,7 +12,8 @@ import { LoadingController, ToastController } from 'ionic-angular';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-setting',
   templateUrl: 'setting.html',
@@ -26,7 +27,7 @@ export class SettingPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingPage');
+
   }
 
   feedBack() {

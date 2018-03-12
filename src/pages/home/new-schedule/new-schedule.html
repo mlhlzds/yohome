@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>我的进度</ion-title>
         <ion-buttons end>
       <button ion-button icon-only (click)="newSchedule()">
@@ -20,7 +20,7 @@
     </div>
 
      <div padding-vertical>
-        <page-select-pic [max]="8"   [(fileObjList)]="fileObjList"></page-select-pic>
+        <page-select-pic [max]="12"   [(fileObjList)]="fileObjList"></page-select-pic>
       </div>
     <!-- 这里是我自己定义的img空间 -->
     <!-- <div *ngFor="let item of thumb;let i = index" style="float:left">

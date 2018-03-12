@@ -6,6 +6,8 @@ import { UserOrder } from "../../../model/UserOrder";
 import { Content } from 'ionic-angular';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 
 @Component({
   selector: 'page-customer-service-list',
@@ -55,12 +57,9 @@ export class CustomerServiceListPage {
                 this.el.nativeElement.querySelector("#d" + i).style = "background-color:none;";
               }
             }).subscribe(function (data) {
-              console.log('1111');
+
             })
 
-
-
-            // that.fileObjList.splice(i, 1);
           }
         },
         {
@@ -89,24 +88,11 @@ export class CustomerServiceListPage {
     });
 
     this.http.post("contract/getServiceInfo", body, options).map(res => {
-      console.log("*********************打印进度***********************************");
-      console.log(res.json());
-      console.log("*********************打印进度***********************************");
       var objList = eval('(' + res.json() + ')');
-
       this.customerList = objList;
     }).subscribe(function (data) {
-      console.log('1111');
+
     })
-
-
-
-
-    // this.http.get("assets/data/OrderSchedule.json").map(res => {
-    //   this.orderScheduleList = res.json();
-    // }).subscribe(function (data) {
-    //   console.log(data)
-    // })
 
   }
 
@@ -127,13 +113,12 @@ export class CustomerServiceListPage {
 
     let body = JSON.stringify(orderSchedule);
     this.http.post("contract/callService", body, options).map(res => {
-      console.log(res.json());
+
       var objList = eval('(' + res.json() + ')');
 
       var obj = { describe: this.describe, fileObjList: this.fileObjList };
       this.customerList.unshift(obj);
 
-      console.log(this.fileObjList);
       this.describe = '';
       this.fileObjList = []; //所有图片
       loading.dismiss();
@@ -145,7 +130,7 @@ export class CustomerServiceListPage {
 
   //往下拉 加载数据
   doInfinite(): Promise<any> {
-    console.log('Begin async operation');
+
     return new Promise((resolve) => {
       setTimeout(() => {
         this.pageNum = this.pageNum + 1;
@@ -165,16 +150,13 @@ export class CustomerServiceListPage {
 
 
         this.http.post("contract/getServiceInfo", body, options).map(res => {
-
           var objList = eval('(' + res.json() + ')');
           for (var i = 0; i < objList.length; i++) {
             this.customerList.push(objList[i]);
           }
         }).subscribe(function (data) {
-          console.log('1111');
-        })
 
-        console.log('Async operation has ended');
+        })
         resolve();
       }, 500);
     })

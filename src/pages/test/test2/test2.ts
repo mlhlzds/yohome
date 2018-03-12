@@ -18,7 +18,7 @@ export class Test2Page {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Test2Page');
+
   }
 
 }

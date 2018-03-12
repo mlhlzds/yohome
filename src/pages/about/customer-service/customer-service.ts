@@ -7,14 +7,15 @@ import { Content } from 'ionic-angular';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 
-import { CustomerServiceNewPage } from '../customer-service-new/customer-service-new';
-import { CustomerServiceListPage } from '../customer-service-list/customer-service-list';
+
 /**
  * Generated class for the CustomerServicePage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 
 @Component({
   selector: 'page-customer-service',
@@ -33,11 +34,11 @@ this.afterSalePhone = this.navParams.data.afterSalePhone;
   }
 
   toCustomerServiceNewPage(){
-    this.navCtrl.push(CustomerServiceNewPage,{"termsOfSale":this.termsOfSale,"afterSalePhone":this.afterSalePhone,"userOrder":this.userOrder});
+    this.navCtrl.push('CustomerServiceNewPage',{"termsOfSale":this.termsOfSale,"afterSalePhone":this.afterSalePhone,"userOrder":this.userOrder});
   }
 
   toCustomerServiceListPage(){
-    this.navCtrl.push(CustomerServiceListPage,{"termsOfSale":this.termsOfSale,"userOrder":this.userOrder});
+    this.navCtrl.push('CustomerServiceListPage',{"termsOfSale":this.termsOfSale,"userOrder":this.userOrder});
   }
 
 }

@@ -12,7 +12,8 @@ import { UserInfo, LoginInfo } from "../../../model/UserInfo";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-new-schedule',
   templateUrl: 'new-schedule.html',
@@ -44,7 +45,6 @@ export class NewSchedulePage {
     reader.onload = function (e) {
       self.thumb.push(this.result);
 
-      console.log(guid);
     }
 
   };
@@ -53,7 +53,7 @@ export class NewSchedulePage {
     this.thumb.splice(key, 1);
   };
   cliTest() {
-    console.log(this.thumb.length);
+
   }
   userInfo: any = null;
   newSchedule() {
@@ -69,15 +69,11 @@ export class NewSchedulePage {
     orderSchedule.img = this.userInfo.avatarPath;
     orderSchedule.name = this.userInfo.name;
 
-    console.log("this.orderIdthis.orderId===" + this.orderId);
-
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
     let body = JSON.stringify(orderSchedule);
     this.http.post("content/newSchedule", body, options).map(res => {
-      console.log(res.json());
-
 
       var objList = eval('(' + res.json() + ')');
       orderSchedule.time = objList.time;
@@ -86,7 +82,6 @@ export class NewSchedulePage {
       this.orderScheduleList.unshift(orderSchedule);
       loading.dismiss();
       this.navCtrl.pop();
-      console.log(this.fileObjList);
     }).subscribe(function (data) {
     })
 

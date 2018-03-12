@@ -8,6 +8,8 @@ import { Http, RequestOptions, Headers } from '@angular/http';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+import { IonicPage } from 'ionic-angular';
+@IonicPage()
 
 @Component({
   selector: 'page-goods-list',
@@ -19,7 +21,6 @@ export class GoodsListPage {
   spqd: string;
   userOrders: UserOrder;
   constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams) {
-    console.log("*******************商品清单this.userOrders************************")
     this.userOrders = navParams.data.userOrders;
     this.type = navParams.data.type;
     this.initData();
@@ -32,10 +33,10 @@ export class GoodsListPage {
     if (this.type == '3') {
       this.spqd = "施工设计";
     }
-    
+
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GoodsListPage');
+
   }
   imgs: string[];
   initData() {
@@ -47,12 +48,8 @@ export class GoodsListPage {
       type: this.type
     });
     this.http.post("contract/contractInfo", body, options).map(res => {
-      // this.http.get('assets/data/userList2.json').map(res => {
       var objList = eval('(' + res.json() + ')');
       this.imgs = objList.imgs;
-      console.log("***************getGoodsList***************");
-      console.log(JSON.stringify(objList));
-      console.log("***************getGoodsList***************");
     }).subscribe(function (data) {
     })
   }

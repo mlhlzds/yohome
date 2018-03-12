@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>
         <div align="center">
     <img src="assets/img/logo.png" style="width:70%;"/>
@@ -13,19 +13,19 @@
   
   <ion-item>
     <ion-label fixed>账号</ion-label>
-    <ion-input type="text" value="" placeholder="请输入账号" #username></ion-input>
+    <ion-input type="text" value="" placeholder="请输入账号" [(ngModel)]="username"></ion-input>
   </ion-item>
   <ion-item>            
     <ion-label fixed>密码</ion-label>
-    <ion-input type="password" value="" placeholder="请输入密码" #password></ion-input>
+    <ion-input type="password" value="" placeholder="请输入密码" [(ngModel)]="password"></ion-input>
   </ion-item>
 
 <br/><br/><br/>
   <div style="text-align: center; margin-left: 30px; margin-right: 30px;">
-    <button ion-button block color="danger" (click)="logIn(username, password)">
+    <button ion-button block color="danger" (click)="logIn()">
       登录
     </button>
-    <!-- <button ion-button block color="danger" (click)="testPage()">
+     <!-- <button ion-button block color="danger" (click)="testPage()">
       跳转到测试页面
     </button> -->
   </div>

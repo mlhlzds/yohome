@@ -18,7 +18,7 @@ export class YoHomePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad YoHomePage');
+
   }
 
 }
